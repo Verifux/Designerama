@@ -80,21 +80,22 @@ going through `withBasePath()` (see `lib/basePath.ts`) — find it and fix it
 before uploading, or the deploy will render unstyled/broken like the first
 `/new` attempt did.
 
-## Analytics (GA4)
+## Analytics (GA4) — live
 
-`components/shared/GoogleAnalytics.tsx` reads `NEXT_PUBLIC_GA_MEASUREMENT_ID`
-at build time and renders nothing if it's unset — safe to build/deploy
-without it. The site's old Universal Analytics ID (`UA-18944179-2`, found in
+`components/shared/GoogleAnalytics.tsx` ships GA4 property `G-3C5292GLX7`
+(Kishan's own property) as the built-in default — no env var needed, since a
+Measurement ID isn't a secret (it's visible in any page's source). It fires
+on every build and every route automatically.
+
+To point at a *different* property (e.g. a staging environment that
+shouldn't pollute production analytics), set `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+before building — it overrides the default. Leave it unset for normal
+builds.
+
+The site's old Universal Analytics ID (`UA-18944179-2`, found in
 `website_old/index.html`) is permanently dead: UA stopped collecting data on
-2023-07-01, and its `ga.js` loader was retired years before that. Don't
-reuse it.
-
-To enable analytics: create a GA4 property in the Google Analytics admin
-panel (this requires Kishan's own Google account access — not something
-that can be done from this codebase), then set the Measurement ID
-(format `G-XXXXXXXXXX`) as `NEXT_PUBLIC_GA_MEASUREMENT_ID` before building —
-either in a `.env.local` file for local builds, or as an environment
-variable in whatever CI/host runs the production build.
+2023-07-01, and its `ga.js` loader was retired years before that. It was
+never reused.
 
 ## robots.txt, sitemap, favicon
 

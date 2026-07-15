@@ -6,6 +6,10 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 
 ## 2026-07-15 (latest session)
 
+- Activated GA4 analytics with Kishan's real Measurement ID (`G-3C5292GLX7`),
+  baked in as the default in `components/shared/GoogleAnalytics.tsx` rather
+  than requiring an env var — confirmed firing correctly in the browser
+  (gtag `config` call and `gtm.load` event both verified).
 - Restored the Verifux Spotlight section on Portfolio (with its cursor-glow
   hover treatment) after an earlier commit removed it — removed the
   now-redundant Verifux tile from Selected Work instead, per instruction to

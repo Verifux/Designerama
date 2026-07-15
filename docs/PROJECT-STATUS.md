@@ -45,6 +45,9 @@ a path prefix at build time, so this is not just a copy-paste).
   [DECISIONS.md](./DECISIONS.md) for the full note.
 - **Designerama is dark-only, Portfolio is light-only.** There is no theme
   toggle. Don't add one without being asked.
+- **GA4 analytics is live**, Measurement ID `G-3C5292GLX7`, baked directly
+  into `components/shared/GoogleAnalytics.tsx` as the default (not a secret,
+  so no env var required to activate it). See DEPLOYMENT.md.
 
 ## Standing constraints (do not re-litigate without being asked)
 
@@ -64,10 +67,6 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Open / pending
 
-- **Analytics is scaffolded but inactive.** `NEXT_PUBLIC_GA_MEASUREMENT_ID`
-  needs a real GA4 property ID from Kishan's own Google Analytics account
-  (create the property, then hand over the `G-XXXXXXXXXX` ID) — this can't
-  be done from the codebase alone. See DEPLOYMENT.md.
 - SuperSport case study still lacks real Figma-sourced images (blocked on
   Figma quota as of last check).
 - GOtv Presentation slides — no additional usable Figma node-IDs found beyond
