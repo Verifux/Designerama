@@ -49,7 +49,10 @@ a path prefix at build time, so this is not just a copy-paste).
 ## Standing constraints (do not re-litigate without being asked)
 
 - No em dashes or en dashes anywhere in copy. Use commas, periods, mid-dots
-  (`·`), or "to" for date ranges instead.
+  (`·`), or "to" for date ranges instead (e.g. "2017 to 2018"). Exception:
+  compact numeric reach/range figures like "26-30M" keep a plain hyphen —
+  that's a range notation, not sentence-level dash punctuation, and Kishan
+  has explicitly asked for the hyphenated form there over "26 to 30 million".
 - No Johannesburg / JHB / South Africa location references in copy anywhere
   on the site (explicitly removed once already — don't reintroduce it).
 - `/Users/kishanrama/Documents/Verifux` is a separate, live production
@@ -61,9 +64,10 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Open / pending
 
-- A large batch of file changes from earlier redesign work is still
-  **uncommitted** in git (see `git status`). Nothing has been committed
-  automatically per standing instructions — only commit when explicitly asked.
+- **Analytics is scaffolded but inactive.** `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+  needs a real GA4 property ID from Kishan's own Google Analytics account
+  (create the property, then hand over the `G-XXXXXXXXXX` ID) — this can't
+  be done from the codebase alone. See DEPLOYMENT.md.
 - SuperSport case study still lacks real Figma-sourced images (blocked on
   Figma quota as of last check).
 - GOtv Presentation slides — no additional usable Figma node-IDs found beyond

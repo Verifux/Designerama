@@ -80,6 +80,39 @@ going through `withBasePath()` (see `lib/basePath.ts`) — find it and fix it
 before uploading, or the deploy will render unstyled/broken like the first
 `/new` attempt did.
 
+## Analytics (GA4)
+
+`components/shared/GoogleAnalytics.tsx` reads `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+at build time and renders nothing if it's unset — safe to build/deploy
+without it. The site's old Universal Analytics ID (`UA-18944179-2`, found in
+`website_old/index.html`) is permanently dead: UA stopped collecting data on
+2023-07-01, and its `ga.js` loader was retired years before that. Don't
+reuse it.
+
+To enable analytics: create a GA4 property in the Google Analytics admin
+panel (this requires Kishan's own Google account access — not something
+that can be done from this codebase), then set the Measurement ID
+(format `G-XXXXXXXXXX`) as `NEXT_PUBLIC_GA_MEASUREMENT_ID` before building —
+either in a `.env.local` file for local builds, or as an environment
+variable in whatever CI/host runs the production build.
+
+## robots.txt, sitemap, favicon
+
+- `public/robots.txt` allows crawling and points to `/sitemap.xml`. The old
+  site's `robots.txt` (`website_old/robots.txt`) has `Disallow: /` — it was
+  blocking every search engine from indexing the live site, contradicting
+  its own page-level `index, follow` meta tag. Do not carry that file over.
+- `app/sitemap.ts` generates `/sitemap.xml` dynamically from
+  `lib/content/work.ts`'s `workItems` — new case studies are picked up
+  automatically, no manual sitemap maintenance needed. Hardcodes
+  `https://designerama.co.za` as the base URL (the eventual production
+  domain per the migration plan in PROJECT-STATUS.md), not the `/new` test
+  path — update that constant if the domain ever changes.
+- `app/icon.png` is the existing square red logo-mark badge (source:
+  `website_old/designerama logo/Designerama_02.png`), picked up
+  automatically by Next's `app/icon.png` convention — no extra `<link>`
+  tags or config needed.
+
 ## Local development
 
 ```bash
