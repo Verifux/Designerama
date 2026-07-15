@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { RevealOnScroll, RevealGroup, RevealItem } from "@/components/shared/RevealOnScroll";
-import type { CaseStudy as CaseStudyData } from "@/lib/content/caseStudies";
+import type { CaseStudyData } from "@/lib/content/work";
+import { withBasePath } from "@/lib/basePath";
 
 function FramePlaceholder({ caption }: { caption: string }) {
   return (
@@ -9,13 +11,30 @@ function FramePlaceholder({ caption }: { caption: string }) {
         className="flex aspect-video items-center justify-center rounded-card border border-line px-8 text-center"
         style={{ background: "linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, var(--paper)), var(--paper))" }}
       >
-        <span className="font-mono text-[0.78rem] text-ink-dim">Placeholder — {caption}</span>
+        <span className="font-mono text-[0.78rem] text-ink-dim">Placeholder · {caption}</span>
       </div>
     </RevealOnScroll>
   );
 }
 
-export function CaseStudy({ data }: { data: CaseStudyData }) {
+function ImageGallery({ images }: { images: { src: string; alt: string }[] }) {
+  return (
+    <RevealGroup className="flex flex-wrap items-end justify-center gap-4" amount={0.1}>
+      {images.map((img) => (
+        <RevealItem key={img.src} y={20} className="overflow-hidden rounded-card border border-line bg-paper">
+          <Image src={withBasePath(img.src)} alt={img.alt} width={540} height={1400} className="h-[420px] w-auto object-contain" />
+        </RevealItem>
+      ))}
+    </RevealGroup>
+  );
+}
+
+function Media({ images, caption }: { images?: { src: string; alt: string }[]; caption: string }) {
+  if (images && images.length > 0) return <ImageGallery images={images} />;
+  return <FramePlaceholder caption={caption} />;
+}
+
+export function CaseStudy({ data, next }: { data: CaseStudyData; next?: { label: string; title: string; href: string } }) {
   return (
     <div className="pt-36">
       <section className="border-b border-line pb-10">
@@ -54,7 +73,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
         </section>
 
         <div className="border-b border-line py-16">
-          <FramePlaceholder caption={data.situationFrameCaption} />
+          <Media images={data.situationImages} caption={data.situationFrameCaption} />
         </div>
 
         <section className="max-w-2xl border-b border-line py-16">
@@ -69,7 +88,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
         </section>
 
         <div className="border-b border-line py-16">
-          <FramePlaceholder caption={data.approachFrameCaption} />
+          <Media images={data.approachImages} caption={data.approachFrameCaption} />
         </div>
 
         <section className="max-w-2xl border-b border-line py-16">
@@ -92,12 +111,14 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
           ))}
         </RevealGroup>
 
-        <RevealOnScroll className="py-20 text-center">
-          <p className="eyebrow mb-3">{data.next.label}</p>
-          <Link href={data.next.href} className="text-[1.6rem] font-bold tracking-[-0.02em] text-ink hover:text-accent">
-            {data.next.title}
-          </Link>
-        </RevealOnScroll>
+        {next && (
+          <RevealOnScroll className="py-20 text-center">
+            <p className="eyebrow mb-3">{next.label}</p>
+            <Link href={next.href} className="text-[1.6rem] font-bold tracking-[-0.02em] text-ink hover:text-accent">
+              {next.title}
+            </Link>
+          </RevealOnScroll>
+        )}
       </div>
     </div>
   );

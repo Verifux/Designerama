@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
-import { Big_Shoulders_Display, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Big_Shoulders_Display, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { CursorProvider } from "@/components/shared/CursorProvider";
+import { CustomCursor } from "@/components/shared/CustomCursor";
 import "./globals.css";
+
+const displayFont = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 const bigShoulders = Big_Shoulders_Display({
   subsets: ["latin"],
-  weight: ["400", "600", "700", "900"],
-  variable: "--font-display",
+  weight: ["600", "700", "900"],
+  variable: "--font-display-alt",
   display: "swap",
 });
 
@@ -24,9 +33,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kishan Rama & Designerama — Product Design, UX Strategy & Consulting",
+  title: "Kishan Rama & Designerama · Product Design, UX Strategy & Consulting",
   description:
-    "One practice, two doors. Kishan Rama's portfolio for recruiters and hiring teams, and Designerama's UX consulting and Verifux for businesses.",
+    "Kishan Rama's portfolio for recruiters and hiring teams, and Designerama's UX consulting and Verifux for businesses.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -34,9 +43,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bigShoulders.variable} ${plexSans.variable} ${plexMono.variable}`}
+      className={`${displayFont.variable} ${bigShoulders.variable} ${plexSans.variable} ${plexMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <CursorProvider>
+          {children}
+          <CustomCursor />
+        </CursorProvider>
+      </body>
     </html>
   );
 }

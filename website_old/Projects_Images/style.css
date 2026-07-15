@@ -1,0 +1,201 @@
+BODY {
+	BACKGROUND-POSITION: center 0px;
+	BACKGROUND-IMAGE: url(../Designerama_Images/Background.jpg);
+	BACKGROUND-COLOR: black;
+	TEXT-ALIGN: center;
+	cursor: crosshair;
+}
+P {
+	FONT-WEIGHT: normal;
+	FONT-SIZE: 11px;
+	COLOR: #a1a1a1;
+	font-family : Georgia, "Times New Roman", Times, serif;
+	background-color: #000;
+}
+H1 {
+	FONT-WEIGHT: normal;
+	FONT-SIZE: 32px;
+	COLOR: white;
+	font-family : Georgia,"Times New Roman","New York",serif;
+	FONT-STYLE: italic;
+}
+H2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 21px; COLOR: white; font-family : Georgia,"Times New Roman","New York",serif; 
+}
+H3 {
+	FONT-WEIGHT: normal; FONT-SIZE: 18px; COLOR: white; font-family : Georgia,"Times New Roman","New York",serif; FONT-STYLE: italic;
+}
+.grostitre {
+	FONT-WEIGHT: normal; FONT-SIZE: 32px; COLOR: white; font-family : Georgia,"Times New Roman","New York",serif; FONT-STYLE: italic;
+}
+
+.detailstitres {
+	FONT-WEIGHT: normal; FONT-SIZE: 16px; COLOR: white; font-family : Georgia,"Times New Roman","New York",serif; FONT-STYLE: italic;
+}
+
+a {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #0491ab; font-family : Georgia,"Times New Roman","New York",serif; TEXT-DECORATION: none; 
+}
+a:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #0491ab; font-family : Georgia,"Times New Roman","New York",serif; TEXT-DECORATION: line-through;
+}
+
+a.link2 { 
+FONT-WEIGHT: normal; FONT-STYLE: normal; FONT-SIZE: 22px; COLOR: white; font-family : Georgia,"Times New Roman","New York",serif; TEXT-DECORATION: none; BACKGROUND-COLOR:#0491ab; 
+}
+
+a.link2:hover {
+	FONT-WEIGHT: normal;
+	FONT-STYLE: normal;
+	FONT-SIZE: 22px;
+	COLOR: #900;
+	font-family : Georgia, "Times New Roman", Times, serif;
+	TEXT-DECORATION: none;
+	BACKGROUND-COLOR:black;
+}
+
+a.link3 { 
+FONT-WEIGHT: bold; FONT-STYLE: normal; FONT-SIZE: 9px; COLOR: white; font-family : Georgia,"Times New Roman","New York",serif; TEXT-DECORATION: none; COLOR: #0491ab; 
+}
+
+a.link3:hover { 
+FONT-WEIGHT: bold; FONT-STYLE: normal; FONT-SIZE: 9px; COLOR: white; font-family : Georgia,"Times New Roman","New York",serif; TEXT-DECORATION: none; COLOR: #0491ab; TEXT-DECORATION: line-through;
+}
+
+#separator {
+	FLOAT: left; MARGIN-BOTTOM: 0px; WIDTH: 1110px; TEXT-ALIGN: left;
+}
+
+#separator2, #separator3, #separator4 {
+	FLOAT: left; MARGIN-BOTTOM: 60px; WIDTH: 1110px; TEXT-ALIGN: left;
+}
+
+.separation {
+PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 0px; WIDTH: 1110px; PADDING-TOP: 0px; HEIGHT: 4px;
+}
+
+
+#center {
+	width: 100%;
+	FLOAT: left;
+	DISPLAY: block;
+	MARGIN: auto;
+	TEXT-ALIGN: left;
+	background-repeat:no-repeat;
+	background-image: url(../Designerama_Images/top.png);
+}
+#content {
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	PADDING-BOTTOM: 0px;
+	MARGIN: auto;
+	WIDTH: 1110px;
+	PADDING-TOP: 0px;
+	TEXT-ALIGN: left;
+}
+#top {
+	MARGIN-TOP: 100px;
+	FLOAT: right;
+	MARGIN-BOTTOM: 10px;
+	WIDTH: 1110px;
+	HEIGHT:120px;
+	TEXT-ALIGN: right;
+	overflow: visible;
+	background-image: url(../Designerama_Images/Logo.gif);
+	background-repeat: no-repeat;
+	background-position: 554px;
+}
+
+#middle {
+	MARGIN-TOP: 0px; FLOAT: left; MARGIN-BOTTOM: 0px; WIDTH: 1110px; TEXT-ALIGN: center; HEIGHT: 320px;
+}
+
+#feature1 {
+	FLOAT: left; MARGIN-BOTTOM: 0px; WIDTH: 1110px; TEXT-ALIGN: left; 
+}
+
+#feature2, #feature3, #feature4, #feature5, #feature6, #feature7, #feature8, #feature9, #feature10, #feature11, #feature11, #feature12, #feature13, #feature14, #feature15, #feature16   {
+	FLOAT: left; MARGIN-BOTTOM: 0px; WIDTH: 1110px; TEXT-ALIGN: left; HEIGHT: 460px;
+}
+
+#featureTop   {
+	FLOAT: left; MARGIN-BOTTOM: 0px; WIDTH: 1110px; TEXT-ALIGN: left; HEIGHT: 560px;
+}
+
+.feat {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px 15px 0px 0px; WIDTH: 540px; PADDING-TOP: 0px; HEIGHT: 440px; TEXT-ALIGN: left;
+}
+
+#thumbs {
+	FLOAT: left; MARGIN-BOTTOM: 10px; WIDTH: 1110px; TEXT-ALIGN: left
+}
+
+#links1, #links2, #links3, #links4 {
+	FLOAT: left;
+	MARGIN-BOTTOM: 0px;
+	WIDTH: 1110px;
+	TEXT-ALIGN: left;
+	HEIGHT: 190px;
+}
+
+#linksbottom {
+	FLOAT: left; MARGIN-BOTTOM: 10px; WIDTH: 1110px; TEXT-ALIGN: left; HEIGHT: 270px;
+}
+
+.liens1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px 15px 0px 0px; WIDTH: 260px; PADDING-TOP: 0px; TEXT-ALIGN: left;
+}
+.liens2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px 15px 0px 0px; WIDTH: 260px; PADDING-TOP: 0px; HEIGHT: 260px; TEXT-ALIGN: left;
+}
+
+#bottom {
+	FLOAT: left;
+	MARGIN-BOTTOM: 10px;
+	MARGIN-TOP: 50px;
+	BACKGROUND-COLOR:#000000;
+	WIDTH: 1110px;
+	TEXT-ALIGN: center;
+}
+
+.bottom {
+FONT-SIZE: 11px; font-family: "Times New Roman", Times, serif; color: #666666;
+}
+
+.dedicatedpage  {
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	FLOAT: left;
+	PADDING-BOTTOM: 0px;
+	MARGIN: 0px 4px 40px 0px;
+	WIDTH: 1110px;
+	PADDING-TOP: 0px;
+	TEXT-ALIGN: center;
+}
+
+.dedicatedpage IMG {
+}
+
+#works1, #works2 {
+	FLOAT: left; MARGIN-BOTTOM: 5px; WIDTH: 1110px; TEXT-ALIGN: left
+}
+
+.works_petit{
+PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px 4px 10px 0px; WIDTH: 271px; HEIGHT: 175px; PADDING-TOP: 0px; TEXT-ALIGN: left;
+}
+
+.works_moyen{
+PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px 15px 20px 0px; WIDTH: 540px; PADDING-TOP: 0px; HEIGHT: 289px; TEXT-ALIGN: left;
+}
+
+.works_long{
+PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px 15px 20px 0px; WIDTH: 1110px; PADDING-TOP: 0px; HEIGHT: 289px; TEXT-ALIGN: left;
+}
+
+.backtop{
+PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 0px; WIDTH: 1110px; PADDING-TOP: 0px; HEIGHT: 10px; TEXT-ALIGN: right;
+}
+.P2 {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 11px;
+}

@@ -6,7 +6,7 @@ function Track() {
       {marqueeItems.map((item, i) => (
         <span key={i} className="flex items-center gap-10 text-[1.4rem] font-bold uppercase text-ink">
           {item}
-          <em className="not-italic text-accent">—</em>
+          <em className="not-italic text-accent">·</em>
         </span>
       ))}
     </span>

@@ -1,0 +1,3 @@
+#konsoleH robot
+User-agent: *
+Disallow: /

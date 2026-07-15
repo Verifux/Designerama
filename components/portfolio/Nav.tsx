@@ -1,16 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { Logo } from "@/components/shared/Logo";
 import { nav } from "@/lib/content/portfolio";
 
 export function Nav({ backLink }: { backLink?: { label: string; href: string } }) {
   return (
     <nav className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-line bg-bg/80 px-6 py-4 backdrop-blur-md sm:px-10">
       <div className="flex items-center gap-6">
-        <Link href="/" aria-label="Back to portal">
-          <Image src="/images/logo-mark.png" alt="Designerama" width={104} height={36} className="h-[26px] w-auto dark:invert" priority />
+        <Link href="/" aria-label="Designerama home" className="flex items-center">
+          <Logo height={34} priority />
         </Link>
         {backLink && (
           <Link href={backLink.href} className="hidden font-mono text-[0.78rem] text-ink-dim transition-colors hover:text-accent sm:inline">
@@ -37,7 +36,6 @@ export function Nav({ backLink }: { backLink?: { label: string; href: string } }
         <a href={nav.cta.href} className="btn--ghost hidden text-[0.82rem] sm:inline-flex">
           {nav.cta.label}
         </a>
-        <ThemeToggle className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-accent" />
       </div>
     </nav>
   );

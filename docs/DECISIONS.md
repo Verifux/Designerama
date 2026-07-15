@@ -1,0 +1,91 @@
+# Decisions log
+
+Chronological, most recent first. Each entry explains *why*, not just *what*
+— the code diff shows what changed; this shows the reasoning so a future
+session doesn't re-litigate settled calls.
+
+## Verifux framework copy corrected to ground truth (2026-07-15)
+
+**What was wrong:** site copy described Verifux's framework as "8 pillars,
+48 checkpoints" across "UX, DX, MX, AIX" — a plausible-sounding guess that
+was never verified against the actual product.
+
+**What's actually true**, confirmed by reading
+`/Users/kishanrama/Documents/Verifux/heuristics.js` directly (the `PILLARS`
+and `PILLAR_GROUPS` exports) and cross-checking the live
+`designerama.co.za/verifux` page:
+
+- **54 checkpoints across 9 pillars total.**
+- Grouped into a triad, not a quartet: **MX** (Human Experience — "can people
+  use it?", 7 pillars), **BX** (Behavioural Experience — "will people act?",
+  1 pillar), **AIX** (AI Experience — "can AI use it?", 1 pillar).
+- **DX** (Design Excellence) is a *separate, optional* 0–100 craft score,
+  benchmarked against design-award criteria. It explicitly does **not**
+  factor into the 54-checkpoint score — the two are independent numbers.
+
+**Why it matters going forward:** any future copy touching Verifux's
+framework must use MX/BX/AIX as the checkpoint triad and treat DX as a
+separate, optional add-on — not a fourth equal member of the framework. If
+the real product's pillar/checkpoint counts change, re-verify against
+`heuristics.js` rather than propagating old copy.
+
+**Process lesson:** this was caught because the user directly asked "why
+can't you check the Verifux folder or engine.js or git." The honest answer
+was that an earlier session treated "don't modify the Verifux folder" as
+"don't touch it at all," when it only ever meant don't *write* to it — reading
+it for facts was always fine and should have happened before guessing.
+
+## Portal splash demoted, Designerama became the site root
+
+Earlier in the project, `/` was a "two doors" portal forcing a choice between
+Portfolio and Designerama before showing any content. This was replaced:
+Designerama is now the home page directly; Portfolio is a first-class page
+one click away at `/portfolio`. Reasoning: a mandatory gate before content
+costs a click of friction for anyone arriving with specific intent (a shared
+link, a search result), and gave 50/50 visual weight to two properties that
+aren't equal priority — Designerama/Verifux is the revenue focus, the
+portfolio is secondary.
+
+## Designerama is dark-only, Portfolio is light-only — no theme toggle
+
+Each brand carries a fixed theme via `[data-brand]`-scoped CSS custom
+properties (`components/theme/ThemeProvider.tsx`, `app/globals.css`). There
+is no light/dark toggle and none should be added without being asked — this
+was a deliberate simplification after theme toggling was tried and dropped.
+
+## No em/en dashes anywhere in copy
+
+Standing style rule from the user. Replace with commas, periods, mid-dots
+(`·`), or "to" for date ranges (e.g. "2017 to 2018", not "2017–2018").
+Applies to all content files and any hardcoded copy in components.
+
+## No Johannesburg / JHB / South Africa references in copy
+
+Explicitly removed once already in an earlier session. Caught and reverted a
+near-miss reintroduction of this during the 2026-07-15 footer update — worth
+flagging clearly here so it doesn't happen again.
+
+## Static export + subpath basePath handling
+
+Next.js 14.2.18's `next/image` does not reliably auto-prefix `basePath` onto
+hardcoded local image `src` strings when using `output: "export"` with
+`images.unoptimized: true` — confirmed empirically (an export built with
+`NEXT_PUBLIC_BASE_PATH=/new` still emitted un-prefixed `/images/...` paths
+for every hardcoded image source, even though CSS/JS chunk paths prefixed
+correctly). Fixed with a small `lib/basePath.ts` helper (`withBasePath()`)
+threaded through every hardcoded image `src` in the codebase, rather than
+relying on Next to handle it automatically. See `docs/DEPLOYMENT.md` for the
+build commands this affects.
+
+## Tailwind color-opacity modifiers don't work on this project's color tokens
+
+`text-ink/75`-style Tailwind opacity modifiers silently do nothing on this
+codebase's custom colors (`ink`, `ink-dim`, `accent`, etc. in
+`tailwind.config.ts`), because those tokens are defined as plain
+`var(--x)` references rather than the RGB-channel-triplet format
+(`rgb(var(--x-rgb) / <alpha-value>)`) Tailwind's opacity syntax requires.
+Changing the token format would ripple across every color usage sitewide, so
+the fix used instead is `text-[color-mix(in_srgb,var(--x)_NN%,transparent)]`
+as an arbitrary value wherever a color-with-opacity is needed. Don't reach
+for `/NN` opacity modifiers on this project's tokens — they won't error,
+they'll just silently apply full opacity, which is a hard bug to spot visually.

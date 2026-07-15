@@ -5,6 +5,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
 import { Button } from "@/components/shared/Button";
 import { hero } from "@/lib/content/portfolio";
+import { withBasePath } from "@/lib/basePath";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -15,6 +16,15 @@ export function Hero() {
   return (
     <section className="relative flex min-h-[96vh] flex-col justify-center overflow-hidden border-b border-line pb-16 pt-36">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div
+          className="absolute bottom-[-4rem] right-[clamp(-6rem,0vw,0rem)] hidden w-[min(42vw,520px)] sm:block"
+          aria-hidden="true"
+          style={{
+            background: "radial-gradient(closest-side, color-mix(in srgb, var(--accent) 14%, transparent), transparent 72%)",
+            filter: "blur(40px)",
+            transform: "scale(1.15)",
+          }}
+        />
         <motion.div
           className="absolute bottom-[-2rem] right-[clamp(-4rem,2vw,2rem)] hidden w-[min(38vw,460px)] sm:block"
           style={
@@ -24,20 +34,20 @@ export function Hero() {
                   y,
                   scale,
                   maskImage:
-                    "linear-gradient(to bottom, black 55%, transparent 96%), linear-gradient(to left, black 65%, transparent 100%)",
+                    "radial-gradient(95% 78% at 74% 32%, black 40%, transparent 82%), linear-gradient(to bottom, black 55%, transparent 96%), linear-gradient(to left, black 58%, transparent 100%)",
                   WebkitMaskImage:
-                    "linear-gradient(to bottom, black 55%, transparent 96%), linear-gradient(to left, black 65%, transparent 100%)",
+                    "radial-gradient(95% 78% at 74% 32%, black 40%, transparent 82%), linear-gradient(to bottom, black 55%, transparent 96%), linear-gradient(to left, black 58%, transparent 100%)",
                   maskComposite: "intersect",
                   WebkitMaskComposite: "source-in",
                 }
           }
         >
           <Image
-            src="/images/kishan-portrait.webp"
+            src={withBasePath("/images/kishan-portrait.webp")}
             alt=""
             width={900}
             height={1574}
-            className="w-full opacity-90 grayscale [mix-blend-mode:multiply] [filter:contrast(1.02)]"
+            className="w-full opacity-70 grayscale [mix-blend-mode:multiply] [filter:contrast(1.04)_saturate(0.9)]"
             priority
           />
         </motion.div>
@@ -51,7 +61,7 @@ export function Hero() {
         </RevealOnScroll>
 
         <RevealOnScroll y={34}>
-          <h1 className="max-w-4xl text-[clamp(3rem,9.5vw,7.6rem)] font-extrabold uppercase leading-[0.96] tracking-[-0.035em]">
+          <h1 className="max-w-4xl text-[clamp(3rem,9.5vw,7.6rem)] font-extrabold leading-[0.96] tracking-[-0.035em]">
             {hero.headline}
             <br />
             <span className="bg-gradient-to-r from-accent-deep via-accent to-accent-light bg-clip-text text-transparent">

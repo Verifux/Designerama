@@ -4,19 +4,19 @@
 
 /* ==========================================================================
    Design tokens
-   Three brand contexts share one accent red and one font system, but carry
-   distinct color/radius tokens. Scoped via [data-brand] + [data-theme] on
-   <html>, set by components/theme/ThemeProvider.tsx (no-flash inline script).
+   Two brand contexts share one accent red, one font system and one radius
+   scale, but carry distinct color tokens. Scoped via [data-brand] on <html>,
+   set by components/theme/ThemeProvider.tsx. Light only — no dark mode.
    ========================================================================== */
 
 :root {
-  --font-display: "Big Shoulders Display", sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
   --font-body: "IBM Plex Sans", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
 
   --accent: #cc2a3f;
 
-  /* fallback (portfolio, light) so pre-hydration paint isn't unstyled */
+  /* fallback (portfolio) so pre-hydration paint isn't unstyled */
   --bg: #faf8f8;
   --paper: #f8f8f8;
   --ink: #111014;
@@ -25,12 +25,13 @@
   --line: #edeae6;
   --accent-deep: #7a1b29;
   --accent-light: #f5c7ce;
-  --radius-card: 16px;
-  --radius-lg: 20px;
+  --radius-card: 20px;
+  --radius-lg: 24px;
   --radius-pill: 100px;
+  --dots-opacity: 0.5;
 }
 
-/* ---- Portfolio brand (portal.html + portfolio.html + case studies) ---- */
+/* ---- Portfolio brand ---- */
 
 [data-brand="portfolio"] {
   --bg: #faf8f8;
@@ -41,91 +42,28 @@
   --line: #edeae6;
   --accent-deep: #7a1b29;
   --accent-light: #f5c7ce;
-  --radius-card: 16px;
-  --radius-lg: 20px;
+  --radius-card: 20px;
+  --radius-lg: 24px;
   --radius-pill: 100px;
+  --dots-opacity: 0.4;
 }
 
-[data-brand="portfolio"][data-theme="dark"] {
-  --bg: #0a0a0a;
-  --paper: #141414;
-  --ink: #f2f0ec;
-  --ink-muted: #c9c7c3;
-  --ink-dim: #8a8886;
-  --line: #232323;
-  --accent-deep: #ff6b7f;
-  --accent-light: #3a1216;
-}
-
-/* ---- Designerama brand ---- */
+/* ---- Designerama brand — dark, clinical-on-void ---- */
 
 [data-brand="designerama"] {
-  /* dark is the default */
   --bg: #0a0a0a;
   --paper: #141414;
   --ink: #f2f0ec;
-  --ink-muted: #8a8886;
-  --ink-dim: #8a8886;
+  --ink-muted: #a3a19d;
+  --ink-dim: #b3b1ad;
   --line: #232323;
   --accent-deep: var(--accent);
   --accent-light: var(--accent);
-  --radius-card: 0px;
-  --radius-lg: 0px;
-  --radius-pill: 0px;
-}
-
-[data-brand="designerama"][data-theme="light"] {
-  --bg: #f6f6f4;
-  --paper: #ececea;
-  --ink: #141414;
-  --ink-muted: #55524d;
-  --ink-dim: #55524d;
-  --line: #ddd9d4;
-}
-
-/* ---- Portal brand (its own third register, blends both doors) ---- */
-
-[data-brand="portal"] {
-  /* dark is the default */
-  --bg: #0a0a0a;
-  --paper: #141414;
-  --ink: #f2f0ec;
-  --ink-muted: #8a8886;
-  --ink-dim: #8a8886;
-  --line: #232323;
-  --accent-deep: var(--accent);
-  --accent-light: var(--accent);
-  --red-dim: #a01f31;
-  --radius-card: 0px;
-  --radius-lg: 0px;
-  --radius-pill: 999px;
-}
-
-[data-brand="portal"][data-theme="light"] {
-  --bg: #f6f6f4;
-  --paper: #ececea;
-  --ink: #141414;
-  --ink-muted: #55524d;
-  --ink-dim: #55524d;
-  --line: #ddd9d4;
-}
-
-/* ---- Background stripe opacity, per brand/theme ---- */
-
-[data-brand="portfolio"] {
-  --stripe-opacity: 0.05;
-}
-[data-brand="portfolio"][data-theme="dark"] {
-  --stripe-opacity: 0.09;
-}
-[data-brand="designerama"] {
-  --stripe-opacity: 0.88;
-}
-[data-brand="designerama"][data-theme="light"] {
-  --stripe-opacity: 0.65;
-}
-[data-brand="portal"] {
-  --stripe-opacity: 0.07;
+  --radius-card: 20px;
+  --radius-lg: 24px;
+  --radius-pill: 100px;
+  --dots-opacity: 0.55;
+  --font-display: var(--font-display-alt), sans-serif;
 }
 
 /* ==========================================================================
@@ -144,7 +82,6 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
-  transition: background 0.5s ease, color 0.5s ease;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -178,12 +115,8 @@ h3 {
     @apply font-mono text-[0.72rem] uppercase tracking-[0.16em] text-ink-dim;
   }
 
-  [data-brand="designerama"] .eyebrow {
-    @apply text-[11px] tracking-[0.14em] text-ink-dim;
-  }
-
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill text-[0.92rem] font-medium transition-colors duration-200;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-pill text-[0.92rem] font-medium transition-all duration-200;
   }
 
   [data-brand="designerama"] .btn {
@@ -192,19 +125,22 @@ h3 {
 
   .btn--solid {
     @apply btn text-white;
-    background: var(--accent) radial-gradient(var(--grad-radius, 160px) circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.3), transparent 60%);
+    background: var(--accent);
+  }
+
+  .btn--solid:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -8px color-mix(in srgb, var(--accent) 55%, transparent);
   }
 
   .btn--ghost {
-    @apply btn border border-ink text-ink;
-  }
-
-  [data-brand="designerama"] .btn--ghost {
-    @apply border-line text-ink rounded-none;
+    @apply btn border border-line text-ink bg-paper;
   }
 
   .btn--ghost:hover {
-    @apply bg-ink text-bg;
+    @apply bg-ink text-bg border-ink;
+    transform: translateY(-1px);
   }
 
   /* cursor-tracked radial gradient hover, consumed by shared/GradientHoverCard */
@@ -242,40 +178,51 @@ h3 {
     }
   }
 
-  /* portal page: per-panel cursor-tracked radial glow */
-  .portal-panel {
-    position: relative;
-  }
-  .portal-panel::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    opacity: 0;
-    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(204, 42, 63, 0.16), transparent 65%);
-    transition: opacity 0.25s ease;
-    pointer-events: none;
-  }
-  .portal-panel:hover::after {
-    opacity: 1;
+  /* Designerama: round buttons */
+  [data-brand="designerama"] .btn--solid,
+  [data-brand="designerama"] .btn--ghost {
+    @apply rounded-full;
   }
 
-  .portal-dot-pattern {
-    position: absolute;
-    inset: 0;
-    opacity: 0.5;
-    pointer-events: none;
-    background-image: radial-gradient(circle, var(--red-dim, #a01f31) 1px, transparent 1px);
-    background-size: 26px 26px;
-    -webkit-mask-image: radial-gradient(ellipse at 75% 60%, black 0%, transparent 65%);
-    mask-image: radial-gradient(ellipse at 75% 60%, black 0%, transparent 65%);
-    transition: opacity 0.5s ease;
+  [data-brand="designerama"] .btn--ghost {
+    @apply border-[#333] text-[#f2f0ec] bg-transparent;
   }
-  .portal-panel:hover .portal-dot-pattern {
-    opacity: 0.9;
+  [data-brand="designerama"] .btn--ghost:hover {
+    @apply bg-[#f2f0ec] text-[#0a0a0a] border-[#f2f0ec];
   }
 
-  .portal-divider-text {
-    writing-mode: vertical-rl;
+  /* Designerama: fixed diagonal stripe background */
+  .bg-stripe-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .bg-stripe-layer .stripe-inner {
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 70%;
+    height: 180%;
+    transform: rotate(-35deg);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 180, 180, 0.18) 15%,
+      rgba(0, 140, 160, 0.22) 25%,
+      rgba(60, 80, 140, 0.15) 40%,
+      rgba(120, 50, 140, 0.18) 55%,
+      rgba(180, 40, 100, 0.22) 70%,
+      rgba(200, 50, 80, 0.15) 85%,
+      transparent 100%
+    );
+    will-change: transform;
+  }
+
+  /* custom cursor: native cursor hidden only while CursorProvider is active */
+  html[data-custom-cursor="true"],
+  html[data-custom-cursor="true"] * {
+    cursor: none !important;
   }
 }

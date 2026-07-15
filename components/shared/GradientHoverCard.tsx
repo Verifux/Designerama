@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef } from "react";
+import { usePointerGlow } from "./usePointerGlow";
 
 type Props = {
   children: React.ReactNode;
@@ -9,30 +9,39 @@ type Props = {
   href?: string;
   radius?: number;
   ariaLabel?: string;
+  style?: React.CSSProperties;
 };
 
-export function GradientHoverCard({ children, className = "", href, radius = 360, ariaLabel }: Props) {
-  const ref = useRef<HTMLAnchorElement | HTMLDivElement>(null);
+export function GradientHoverCard({ children, className = "", href, radius = 360, ariaLabel, style: userStyle }: Props) {
+  const glow = usePointerGlow<HTMLAnchorElement | HTMLDivElement>();
 
-  const onPointerMove = useCallback((e: React.PointerEvent) => {
-    if (e.pointerType !== "mouse") return;
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
-    el.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
-  }, []);
-
-  const style = { "--grad-radius": `${radius}px` } as React.CSSProperties;
+  const style = { ...userStyle, "--grad-radius": `${radius}px` } as React.CSSProperties;
 
   if (href) {
+    const external = href.startsWith("http");
+    if (external) {
+      return (
+        <a
+          href={href}
+          ref={glow.ref as React.Ref<HTMLAnchorElement>}
+          className={className}
+          style={style}
+          onPointerMove={glow.onPointerMove}
+          aria-label={ariaLabel}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {children}
+        </a>
+      );
+    }
     return (
       <Link
         href={href}
-        ref={ref as React.Ref<HTMLAnchorElement>}
+        ref={glow.ref as React.Ref<HTMLAnchorElement>}
         className={className}
         style={style}
-        onPointerMove={onPointerMove}
+        onPointerMove={glow.onPointerMove}
         aria-label={ariaLabel}
       >
         {children}
@@ -41,12 +50,7 @@ export function GradientHoverCard({ children, className = "", href, radius = 360
   }
 
   return (
-    <div
-      ref={ref as React.Ref<HTMLDivElement>}
-      className={className}
-      style={style}
-      onPointerMove={onPointerMove}
-    >
+    <div ref={glow.ref as React.Ref<HTMLDivElement>} className={className} style={style} onPointerMove={glow.onPointerMove}>
       {children}
     </div>
   );
