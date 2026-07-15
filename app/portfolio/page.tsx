@@ -8,6 +8,7 @@ import { Marquee } from "@/components/portfolio/Marquee";
 import { Arc } from "@/components/portfolio/Arc";
 import { Method } from "@/components/portfolio/Method";
 import { Stats } from "@/components/portfolio/Stats";
+import { VerifuxSpotlight } from "@/components/portfolio/VerifuxSpotlight";
 import { WorkGrid } from "@/components/portfolio/WorkGrid";
 import { LegacyWork } from "@/components/portfolio/LegacyWork";
 import { Philosophy } from "@/components/portfolio/Philosophy";
@@ -17,7 +18,7 @@ import { Footer } from "@/components/portfolio/Footer";
 export const metadata: Metadata = {
   title: "Kishan Rama · Principal Product Designer & UX Strategist",
   description:
-    "Principal Product Designer and UX Strategist. 26 years, 26 to 30 million monthly users reached. Open to senior roles, contract work and consulting.",
+    "Principal Product Designer and UX Strategist. 26 years, 26-30 million monthly users reached. Open to senior roles, contract work and consulting.",
 };
 
 export default function PortfolioPage() {
@@ -32,6 +33,7 @@ export default function PortfolioPage() {
         <Arc />
         <Method />
         <Stats />
+        <VerifuxSpotlight />
         <WorkGrid />
         <LegacyWork />
         <Philosophy />

@@ -21,7 +21,7 @@ export const trust = {
   logos: ["SuperSport", "DStv / MultiChoice", "FNB", "bidorbuy", "Hollard", "Coca-Cola", "Standard Bank", "Telkom"],
 };
 
-export const marqueeItems = ["UX Strategy", "Product Design", "Verifux", "26 Years", "26 to 30M Users", "Broadcast to Product"];
+export const marqueeItems = ["UX Strategy", "Product Design", "Verifux", "26 Years", "26-30M Users", "Broadcast to Product"];
 
 export const arc = {
   eyebrow: "The arc",
@@ -40,7 +40,7 @@ export const arc = {
     {
       era: "2018 to 2025",
       title: "Principal Product Designer & UX Manager, SuperSport",
-      body: "Directed UX strategy and product design across SuperSport's web, mobile and connected TV ecosystem in 50+ African markets, reaching 26 to 30 million monthly impressions and driving a 40% increase in ad revenue.",
+      body: "Directed UX strategy and product design across SuperSport's web, mobile and connected TV ecosystem in 50+ African markets, reaching 26-30 million monthly impressions and driving a 40% increase in ad revenue.",
     },
     {
       era: "Now",
@@ -79,7 +79,7 @@ export const method = {
 
 export const stats = [
   { num: "26+", label: "Years in design" },
-  { num: "26 to 30M", label: "Monthly users reached, SuperSport" },
+  { num: "26-30M", label: "Monthly users reached, SuperSport" },
   { num: "40%", label: "Ad revenue lift from UX redesign" },
   { num: "CUA", label: "Certified usability analyst" },
 ];

@@ -220,6 +220,23 @@ h3 {
     will-change: transform;
   }
 
+  /* Verifux spotlight card: brand-tinted resting gradient + accent radial on hover (cursor-tracked) */
+  .verifux-card {
+    position: relative;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, var(--paper)), var(--paper) 55%, color-mix(in srgb, var(--accent-deep) 6%, var(--paper)));
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+  .verifux-card:hover {
+    background: radial-gradient(
+        var(--grad-radius, 520px) circle at var(--mx, 50%) var(--my, 50%),
+        color-mix(in srgb, var(--accent) 22%, transparent),
+        color-mix(in srgb, var(--accent-deep) 8%, transparent) 45%,
+        transparent 72%
+      ),
+      linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, var(--paper)), var(--paper) 55%, color-mix(in srgb, var(--accent-deep) 8%, var(--paper)));
+    box-shadow: 0 20px 60px -30px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
   /* custom cursor: native cursor hidden only while CursorProvider is active */
   html[data-custom-cursor="true"],
   html[data-custom-cursor="true"] * {

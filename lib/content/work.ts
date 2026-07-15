@@ -36,12 +36,12 @@ export const workItems: WorkItem[] = [
     slug: "supersport",
     title: "SuperSport",
     tag: "Product · UX · 2018 to 2025",
-    summary: "UX strategy and product design across web, mobile and connected TV, reaching 26 to 30 million monthly users.",
+    summary: "UX strategy and product design across web, mobile and connected TV, reaching 26-30 million monthly users.",
     featured: true,
     caseStudy: {
       title: "SuperSport, Case Study, Kishan Rama",
       metaDescription:
-        "UX strategy and product design for SuperSport, reaching 26 to 30 million monthly users across web, mobile and connected TV.",
+        "UX strategy and product design for SuperSport, reaching 26-30 million monthly users across web, mobile and connected TV.",
       eyebrow: "Product · UX · Dec 2018 to Sep 2025",
       headline: "Redesigning discovery and revenue across SuperSport's digital ecosystem.",
       intro:
@@ -50,7 +50,7 @@ export const workItems: WorkItem[] = [
         { label: "Client", value: "SuperSport, MultiChoice Group" },
         { label: "Role", value: "Principal Product Designer & UX Manager" },
         { label: "Duration", value: "6 years 10 months" },
-        { label: "Reach", value: "26 to 30M monthly users" },
+        { label: "Reach", value: "26-30M monthly users" },
       ],
       situation: {
         heading: "The situation",
@@ -72,11 +72,11 @@ export const workItems: WorkItem[] = [
       outcome: {
         heading: "The outcome",
         body: [
-          "The video play page changes drove an average of 26 to 30 million views and impressions per month across web and mobile. The article page changes lifted ad revenue by close to 40%, alongside increased article reads and engagement time.",
+          "The video play page changes drove an average of 26-30 million views and impressions per month across web and mobile. The article page changes lifted ad revenue by close to 40%, alongside increased article reads and engagement time.",
         ],
       },
       proof: [
-        { num: "26 to 30M", label: "Monthly views & impressions" },
+        { num: "26-30M", label: "Monthly views & impressions" },
         { num: "40%", label: "Increase in ad revenue" },
         { num: "50+", label: "African markets served" },
       ],
@@ -387,14 +387,6 @@ export const workItems: WorkItem[] = [
         { num: "3", label: "Core flows (discovery, redemption, history)" },
       ],
     },
-  },
-  {
-    slug: "verifux",
-    title: "Verifux",
-    tag: "Product · AI SaaS",
-    summary: "An AI-powered audit engine covering MX, BX and AIX (54 checkpoints, 9 pillars) with an optional DX craft score. Automates expert-level evaluation into structured, actionable reports.",
-    featured: true,
-    href: "https://www.designerama.co.za/verifux",
   },
 ];
 
