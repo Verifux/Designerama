@@ -6,6 +6,18 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 
 ## 2026-07-15 (latest session)
 
+- Added `designerama-design-system.html` — a self-hosted, framework-free
+  living style guide covering both brand contexts (Designerama dark,
+  Portfolio light), mirroring the structure of Verifux's own design system
+  file. Every value documented is pulled from the real source
+  (`app/globals.css`, `tailwind.config.ts`, `RevealOnScroll.tsx`,
+  `useMagnetic.ts`, `usePointerGlow.ts`) rather than approximated. Covers
+  brand/logo, colour, typography, spacing, radius, motion, buttons, cards
+  and hover glow, the accordion pattern, navigation, index rows, ambient
+  background effects, the MX/BX/AIX/DX framework, voice and copy rules, and
+  responsive behaviour. Verified interactive (accordion toggle, swatch
+  copy-to-clipboard, active-nav-on-scroll) in the browser with zero console
+  errors.
 - Activated GA4 analytics with Kishan's real Measurement ID (`G-3C5292GLX7`),
   baked in as the default in `components/shared/GoogleAnalytics.tsx` rather
   than requiring an env var — confirmed firing correctly in the browser

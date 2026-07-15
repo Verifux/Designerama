@@ -22,6 +22,8 @@ state, the live-site migration plan, and standing constraints.
 - [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md) — build/export/hosting instructions
 - [`docs/DECISIONS.md`](./docs/DECISIONS.md) — why things are the way they are
 - [`docs/CHANGELOG.md`](./docs/CHANGELOG.md) — dated history of changes
+- [`designerama-design-system.html`](./designerama-design-system.html) — visual
+  design system reference, open directly in a browser (no build step)
 
 ## Repo layout
 

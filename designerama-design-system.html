@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Designerama Design System v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Big+Shoulders+Display:wght@600;700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   DESIGNERAMA + PORTFOLIO DESIGN SYSTEM · v1.0
+   Source of truth for both brand contexts sharing this
+   codebase. Mirrors the real tokens in app/globals.css
+   and tailwind.config.ts — this file is self-hosted,
+   framework-free, and documents production values only.
+═══════════════════════════════════════════════════ */
+:root{
+  /* Doc chrome (this file's own UI, not a site token) */
+  --docred:#cc2a3f;--docred-dark:#7a1b29;--docred-soft:#fbe9ec;
+  --ink:#111827;--g1:#374151;--g2:#4B5563;--g3:#6B7280;--g4:#9CA3AF;
+  --bg:#FFFFFF;--bg2:#F9FAFB;--bg3:#F3F4F6;
+  --line:#E5E7EB;--line2:#F0F1F3;
+  --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+  --r-xs:4px;--r-sm:8px;--r:12px;--r-lg:16px;--r-xl:24px;--r-pill:100px;
+  --shadow-sm:0 1px 2px rgba(17,24,39,.04),0 1px 3px rgba(17,24,39,.06);
+  --shadow:0 4px 6px rgba(17,24,39,.03),0 10px 24px rgba(17,24,39,.06);
+  --ease:cubic-bezier(0.16,0.84,0.24,1);
+  --sidebar:250px;
+
+  /* ── Real site tokens: Portfolio brand (light) ── */
+  --pf-bg:#faf8f8;--pf-paper:#f8f8f8;--pf-ink:#111014;--pf-ink-muted:#5b5b63;
+  --pf-ink-dim:#9a979e;--pf-line:#edeae6;--pf-accent:#cc2a3f;
+  --pf-accent-deep:#7a1b29;--pf-accent-light:#f5c7ce;--pf-dots:0.4;
+
+  /* ── Real site tokens: Designerama brand (dark) ── */
+  --dr-bg:#0a0a0a;--dr-paper:#141414;--dr-ink:#f2f0ec;--dr-ink-muted:#a3a19d;
+  --dr-ink-dim:#b3b1ad;--dr-line:#232323;--dr-accent:#cc2a3f;--dr-dots:0.55;
+
+  /* ── Shared across both brands ── */
+  --radius-card:20px;--radius-lg:24px;--radius-pill:100px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg2);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16px}
+
+/* ── LAYOUT ── */
+.ds-app{display:flex;min-height:100vh}
+.ds-sidebar{
+  width:var(--sidebar);flex-shrink:0;background:var(--bg);
+  border-right:1px solid var(--line);position:sticky;top:0;
+  height:100vh;overflow-y:auto;display:flex;flex-direction:column;
+}
+.ds-content{flex:1;min-width:0;padding:0}
+.section{padding:60px 48px;border-bottom:1px solid var(--line);max-width:960px}
+.section:last-child{border-bottom:none}
+.section-id{scroll-margin-top:24px}
+
+/* ── SIDEBAR ── */
+.sidebar-head{padding:20px 18px 16px;border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo-mark{width:30px;height:30px;background:var(--docred);display:flex;align-items:center;justify-content:center;padding:5px}
+.logo-word{font-size:15px;font-weight:800;letter-spacing:-0.02em;color:var(--ink);font-family:'Big Shoulders Display',var(--sans)}
+.sidebar-v{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--g4);margin-top:6px}
+.sidebar-nav{padding:10px 0;flex:1}
+.nav-group{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--g4);padding:10px 18px 4px}
+.nav-link{display:flex;align-items:center;padding:9px 18px;font-size:14px;font-weight:500;color:var(--g3);cursor:pointer;transition:all .14s;text-decoration:none;gap:9px}
+.nav-link:hover{color:var(--ink);background:var(--bg2)}
+.nav-link.active{color:var(--docred);background:var(--docred-soft);font-weight:600;position:relative}
+.nav-link.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--docred)}
+.nav-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sidebar-foot{padding:14px 18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:var(--g4);line-height:1.6}
+
+/* ── SECTION HEADERS ── */
+.sec-eyebrow{font-family:var(--mono);font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:1px;color:var(--docred);margin-bottom:10px}
+.sec-title{font-size:32px;font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:12px;font-family:'Big Shoulders Display',var(--sans)}
+.sec-title em{font-style:italic;color:var(--docred)}
+.sec-sub{font-size:15.5px;color:var(--g2);max-width:64ch;line-height:1.6;margin-bottom:36px}
+
+/* ── DEMO GRIDS ── */
+.demo{margin-bottom:32px}
+.demo-label{font-family:var(--mono);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--g4);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.demo-label::after{content:'';flex:1;height:1px;background:var(--line)}
+.demo-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.demo-block{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:20px 24px}
+
+/* ── COLOUR SWATCHES ── */
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.swatch{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .15s}
+.swatch:hover{transform:translateY(-2px)}
+.swatch-color{height:72px}
+.swatch-info{background:var(--bg);padding:10px 12px;border-top:1px solid var(--line)}
+.swatch-name{font-size:13px;font-weight:600;color:var(--ink);display:block}
+.swatch-val{font-family:var(--mono);font-size:11px;color:var(--g3);display:block;margin-top:2px}
+.swatch-token{font-family:var(--mono);font-size:10px;color:var(--g4);display:block;margin-top:1px}
+
+/* ── BRAND PANELS (side-by-side light/dark demos) ── */
+.brand-panel{border-radius:var(--r-lg);padding:24px 26px;flex:1;min-width:280px}
+.brand-panel.pf{background:var(--pf-bg);border:1px solid var(--pf-line)}
+.brand-panel.dr{background:var(--dr-bg);border:1px solid var(--dr-line)}
+.brand-panel-label{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;display:block}
+.brand-panel.pf .brand-panel-label{color:var(--pf-ink-dim)}
+.brand-panel.dr .brand-panel-label{color:var(--dr-ink-dim)}
+
+/* ── TYPOGRAPHY SCALE ── */
+.type-row{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--line2)}
+.type-row:last-child{border-bottom:none}
+.type-meta{font-family:var(--mono);font-size:10.5px;color:var(--g4);width:200px;flex-shrink:0;line-height:1.5}
+.type-sample{flex:1}
+
+/* ── SPACING SCALE ── */
+.space-row{display:flex;align-items:center;gap:14px;padding:8px 0;border-bottom:1px solid var(--line2)}
+.space-row:last-child{border-bottom:none}
+.space-bar{background:var(--docred);border-radius:2px;height:20px;flex-shrink:0}
+.space-meta{font-family:var(--mono);font-size:11px;color:var(--g3)}
+
+/* ── RADIUS DEMO ── */
+.radius-grid{display:flex;gap:12px;flex-wrap:wrap}
+.radius-box{width:72px;height:72px;background:var(--bg3);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.radius-label{font-family:var(--mono);font-size:10px;color:var(--g3);text-align:center;line-height:1.3}
+
+/* ── COMPONENTS ── */
+button{font-family:var(--sans);cursor:pointer;border:none;transition:all .2s}
+.btn-red{font-size:13.5px;font-weight:500;color:#fff;background:var(--docred);padding:14px 28px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:8px}
+.btn-red:hover{filter:brightness(1.06);transform:translateY(-1px);box-shadow:0 8px 24px -8px rgba(204,42,63,.55)}
+.btn-ghost-light{font-size:13.5px;font-weight:500;color:var(--pf-ink);background:var(--pf-paper);border:1px solid var(--pf-line);padding:14px 28px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:8px}
+.btn-ghost-light:hover{background:var(--pf-ink);color:var(--pf-bg);border-color:var(--pf-ink);transform:translateY(-1px)}
+.btn-ghost-dark{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:400;color:#f2f0ec;background:transparent;border:1px solid #333;padding:14px 28px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:8px}
+.btn-ghost-dark:hover{background:#f2f0ec;color:#0a0a0a;border-color:#f2f0ec;transform:translateY(-1px)}
+.btn-red-mono{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:400;color:#fff;background:var(--docred);padding:14px 28px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:8px}
+.btn-red-mono:hover{filter:brightness(1.06);transform:translateY(-1px);box-shadow:0 8px 24px -8px rgba(204,42,63,.55)}
+
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;padding:4px 10px;border-radius:var(--r-pill);border:1px solid var(--line)}
+.chip-mx{background:#fbe9ec;color:var(--docred-dark);border-color:#f3c9d0}
+.chip-neutral{background:var(--bg3);color:var(--g2);border-color:var(--line)}
+
+.eyebrow-demo{font-family:var(--mono);font-size:11.5px;font-weight:500;text-transform:uppercase;letter-spacing:.16em}
+
+/* ── GRAD-HOVER-CARD DEMO (mirrors .grad-hover-card in globals.css) ── */
+.ghc-demo{position:relative;border:1px solid var(--pf-line);border-radius:var(--r-lg);padding:26px;background:var(--pf-bg);transition:background .3s ease;cursor:pointer}
+.ghc-demo:hover{background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(204,42,63,.08),var(--pf-paper) 65%)}
+
+/* ── ACCORDION DEMO ── */
+.acc-demo{position:relative;border-top:1px solid var(--pf-line);padding:24px 0}
+.acc-chevron{position:absolute;right:0;top:24px;width:44px;height:44px;border-radius:50%;border:1px solid var(--pf-line);display:flex;align-items:center;justify-content:center;color:var(--pf-ink);cursor:pointer;transition:all .2s}
+.acc-chevron:hover{border-color:var(--docred);color:var(--docred)}
+
+/* ── IDX ROW DEMO (mirrors .idx-row / .idx-num / .idx-body) ── */
+.idx-demo-row{display:grid;grid-template-columns:64px 1fr;border-top:1px solid var(--pf-line);padding:18px 0}
+.idx-demo-num{font-family:var(--mono);font-size:12px;color:var(--docred);letter-spacing:.05em;padding-top:2px}
+.idx-demo-body{border-left:1px solid var(--pf-line);padding-left:28px}
+
+/* ── ICON GRID (checkmark used for numbered display numerals demo) ── */
+.numeral-grid{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-end}
+.numeral-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+.numeral-item span.n{font-family:'Big Shoulders Display',sans-serif;font-weight:900;color:var(--docred)}
+.numeral-item span.label{font-family:var(--mono);font-size:10px;color:var(--g4);text-align:center}
+
+/* ── COPY BLOCKS ── */
+.copy-block{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 16px;font-family:var(--mono);font-size:12.5px;color:var(--ink);position:relative;cursor:pointer}
+.copy-block:hover{border-color:var(--docred)}
+.copy-block .copy-btn{position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:10px;background:var(--bg3);border:1px solid var(--line);color:var(--g3);padding:4px 9px;border-radius:6px;font-weight:500;cursor:pointer}
+.copy-block .copy-btn:hover{border-color:var(--docred);color:var(--docred)}
+.copy-block .copy-btn.done{background:#22C55E;color:#fff;border-color:#22C55E}
+
+/* ── VOICE GUIDE ── */
+.voice-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.voice-do{background:#eefbf2;border:1px solid #c9f0d4;border-radius:var(--r-sm);padding:14px 16px}
+.voice-dont{background:var(--docred-soft);border:1px solid #f3c9d0;border-radius:var(--r-sm);padding:14px 16px}
+.voice-tag{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px}
+.voice-do .voice-tag{color:#15803D}
+.voice-dont .voice-tag{color:var(--docred-dark)}
+.voice-text{font-size:14px;line-height:1.5}
+
+/* ── RESPONSIVE TABLE ── */
+.bp-table{width:100%;border-collapse:collapse;font-size:14px}
+.bp-table th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--g4);padding:10px 14px;border-bottom:2px solid var(--line);text-align:left;font-weight:500}
+.bp-table td{padding:11px 14px;border-bottom:1px solid var(--line2);color:var(--g2)}
+.bp-table td:first-child{font-family:var(--mono);font-weight:600;color:var(--ink)}
+.bp-table tr:last-child td{border-bottom:none}
+
+/* ── STEP LIST (implementation notes) ── */
+.figma-step{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line2)}
+.figma-step:last-child{border-bottom:none}
+.step-n{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;background:var(--ink);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.step-body h4{font-size:15px;font-weight:700;margin-bottom:4px;letter-spacing:-0.01em}
+.step-body p{font-size:14px;color:var(--g2);line-height:1.55}
+.step-body code{font-family:var(--mono);font-size:12px;background:var(--bg3);border:1px solid var(--line);padding:2px 6px;border-radius:4px;color:var(--docred)}
+code.inline{font-family:var(--mono);font-size:13px;background:var(--bg3);border:1px solid var(--line);padding:2px 6px;border-radius:4px}
+
+/* ── FRAMEWORK LAYER CARDS (MX/BX/AIX/DX — same framework Designerama markets) ── */
+.layer-card{border-radius:var(--r-lg);padding:22px 24px;margin-bottom:12px}
+.layer-mx{background:#fbe9ec;border:1px solid #f3c9d0}
+.layer-bx{background:#f5f3ff;border:1px solid #ddd6fe}
+.layer-aix{background:#eff6ff;border:1px solid #bfdbfe}
+.layer-dx{background:#fbf3e1;border:1px solid #ead9ae}
+.layer-tag{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.layer-mx .layer-tag{color:var(--docred-dark)}
+.layer-bx .layer-tag{color:#5B21B6}
+.layer-aix .layer-tag{color:#1D4ED8}
+.layer-dx .layer-tag{color:#7A5F16}
+.layer-title{font-size:19px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px;font-family:'Big Shoulders Display',var(--sans)}
+.layer-q{font-family:var(--mono);font-size:12px;color:var(--g2);margin-bottom:10px}
+.layer-pillars{display:flex;gap:7px;flex-wrap:wrap}
+
+/* ── PRINT ── */
+@media print{
+  .ds-sidebar,.no-print{display:none!important}
+  .ds-content{padding:0}
+  .section{padding:30px 36px;break-before:page}
+  body{background:#fff}
+}
+@media(max-width:880px){
+  .ds-sidebar{display:none}
+  .section{padding:36px 22px}
+  .voice-row{grid-template-columns:1fr}
+  .swatch-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+  .type-meta{width:130px}
+  .demo-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="ds-app">
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="ds-sidebar">
+  <div class="sidebar-head">
+    <a href="#overview" class="logo">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h9a7 7 0 0 1 0 14H4z"/><path d="M4 4v14"/></svg></span>
+      <span class="logo-word">DESIGNERAMA</span>
+    </a>
+    <div class="sidebar-v">Design System v1.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-group">Foundation</div>
+    <a class="nav-link active" href="#overview"><span class="nav-dot" style="background:var(--docred)"></span>Overview</a>
+    <a class="nav-link" href="#brand"><span class="nav-dot" style="background:var(--ink)"></span>Brand & Logo</a>
+    <a class="nav-link" href="#colours"><span class="nav-dot" style="background:var(--docred)"></span>Colour</a>
+    <a class="nav-link" href="#typography"><span class="nav-dot" style="background:var(--g3)"></span>Typography</a>
+    <a class="nav-link" href="#spacing"><span class="nav-dot" style="background:var(--g4)"></span>Spacing</a>
+    <a class="nav-link" href="#radius"><span class="nav-dot" style="background:var(--g4)"></span>Border Radius</a>
+    <a class="nav-link" href="#motion"><span class="nav-dot" style="background:var(--g4)"></span>Motion</a>
+    <div class="nav-group">Components</div>
+    <a class="nav-link" href="#buttons"><span class="nav-dot" style="background:var(--docred)"></span>Buttons</a>
+    <a class="nav-link" href="#cards"><span class="nav-dot" style="background:var(--g3)"></span>Cards & Hover Glow</a>
+    <a class="nav-link" href="#accordion"><span class="nav-dot" style="background:var(--g3)"></span>Accordion</a>
+    <a class="nav-link" href="#navigation"><span class="nav-dot" style="background:var(--g4)"></span>Navigation</a>
+    <a class="nav-link" href="#idxrows"><span class="nav-dot" style="background:var(--docred)"></span>Index Rows</a>
+    <a class="nav-link" href="#background"><span class="nav-dot" style="background:var(--g4)"></span>Ambient Background</a>
+    <div class="nav-group">System</div>
+    <a class="nav-link" href="#framework"><span class="nav-dot" style="background:#B08D28"></span>MX/BX/AIX/DX</a>
+    <a class="nav-link" href="#voice"><span class="nav-dot" style="background:var(--g3)"></span>Voice & Copy</a>
+    <a class="nav-link" href="#responsive"><span class="nav-dot" style="background:var(--g4)"></span>Responsive</a>
+    <a class="nav-link" href="#implementation"><span class="nav-dot" style="background:#0099FF"></span>Implementation</a>
+  </nav>
+  <div class="sidebar-foot">Designerama · Portfolio<br>designerama.co.za</div>
+</aside>
+
+<!-- ═══ CONTENT ═══ -->
+<main class="ds-content">
+
+<!-- OVERVIEW -->
+<div class="section section-id" id="overview">
+  <div class="sec-eyebrow">Design System</div>
+  <h1 class="sec-title">Designerama <em>Design</em><br>System v1.0</h1>
+  <p class="sec-sub">The authoritative source of truth for both brand contexts sharing this codebase: <strong>Designerama</strong> (the AI design consultancy home, dark) and <strong>Portfolio</strong> (Kishan Rama's case-study site, light). All tokens documented here are production-verified against <code class="inline">app/globals.css</code> and <code class="inline">tailwind.config.ts</code> — nothing on this page is aspirational or invented.</p>
+  <div class="demo-row">
+    <div style="background:var(--docred-soft);border:1px solid #f3c9d0;border-radius:var(--r);padding:14px 18px;flex:1;min-width:180px">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--docred-dark);font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">Two brands, one system</div>
+      <div style="font-size:15px;font-weight:700">Designerama (dark) + Portfolio (light)</div>
+      <div style="font-size:13px;color:var(--g2);margin-top:3px">No theme toggle — each brand is fixed</div>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:14px 18px;flex:1;min-width:180px">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--g4);font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">Typefaces</div>
+      <div style="font-size:15px;font-weight:700">Big Shoulders Display / Plus Jakarta Sans</div>
+      <div style="font-size:13px;color:var(--g2);margin-top:3px">+ IBM Plex Sans body, IBM Plex Mono labels</div>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:14px 18px;flex:1;min-width:180px">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--g4);font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">Stack</div>
+      <div style="font-size:15px;font-weight:700">Next.js 14 + Tailwind + Framer Motion</div>
+      <div style="font-size:13px;color:var(--g2);margin-top:3px">CSS custom properties, brand-scoped</div>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND -->
+<div class="section section-id" id="brand">
+  <div class="sec-eyebrow">Brand & Logo</div>
+  <h2 class="sec-title">The <em>mark</em>.</h2>
+  <p class="sec-sub">A solid red square badge (#cc2a3f) with the "DESGNERAMA" wordmark in white — the dropped "I" is intentional, traced back to the real 2010-era brand source. Same logo asset across both brand contexts; only the surrounding chrome changes.</p>
+
+  <div class="demo">
+    <div class="demo-label">Logo in context — both brands</div>
+    <div class="demo-row">
+      <div class="brand-panel pf" style="display:flex;align-items:center">
+        <div>
+          <span class="brand-panel-label">Portfolio — light</span>
+          <div style="display:inline-flex;align-items:center;background:#cc2a3f;padding:6.9px 11.5px"><span style="color:#fff;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.01em">DESGNERAMA</span></div>
+        </div>
+      </div>
+      <div class="brand-panel dr" style="display:flex;align-items:center">
+        <div>
+          <span class="brand-panel-label">Designerama — dark</span>
+          <div style="display:inline-flex;align-items:center;background:#cc2a3f;padding:8.6px 14.4px"><span style="color:#fff;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:25px;letter-spacing:-0.01em">DESGNERAMA</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-block" style="background:var(--bg3);margin-top:8px">
+    <div class="demo-label" style="margin-bottom:10px">Logo sizing rule (components/shared/Logo.tsx)</div>
+    <div class="copy-block" style="cursor:default">padding = height × 0.32 (horizontal), height × 0.32 × 0.6 (vertical)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;font-size:13.5px;color:var(--g2);line-height:1.6">
+      <div><span style="color:#15803D;font-weight:600">Do:</span> Nav height 45px (Designerama) / 34px (Portfolio).<br>Footer height 36px both brands.<br>Always render via the shared <code class="inline">&lt;Logo /&gt;</code> component.</div>
+      <div><span style="color:var(--docred-dark);font-weight:600">Do not:</span> Recolour the badge or wordmark.<br>Use a different logo asset per brand — it's the same PNG.<br>Hardcode logo markup outside the shared component.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COLOURS -->
+<div class="section section-id" id="colours">
+  <div class="sec-eyebrow">Colour System</div>
+  <h2 class="sec-title">The <em>palette</em>.</h2>
+  <p class="sec-sub">One shared accent red drives both brands. Everything else — background, paper, ink, line — is redefined per brand via <code class="inline">[data-brand]</code> CSS custom property scoping in <code class="inline">app/globals.css</code>, set at runtime by <code class="inline">components/theme/ThemeProvider.tsx</code>. Click any swatch to copy its hex value.</p>
+
+  <div class="demo">
+    <div class="demo-label">Shared accent</div>
+    <div class="swatch-grid" style="grid-template-columns:repeat(3,1fr);max-width:520px">
+      <div class="swatch" onclick="copyText('#cc2a3f',this)"><div class="swatch-color" style="background:#cc2a3f"></div><div class="swatch-info"><span class="swatch-name">Accent</span><span class="swatch-val">#cc2a3f</span><span class="swatch-token">--accent</span></div></div>
+      <div class="swatch" onclick="copyText('#7a1b29',this)"><div class="swatch-color" style="background:#7a1b29"></div><div class="swatch-info"><span class="swatch-name">Accent Deep (Portfolio)</span><span class="swatch-val">#7a1b29</span><span class="swatch-token">--accent-deep</span></div></div>
+      <div class="swatch" onclick="copyText('#f5c7ce',this)"><div class="swatch-color" style="background:#f5c7ce"></div><div class="swatch-info"><span class="swatch-name">Accent Light (Portfolio)</span><span class="swatch-val">#f5c7ce</span><span class="swatch-token">--accent-light</span></div></div>
+    </div>
+    <p style="font-size:12.5px;color:var(--g4);margin-top:8px">On Designerama, <code class="inline">--accent-deep</code> and <code class="inline">--accent-light</code> both resolve to plain <code class="inline">--accent</code> — no gradient tint, flat colour only.</p>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Portfolio — light brand tokens</div>
+    <div class="swatch-grid">
+      <div class="swatch" onclick="copyText('#faf8f8',this)"><div class="swatch-color" style="background:#faf8f8;border:1px solid #edeae6"></div><div class="swatch-info"><span class="swatch-name">Background</span><span class="swatch-val">#faf8f8</span><span class="swatch-token">--bg</span></div></div>
+      <div class="swatch" onclick="copyText('#f8f8f8',this)"><div class="swatch-color" style="background:#f8f8f8;border:1px solid #edeae6"></div><div class="swatch-info"><span class="swatch-name">Paper</span><span class="swatch-val">#f8f8f8</span><span class="swatch-token">--paper</span></div></div>
+      <div class="swatch" onclick="copyText('#111014',this)"><div class="swatch-color" style="background:#111014"></div><div class="swatch-info"><span class="swatch-name">Ink</span><span class="swatch-val">#111014</span><span class="swatch-token">--ink</span></div></div>
+      <div class="swatch" onclick="copyText('#5b5b63',this)"><div class="swatch-color" style="background:#5b5b63"></div><div class="swatch-info"><span class="swatch-name">Ink Muted</span><span class="swatch-val">#5b5b63</span><span class="swatch-token">--ink-muted</span></div></div>
+      <div class="swatch" onclick="copyText('#9a979e',this)"><div class="swatch-color" style="background:#9a979e"></div><div class="swatch-info"><span class="swatch-name">Ink Dim</span><span class="swatch-val">#9a979e</span><span class="swatch-token">--ink-dim</span></div></div>
+      <div class="swatch" onclick="copyText('#edeae6',this)"><div class="swatch-color" style="background:#edeae6"></div><div class="swatch-info"><span class="swatch-name">Line</span><span class="swatch-val">#edeae6</span><span class="swatch-token">--line</span></div></div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Designerama — dark brand tokens</div>
+    <div class="swatch-grid">
+      <div class="swatch" onclick="copyText('#0a0a0a',this)"><div class="swatch-color" style="background:#0a0a0a"></div><div class="swatch-info"><span class="swatch-name">Background</span><span class="swatch-val">#0a0a0a</span><span class="swatch-token">--bg</span></div></div>
+      <div class="swatch" onclick="copyText('#141414',this)"><div class="swatch-color" style="background:#141414"></div><div class="swatch-info"><span class="swatch-name">Paper</span><span class="swatch-val">#141414</span><span class="swatch-token">--paper</span></div></div>
+      <div class="swatch" onclick="copyText('#f2f0ec',this)"><div class="swatch-color" style="background:#f2f0ec"></div><div class="swatch-info"><span class="swatch-name">Ink</span><span class="swatch-val">#f2f0ec</span><span class="swatch-token">--ink</span></div></div>
+      <div class="swatch" onclick="copyText('#a3a19d',this)"><div class="swatch-color" style="background:#a3a19d"></div><div class="swatch-info"><span class="swatch-name">Ink Muted</span><span class="swatch-val">#a3a19d</span><span class="swatch-token">--ink-muted</span></div></div>
+      <div class="swatch" onclick="copyText('#b3b1ad',this)"><div class="swatch-color" style="background:#b3b1ad"></div><div class="swatch-info"><span class="swatch-name">Ink Dim</span><span class="swatch-val">#b3b1ad</span><span class="swatch-token">--ink-dim</span></div></div>
+      <div class="swatch" onclick="copyText('#232323',this)"><div class="swatch-color" style="background:#232323"></div><div class="swatch-info"><span class="swatch-name">Line</span><span class="swatch-val">#232323</span><span class="swatch-token">--line</span></div></div>
+    </div>
+    <p style="font-size:12.5px;color:var(--g4);margin-top:8px">Ink-dim and ink-muted were deliberately lightened from an earlier, harder-to-read pass (#8a8886 → #b3b1ad / #a3a19d) — this is the corrected, final value. Don't darken it back.</p>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Ambient dots opacity per brand</div>
+    <div class="demo-row">
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:12px 16px"><span style="font-family:var(--mono);font-size:12px">--dots-opacity (Portfolio)</span><br><span style="font-family:var(--mono);font-size:16px;font-weight:600;color:var(--docred)">0.4</span></div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:12px 16px"><span style="font-family:var(--mono);font-size:12px">--dots-opacity (Designerama)</span><br><span style="font-family:var(--mono);font-size:16px;font-weight:600;color:var(--docred)">0.55</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="section section-id" id="typography">
+  <div class="sec-eyebrow">Typography</div>
+  <h2 class="sec-title">Type <em>system</em>.</h2>
+  <p class="sec-sub">Four typefaces, cleanly separated by role. Display headings differ per brand — Portfolio uses Plus Jakarta Sans, Designerama swaps in Big Shoulders Display via a <code class="inline">--font-display-alt</code> CSS variable override scoped to <code class="inline">[data-brand="designerama"]</code>. Body and mono are shared across both.</p>
+
+  <div class="demo">
+    <div class="demo-label">Font roles</div>
+    <div class="demo-block">
+      <div class="type-row"><div class="type-meta">Display — Portfolio<br>Plus Jakarta Sans<br>500/600/700/800</div><div class="type-sample" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;letter-spacing:-0.02em">Twenty-six years shaping products.</div></div>
+      <div class="type-row"><div class="type-meta">Display — Designerama<br>Big Shoulders Display<br>600/700/900</div><div class="type-sample" style="font-family:'Big Shoulders Display',sans-serif;font-size:30px;font-weight:900;letter-spacing:-0.01em;text-transform:none">Most software isn't badly designed.</div></div>
+      <div class="type-row"><div class="type-meta">Body — both brands<br>IBM Plex Sans<br>400/500/600</div><div class="type-sample" style="font-family:'IBM Plex Sans',sans-serif;font-size:16px;line-height:1.7">Product strategy, UX leadership and AI-enabled design consulting.</div></div>
+      <div class="type-row"><div class="type-meta">Mono — both brands<br>IBM Plex Mono<br>400/500/600</div><div class="type-sample" style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase">AI design consultancy · Kishan Rama</div></div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Designerama heading scale</div>
+    <div class="demo-block">
+      <div class="type-row"><div class="type-meta">Hero H1<br>clamp(38–84px) / 700 / -0.01em / lh 0.98</div><div class="type-sample" style="font-family:'Big Shoulders Display',sans-serif;font-size:44px;font-weight:700;letter-spacing:-0.01em;line-height:.98">Most software isn't badly designed.</div></div>
+      <div class="type-row"><div class="type-meta">Section heading<br>clamp(26–44px) / lh 1.04 / -0.01em</div><div class="type-sample" style="font-family:'Big Shoulders Display',sans-serif;font-size:34px;font-weight:700;letter-spacing:-0.01em;line-height:1.04">Three experience layers, 54 checkpoints.</div></div>
+      <div class="type-row"><div class="type-meta">Why-it-matters heading<br>clamp(28–48px) / lh 1.08</div><div class="type-sample" style="font-family:'Big Shoulders Display',sans-serif;font-size:36px;font-weight:700;letter-spacing:-0.01em;line-height:1.08">Product decisions grounded in evidence.</div></div>
+      <div class="type-row"><div class="type-meta">Checkpoint card title<br>clamp(24–36px) / 700 / uc / 0.02em</div><div class="type-sample" style="font-family:'Big Shoulders Display',sans-serif;font-size:28px;font-weight:700;text-transform:uppercase;letter-spacing:.02em">MX, human experience</div></div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Portfolio heading scale</div>
+    <div class="demo-block">
+      <div class="type-row"><div class="type-meta">Hero H1<br>clamp(3–7.6rem) / 800 / -0.035em / lh 0.96</div><div class="type-sample" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:800;letter-spacing:-0.035em;line-height:.96">Twenty-six years shaping products</div></div>
+      <div class="type-row"><div class="type-meta">Section heading<br>clamp(1.9–2.7rem)</div><div class="type-sample" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;letter-spacing:-0.02em">A career's worth of shipped design.</div></div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Body copy scale (IBM Plex Sans, text-ink-dim)</div>
+    <div class="demo-block">
+      <div class="type-row"><div class="type-meta">Hero lede<br>19px / 1.8 / 0.005em</div><div class="type-sample" style="font-size:19px;line-height:1.8;letter-spacing:.005em;color:var(--g2)">Product strategy, UX leadership and AI-enabled design consulting.</div></div>
+      <div class="type-row"><div class="type-meta">Section intro<br>17px / 1.75–1.8 / 0.01em</div><div class="type-sample" style="font-size:17px;line-height:1.8;letter-spacing:.01em;color:var(--g2)">Verifux runs a 54-checkpoint audit across 9 pillars.</div></div>
+      <div class="type-row"><div class="type-meta">Card / list body<br>15.5–16.5px / 1.7–1.8 / 0.01em</div><div class="type-sample" style="font-size:16px;line-height:1.75;letter-spacing:.01em;color:var(--g2)">The usability layer. Visibility and feedback, control and freedom, consistency and standards.</div></div>
+      <div class="type-row"><div class="type-meta">Stat / credential label<br>15px / 1.65 / 0.005em</div><div class="type-sample" style="font-size:15px;line-height:1.65;letter-spacing:.005em;color:var(--g2)">Years across UX, product design, behavioural analysis and brand</div></div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Mono scale — labels, eyebrows, numerals</div>
+    <div class="demo-block">
+      <div class="type-row"><div class="type-meta">Eyebrow<br>0.72rem / uc / 0.16em</div><div class="type-sample"><span class="eyebrow-demo" style="color:var(--docred)">01 / What we diagnose</span></div></div>
+      <div class="type-row"><div class="type-meta">Nav link<br>11px / uc / 0.08em</div><div class="type-sample" style="font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--g3)">Portfolio</div></div>
+      <div class="type-row"><div class="type-meta">Tag / meta<br>10–10.5px / uc / 0.06–0.1em</div><div class="type-sample" style="font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--g4)">Product · UX · 2018 to 2025</div></div>
+      <div class="type-row"><div class="type-meta">Display numeral<br>32–44px / font-black</div><div class="type-sample" style="font-family:'Big Shoulders Display',sans-serif;font-size:44px;font-weight:900;letter-spacing:-0.01em;color:var(--docred)">01</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SPACING -->
+<div class="section section-id" id="spacing">
+  <div class="sec-eyebrow">Spacing</div>
+  <h2 class="sec-title">The <em>grid</em>.</h2>
+  <p class="sec-sub">Standard Tailwind spacing scale, no custom overrides. Container max-width is 1180px (<code class="inline">max-w-container</code> in tailwind.config.ts). Section vertical rhythm below is what's actually used across Diagnose, Process, Work List, and About.</p>
+  <div class="demo-block">
+    <div class="space-row"><div class="space-bar" style="width:16px"></div><div class="space-meta">px-6&ensp;—&ensp;24px&ensp;—&ensp;Section horizontal padding, mobile</div></div>
+    <div class="space-row"><div class="space-bar" style="width:20px"></div><div class="space-meta">gap-5&ensp;—&ensp;20px&ensp;—&ensp;Checkpoint card grid gap, mobile</div></div>
+    <div class="space-row"><div class="space-bar" style="width:28px"></div><div class="space-meta">gap-7&ensp;—&ensp;28px&ensp;—&ensp;Checkpoint/Work card grid gap, desktop</div></div>
+    <div class="space-row"><div class="space-bar" style="width:32px"></div><div class="space-meta">px-8&ensp;—&ensp;32px&ensp;—&ensp;Section horizontal padding, desktop</div></div>
+    <div class="space-row"><div class="space-bar" style="width:64px"></div><div class="space-meta">py-16&ensp;—&ensp;64px&ensp;—&ensp;Section vertical padding, mobile</div></div>
+    <div class="space-row"><div class="space-bar" style="width:80px"></div><div class="space-meta">py-20&ensp;—&ensp;80px&ensp;—&ensp;WhyItMatters / Cta section padding, mobile</div></div>
+    <div class="space-row"><div class="space-bar" style="width:96px"></div><div class="space-meta">py-24&ensp;—&ensp;96px&ensp;—&ensp;Section vertical padding, desktop</div></div>
+    <div class="space-row"><div class="space-bar" style="width:112px"></div><div class="space-meta">py-28&ensp;—&ensp;112px&ensp;—&ensp;WhyItMatters / Cta section padding, desktop</div></div>
+  </div>
+</div>
+
+<!-- RADIUS -->
+<div class="section section-id" id="radius">
+  <div class="sec-eyebrow">Border Radius</div>
+  <h2 class="sec-title">Rounded <em>correctly</em>.</h2>
+  <p class="sec-sub">Three radius tokens, shared identically across both brands. Pills for every button on both brands — Designerama's buttons became pills specifically as a later correction; don't reintroduce square buttons there.</p>
+  <div class="radius-grid">
+    <div class="radius-box"><span class="radius-label">20px<br>--radius-card<br>Cards, panels</span></div>
+    <div class="radius-box"><span class="radius-label">24px<br>--radius-lg<br>Large panels</span></div>
+    <div class="radius-box" style="border-radius:100px"><span class="radius-label">100px<br>--radius-pill<br>All buttons, chips</span></div>
+  </div>
+</div>
+
+<!-- MOTION -->
+<div class="section section-id" id="motion">
+  <div class="sec-eyebrow">Motion</div>
+  <h2 class="sec-title">Easing & <em>timing</em>.</h2>
+  <p class="sec-sub">Real values pulled from <code class="inline">RevealOnScroll.tsx</code>, <code class="inline">useMagnetic.ts</code>, and <code class="inline">usePointerGlow.ts</code> — this is the entire motion vocabulary of the site, no invented curves.</p>
+  <div class="demo-block">
+    <div style="font-family:var(--mono);font-size:13px;color:var(--ink);margin-bottom:14px;line-height:2">
+      <span style="color:var(--g4)">Scroll-reveal ease:</span> cubic-bezier(0.16, 0.84, 0.24, 1)<br>
+      <span style="color:var(--g4)">Reveal duration:</span> 0.8s default (many sections override to 0.6s), viewport <code class="inline">amount: 0.15</code>, fires once<br>
+      <span style="color:var(--g4)">Group stagger:</span> 0.09s between children (RevealGroup)<br>
+      <span style="color:var(--g4)">Accordion expand/collapse:</span> 0.4s, cubic-bezier(0.4, 0, 0.2, 1) — height + opacity via Framer Motion AnimatePresence<br>
+      <span style="color:var(--g4)">Accordion chevron rotate:</span> 0.3s, 180deg on open<br>
+      <span style="color:var(--g4)">Magnetic button pull:</span> strength 0.35, max 12px displacement, mouse-only, disabled under reduced-motion<br>
+      <span style="color:var(--g4)">Pointer glow (cards):</span> --mx / --my custom properties set on pointermove, mouse-only, radial gradient radius 360–520px depending on card
+    </div>
+  </div>
+  <div class="demo-block" style="background:var(--docred-soft);border:1px solid #f3c9d0;margin-top:16px">
+    <div class="demo-label" style="margin-bottom:8px">Reduced motion</div>
+    <p style="font-size:13.5px;color:var(--g1);line-height:1.65">Every motion primitive checks <code class="inline">prefers-reduced-motion</code> or Framer's <code class="inline">useReducedMotion()</code> and disables itself accordingly — magnetic pull, pointer glow, ambient dot drift, accordion animation duration all degrade gracefully. This is load-bearing accessibility behaviour, not optional polish — don't strip these checks when touching motion code.</p>
+  </div>
+</div>
+
+<!-- BUTTONS -->
+<div class="section section-id" id="buttons">
+  <div class="sec-eyebrow">Components</div>
+  <h2 class="sec-title">Buttons.</h2>
+  <p class="sec-sub">All buttons use pill radius. Flat accent fill — no gradient, that was explicitly removed. Designerama buttons use uppercase mono type; Portfolio buttons use regular sans. Every button is magnetic by default (<code class="inline">strength: 0.35</code>) via the shared <code class="inline">&lt;Button /&gt;</code> component.</p>
+  <div class="demo">
+    <div class="demo-label">Portfolio — light</div>
+    <div class="brand-panel pf demo-row" style="align-items:center">
+      <button class="btn-red">See the work →</button>
+      <button class="btn-ghost-light">Work with me</button>
+    </div>
+  </div>
+  <div class="demo">
+    <div class="demo-label">Designerama — dark</div>
+    <div class="brand-panel dr demo-row" style="align-items:center">
+      <button class="btn-red-mono">Book a systems diagnosis</button>
+      <button class="btn-ghost-dark">See the work</button>
+    </div>
+  </div>
+  <div class="demo-block" style="margin-top:8px">
+    <div class="demo-label" style="margin-bottom:8px">Rules</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13.5px;color:var(--g2);line-height:1.6">
+      <div><span style="color:#15803D;font-weight:600">Do:</span> Use solid for the single primary CTA per section.<br>Use ghost for secondary actions.<br>Let the magnetic pull and hover glow work — don't override transform.</div>
+      <div><span style="color:var(--docred-dark);font-weight:600">Do not:</span> Add a gradient fill back to <code class="inline">.btn--solid</code>.<br>Mix Designerama's mono-uppercase style onto Portfolio buttons or vice versa.<br>Use a square button anywhere on either brand.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="section section-id" id="cards">
+  <div class="sec-eyebrow">Components</div>
+  <h2 class="sec-title">Cards & hover <em>glow</em>.</h2>
+  <p class="sec-sub">The <code class="inline">.grad-hover-card</code> pattern (via <code class="inline">components/shared/GradientHoverCard.tsx</code>) drives every interactive card on the site — checkpoint cards, work list rows, work grid tiles, the Verifux Spotlight. A cursor-tracked radial gradient in the accent colour appears on hover, radius configurable per usage (360px default, up to 520px for the Verifux Spotlight's larger card).</p>
+  <div class="demo">
+    <div class="demo-label">Hover glow — move your cursor over this card</div>
+    <div class="ghc-demo" onmousemove="ghcMove(event,this)">
+      <div style="font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--g4)">Product / AI SaaS</div>
+      <h3 style="font-family:'Big Shoulders Display',sans-serif;font-size:24px;font-weight:700;margin-top:8px;text-transform:uppercase">Verifux</h3>
+      <p style="font-size:14px;color:var(--g2);margin-top:8px;line-height:1.6">An AI-powered evaluation SaaS covering the MX / BX / AIX triad.</p>
+    </div>
+  </div>
+  <div class="demo-block">
+    <div class="demo-label" style="margin-bottom:8px">Radius by usage</div>
+    <table class="bp-table">
+      <thead><tr><th>Radius</th><th>Used on</th></tr></thead>
+      <tbody>
+        <tr><td>360px</td><td>Checkpoint cards (Diagnose section)</td></tr>
+        <tr><td>420px</td><td>Work List rows (Designerama home)</td></tr>
+        <tr><td>520px</td><td>Verifux Spotlight card (Portfolio)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ACCORDION -->
+<div class="section section-id" id="accordion">
+  <div class="sec-eyebrow">Components</div>
+  <h2 class="sec-title">Accordion.</h2>
+  <p class="sec-sub">Site-specific pattern (<code class="inline">components/shared/Accordion.tsx</code>) wrapping the Diagnose, How It Works, and Selected Work sections on the Designerama home. A circular chevron toggle sits top-right of the section content; clicking collapses/expands the body via Framer Motion height + opacity animation.</p>
+  <div class="demo">
+    <div class="demo-label">Click the chevron to toggle</div>
+    <div class="brand-panel dr">
+      <div class="acc-demo" id="accDemo">
+        <div class="acc-chevron" onclick="toggleAccDemo()" style="border-color:#333;color:#f2f0ec">
+          <svg id="accChevron" width="18" height="18" viewBox="0 0 20 20" fill="none" style="transition:transform .3s"><path d="M4 7l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div style="font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#b3b1ad;margin-bottom:8px">01 / What we diagnose</div>
+        <div style="font-family:'Big Shoulders Display',sans-serif;font-size:24px;font-weight:700;color:#f2f0ec;max-width:70%">Three experience layers, 54 checkpoints.</div>
+        <div id="accBody" style="overflow:hidden;transition:max-height .4s cubic-bezier(0.4,0,0.2,1),opacity .4s;max-height:200px;opacity:1;margin-top:16px">
+          <p style="font-size:14px;color:#b3b1ad;line-height:1.7;max-width:60ch">Verifux runs a 54-checkpoint audit across 9 pillars, grouped into the MX / BX / AIX triad.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="demo-block">
+    <div class="demo-label" style="margin-bottom:8px">Default open state per section</div>
+    <table class="bp-table">
+      <thead><tr><th>Section</th><th>Default</th></tr></thead>
+      <tbody>
+        <tr><td>01 Diagnose</td><td>Open</td></tr>
+        <tr><td>02 How it works</td><td>Open</td></tr>
+        <tr><td>Why diagnosis matters</td><td>Closed</td></tr>
+        <tr><td>03 Selected work</td><td>Open</td></tr>
+        <tr><td>04 Start here (Cta)</td><td>No accordion — always visible</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<div class="section section-id" id="navigation">
+  <div class="sec-eyebrow">Components</div>
+  <h2 class="sec-title">Navigation.</h2>
+  <p class="sec-sub">Fixed top bar, both brands: <code class="inline">bg-bg/80</code> with backdrop blur, logo left, links centre, cross-brand link + primary CTA right. Designerama's nav dropped a Johannesburg clock and a "Diagnose" link during an earlier revision — don't reintroduce either.</p>
+  <div class="demo">
+    <div class="demo-label">Designerama nav</div>
+    <div class="brand-panel dr" style="display:flex;align-items:center;justify-content:space-between;padding:16px 22px">
+      <div style="display:inline-flex;align-items:center;background:#cc2a3f;padding:6px 10px"><span style="color:#fff;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:16px">DESGNERAMA</span></div>
+      <div style="display:flex;gap:22px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:#f2f0ec;opacity:.82">
+        <span>Work</span><span>About</span><span>Blog</span><span>Verifux</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <span style="font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:#f2f0ec;opacity:.82">Portfolio</span>
+        <button class="btn-red-mono" style="padding:9px 18px;font-size:10px">Get in touch</button>
+      </div>
+    </div>
+  </div>
+  <div class="demo">
+    <div class="demo-label">Portfolio nav</div>
+    <div class="brand-panel pf" style="display:flex;align-items:center;justify-content:space-between;padding:16px 22px">
+      <div style="display:inline-flex;align-items:center;background:#cc2a3f;padding:5px 8px"><span style="color:#fff;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:14px">DESGNERAMA</span></div>
+      <div style="display:flex;gap:22px;font-size:13px;color:var(--pf-ink-muted)">
+        <span>Work</span><span>Approach</span><span>Verifux</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <span style="font-family:var(--mono);font-size:11px;color:var(--pf-ink-dim)">Designerama →</span>
+        <button class="btn-ghost-light" style="padding:9px 18px;font-size:12px">Get in touch</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INDEX ROWS -->
+<div class="section section-id" id="idxrows">
+  <div class="sec-eyebrow">Content Patterns</div>
+  <h2 class="sec-title">Index <em>rows</em>.</h2>
+  <p class="sec-sub">Designerama's signature structural device — a numbered, ruled row grid used for checkpoints, process steps, work list items, and about credentials. 64px number column (40px on mobile below 700px), border-left rule, body indented 28px. This rhythm is the closest thing this site has to a brand "voice" beyond colour and type.</p>
+  <div class="demo">
+    <div class="demo-label">idx-row pattern (.idx-row / .idx-num / .idx-body)</div>
+    <div class="brand-panel dr">
+      <div class="idx-demo-row" style="border-color:#232323">
+        <div class="idx-demo-num" style="color:#cc2a3f">01</div>
+        <div class="idx-demo-body" style="border-color:#232323">
+          <div style="font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:#b3b1ad">Product / AI SaaS</div>
+          <div style="font-family:'Big Shoulders Display',sans-serif;font-size:22px;font-weight:700;color:#f2f0ec;text-transform:uppercase;margin-top:6px">Verifux</div>
+        </div>
+      </div>
+      <div class="idx-demo-row" style="border-color:#232323">
+        <div class="idx-demo-num" style="color:#cc2a3f">02</div>
+        <div class="idx-demo-body" style="border-color:#232323">
+          <div style="font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:#b3b1ad">Studio practice</div>
+          <div style="font-family:'Big Shoulders Display',sans-serif;font-size:22px;font-weight:700;color:#f2f0ec;text-transform:uppercase;margin-top:6px">Designerama</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AMBIENT BACKGROUND -->
+<div class="section section-id" id="background">
+  <div class="sec-eyebrow">Content Patterns</div>
+  <h2 class="sec-title">Ambient <em>background</em>.</h2>
+  <p class="sec-sub">Two layered background effects, both fixed-position and rendered behind all page content. Neither is decorative-only — both respond to scroll and respect reduced-motion.</p>
+  <div class="demo">
+    <div class="demo-label">AmbientDots (components/shared/AmbientDots.tsx)</div>
+    <div class="demo-block">
+      <ul style="font-size:13.5px;color:var(--g2);line-height:2.1;padding-left:18px">
+        <li>Canvas-based particle field, clustered organically (not a uniform grid) across 6 loose cluster centres</li>
+        <li>Opacity: 0.4 (Portfolio) / 0.55 (Designerama), driven by <code class="inline">--dots-opacity</code></li>
+        <li>Scroll parallax: particles drift at <code class="inline">scrollY × -0.04</code>, smoothed via lerp</li>
+        <li>Zoom effect: scales from 1.0 → 1.35 as the user scrolls through the page (<code class="inline">1 + scrollPct × 0.35</code>)</li>
+        <li>Particle colour is read from the live <code class="inline">--accent</code> CSS variable at mount — always matches brand accent automatically</li>
+      </ul>
+    </div>
+  </div>
+  <div class="demo">
+    <div class="demo-label">BgStripe (components/shared/BgStripe.tsx) — Designerama only</div>
+    <div class="demo-block">
+      <ul style="font-size:13.5px;color:var(--g2);line-height:2.1;padding-left:18px">
+        <li>Fixed diagonal multi-colour gradient wash, rotated -35deg, positioned top-right</li>
+        <li>Scroll parallax: translateY driven by <code class="inline">scrollY × 0.08</code>, lerped for smoothness</li>
+        <li>CSS-only gradient (no image asset) — a rainbow-ish teal → violet → magenta → red sweep at low opacity (0.15–0.22 per stop)</li>
+        <li>Portfolio does not use this effect — it's a Designerama-only atmosphere device</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FRAMEWORK -->
+<div class="section section-id" id="framework">
+  <div class="sec-eyebrow">MX / BX / AIX / DX Framework</div>
+  <h2 class="sec-title">The <em>triad</em>, plus DX.</h2>
+  <p class="sec-sub">Designerama markets Verifux's real framework — this is not marketing copy invented for this site, it's the verified structure read directly from Verifux's own <code class="inline">heuristics.js</code>. Three questions, three colours, nine pillars, fifty-four checkpoints, plus a separate DX craft score. Never describe this as "8 pillars, 48 checkpoints" or "UX/DX/MX/AIX" — both were early guesses later corrected.</p>
+
+  <div class="layer-card layer-mx">
+    <div class="layer-tag">MX — Human Experience</div>
+    <div class="layer-title">Can people use it?</div>
+    <div class="layer-q">7 pillars, part of the 54-checkpoint score</div>
+    <div class="layer-pillars">
+      <span class="chip chip-neutral">Visibility & Feedback</span>
+      <span class="chip chip-neutral">Control & Freedom</span>
+      <span class="chip chip-neutral">Consistency & Standards</span>
+      <span class="chip chip-neutral">Error Prevention</span>
+      <span class="chip chip-neutral">Cognitive Load</span>
+      <span class="chip chip-neutral">Accessibility</span>
+      <span class="chip chip-neutral">Conversion</span>
+    </div>
+  </div>
+
+  <div class="layer-card layer-bx">
+    <div class="layer-tag">BX — Behavioural Experience</div>
+    <div class="layer-title">Will people act?</div>
+    <div class="layer-q">1 pillar, part of the 54-checkpoint score</div>
+    <div class="layer-pillars"><span class="chip chip-neutral">Persuasion, not manipulation — nudge architecture, dark-pattern detection</span></div>
+  </div>
+
+  <div class="layer-card layer-aix">
+    <div class="layer-tag">AIX — AI Experience</div>
+    <div class="layer-title">Can AI use it?</div>
+    <div class="layer-q">1 pillar, part of the 54-checkpoint score</div>
+    <div class="layer-pillars"><span class="chip chip-neutral">Structured data, semantic HTML, llms.txt, agent-actionable interfaces</span></div>
+  </div>
+
+  <div class="layer-card layer-dx">
+    <div class="layer-tag">DX — Design Excellence</div>
+    <div class="layer-title">Is it well designed?</div>
+    <div class="layer-q">Separate optional craft score, 0 to 100 — never affects the 54-checkpoint score</div>
+    <div class="layer-pillars"><span class="chip chip-neutral">Hierarchy, typography, colour, whitespace, originality, content voice</span></div>
+  </div>
+
+  <div class="demo-block" style="background:var(--docred-soft);border:1px solid #f3c9d0;margin-top:16px">
+    <div class="demo-label" style="margin-bottom:8px">Where this is used on the Designerama site</div>
+    <p style="font-size:13.5px;color:var(--g1);line-height:1.65">The Diagnose section (01) presents these as four checkpoint cards. The Verifux tile in Selected Work and the Verifux Spotlight on Portfolio (<code class="inline">components/portfolio/VerifuxSpotlight.tsx</code>) both reference the same framework language. If Verifux's real pillar/checkpoint counts ever change, re-verify against <code class="inline">/Users/kishanrama/Documents/Verifux/heuristics.js</code> before updating copy here — don't propagate stale numbers.</p>
+  </div>
+</div>
+
+<!-- VOICE & COPY -->
+<div class="section section-id" id="voice">
+  <div class="sec-eyebrow">Voice & Copywriting</div>
+  <h2 class="sec-title">How the site <em>speaks</em>.</h2>
+  <p class="sec-sub">Confident and specific, never generic agency-speak. Findings and positioning land directly. These are standing rules established across multiple review passes — treat them as settled, not open questions.</p>
+
+  <div class="demo">
+    <div class="demo-label">Do / do not</div>
+    <div class="voice-row">
+      <div class="voice-do"><span class="voice-tag">Do</span><div class="voice-text">2017 to 2018. 26-30M monthly users. hello@designerama.co.za</div></div>
+      <div class="voice-dont"><span class="voice-tag">Do not</span><div class="voice-text">2017–2018 (en dash). 26 to 30 million (spelled out where a compact figure reads better).</div></div>
+    </div>
+    <div class="voice-row">
+      <div class="voice-do"><span class="voice-tag">Do</span><div class="voice-text">Product strategy, UX leadership and AI-enabled design consulting.</div></div>
+      <div class="voice-dont"><span class="voice-tag">Do not</span><div class="voice-text">We're passionate about delivering best-in-class design solutions — leveraging cutting-edge AI.</div></div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-label">Punctuation rules — always follow these exactly</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13.5px">
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px"><span style="font-family:var(--mono);font-size:11px;color:var(--g4);display:block;margin-bottom:6px">Dashes</span>No em dashes or en dashes in sentence copy. Use commas, periods, or mid-dots (·) instead.</div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px"><span style="font-family:var(--mono);font-size:11px;color:var(--g4);display:block;margin-bottom:6px">Date ranges</span>Spell out "to" — "2017 to 2018", never "2017–2018".</div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px"><span style="font-family:var(--mono);font-size:11px;color:var(--g4);display:block;margin-bottom:6px">Numeric reach figures</span>Exception to the dash rule — plain hyphen for compact ranges: "26-30M", not "26 to 30 million".</div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px"><span style="font-family:var(--mono);font-size:11px;color:var(--g4);display:block;margin-bottom:6px">Location</span>No Johannesburg / JHB / South Africa references anywhere in copy. Explicitly removed — don't reintroduce.</div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px"><span style="font-family:var(--mono);font-size:11px;color:var(--g4);display:block;margin-bottom:6px">Framework terms</span><strong>MX / BX / AIX</strong>, plus separate <strong>DX</strong>. Never "UX/DX/MX/AIX" as one set — DX is not part of the triad.</div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px"><span style="font-family:var(--mono);font-size:11px;color:var(--g4);display:block;margin-bottom:6px">Case study facts</span>Never fabricate a fact, date, or outcome not evidenced by a real source (Figma file, prior copy, direct confirmation).</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESPONSIVE -->
+<div class="section section-id" id="responsive">
+  <div class="sec-eyebrow">Responsive Design</div>
+  <h2 class="sec-title">Breakpoints & <em>grid</em>.</h2>
+  <p class="sec-sub">Standard Tailwind breakpoints, no custom scale — plus one site-specific 700px breakpoint for the idx-row number column.</p>
+  <table class="bp-table">
+    <thead><tr><th>Token</th><th>Value</th><th>Behaviour</th></tr></thead>
+    <tbody>
+      <tr><td>—</td><td>700px</td><td>Custom: idx-row number column 64px → 40px, idx-body padding-left 28px → 16px</td></tr>
+      <tr><td>sm</td><td>640px</td><td>Grid columns collapse to 1, section padding px-8 → px-6</td></tr>
+      <tr><td>—</td><td>—</td><td>No lg/xl custom overrides — site relies on Tailwind's default sm: breakpoint almost exclusively</td></tr>
+    </tbody>
+  </table>
+  <div class="demo-block" style="margin-top:16px">
+    <div class="demo-label" style="margin-bottom:8px">Rules</div>
+    <ul style="font-size:14px;color:var(--g2);line-height:2.2;padding-left:18px">
+      <li>Container max-width: 1180px (<code class="inline">max-w-container</code>).</li>
+      <li>Checkpoint/Work card grids: <code class="inline">grid-cols-[72px_1fr]</code> mobile → <code class="inline">[100px_1fr_auto]</code> desktop.</li>
+      <li>Heading sizes use <code class="inline">clamp()</code> throughout rather than discrete breakpoint overrides — check any heading's clamp range before assuming a fixed px value.</li>
+      <li>Custom cursor and magnetic pull disable automatically under <code class="inline">(hover: none), (pointer: coarse)</code> — touch devices get native behaviour, not a broken hover effect.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- IMPLEMENTATION -->
+<div class="section section-id" id="implementation">
+  <div class="sec-eyebrow">Implementation</div>
+  <h2 class="sec-title">Where the <em>source</em> lives.</h2>
+  <p class="sec-sub">This codebase has no Figma/tokens.json pipeline — CSS custom properties in <code class="inline">app/globals.css</code> are the single source of truth, consumed directly by Tailwind via <code class="inline">tailwind.config.ts</code>. Follow these steps to extend the system correctly.</p>
+
+  <div class="demo-block">
+    <div class="figma-step">
+      <div class="step-n">1</div>
+      <div class="step-body"><h4>Token source</h4><p>All colour/radius/opacity tokens live as CSS custom properties in <code>app/globals.css</code>, scoped under <code>:root</code> (fallback), <code>[data-brand="portfolio"]</code>, and <code>[data-brand="designerama"]</code>. Never hardcode a hex value in a component — reference the token.</p></div>
+    </div>
+    <div class="figma-step">
+      <div class="step-n">2</div>
+      <div class="step-body"><h4>Tailwind mapping</h4><p><code>tailwind.config.ts</code> maps each token to a Tailwind colour utility (e.g. <code>ink</code> → <code>var(--ink)</code>). <strong>Known gap:</strong> Tailwind's <code>/NN</code> opacity modifier syntax (e.g. <code>text-ink/75</code>) silently does nothing on these tokens, since they're plain <code>var()</code> references, not the RGB-channel-triplet format the modifier requires. Use <code>color-mix(in srgb, var(--x) NN%, transparent)</code> as an arbitrary value instead.</p></div>
+    </div>
+    <div class="figma-step">
+      <div class="step-n">3</div>
+      <div class="step-body"><h4>Brand switching at runtime</h4><p><code>components/theme/ThemeProvider.tsx</code> sets <code>data-brand</code> on the root element per page. Adding a third brand means adding a new <code>[data-brand="x"]</code> block in globals.css with the same token set as the existing two — nothing else needs to change.</p></div>
+    </div>
+    <div class="figma-step">
+      <div class="step-n">4</div>
+      <div class="step-body"><h4>Static export & deploy</h4><p>The site builds via <code>npm run export</code> (<code>STATIC_EXPORT=true next build</code>) for static hosting, with a <code>NEXT_PUBLIC_BASE_PATH</code> env var for subpath test deploys. Full deploy mechanics, including a real basePath gotcha with <code>next/image</code>, are documented in <code>docs/DEPLOYMENT.md</code> — read that before touching build config.</p></div>
+    </div>
+    <div class="figma-step">
+      <div class="step-n">5</div>
+      <div class="step-body"><h4>Project history & decisions</h4><p><code>docs/PROJECT-STATUS.md</code>, <code>docs/DECISIONS.md</code>, and <code>docs/CHANGELOG.md</code> track current state, the reasoning behind non-obvious calls, and a dated history of changes respectively. Check these before re-litigating a settled decision.</p></div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// Active nav on scroll
+const sections=document.querySelectorAll('.section-id');
+const navLinks=document.querySelectorAll('.nav-link');
+function setActive(){
+  let current='overview';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-80)current=s.id});
+  navLinks.forEach(l=>{
+    l.classList.toggle('active',l.getAttribute('href')==='#'+current);
+  });
+}
+window.addEventListener('scroll',setActive,{passive:true});
+setActive();
+
+// Copy text
+function copyText(text,el){
+  navigator.clipboard.writeText(text).then(()=>{
+    const orig=el.querySelector('.swatch-val');
+    if(orig){const t=orig.textContent;orig.textContent='Copied!';setTimeout(()=>orig.textContent=t,1200);}
+  });
+}
+
+// Card hover glow position tracking
+function ghcMove(e,el){
+  const r=el.getBoundingClientRect();
+  el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+  el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+}
+
+// Accordion demo toggle
+let accOpen=true;
+function toggleAccDemo(){
+  accOpen=!accOpen;
+  const body=document.getElementById('accBody');
+  const chev=document.getElementById('accChevron');
+  body.style.maxHeight=accOpen?'200px':'0px';
+  body.style.opacity=accOpen?'1':'0';
+  body.style.marginTop=accOpen?'16px':'0px';
+  chev.style.transform=accOpen?'rotate(180deg)':'rotate(0deg)';
+}
+</script>
+</body>
+</html>
