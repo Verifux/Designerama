@@ -4,6 +4,44 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Verifux Spotlight stays a dedicated Portfolio section, not a work-grid tile (2026-07-15)
+
+Briefly removed in favour of a work-grid tile linking out to the live
+Verifux site, then explicitly reverted the same session — Kishan wants the
+dedicated section (with its cursor-tracked hover gradient, `.verifux-card`
+in globals.css) kept on Portfolio. The Selected Work grid instead simply
+omits a Verifux tile rather than duplicating it. If touching Portfolio's
+work grid or the Verifux Spotlight again, this is the settled state — don't
+re-remove the section in favour of a grid tile without being asked again.
+
+## Numeric reach figures use a hyphen, not "to" (2026-07-15)
+
+The general "no em/en dashes" rule (below) initially got over-applied to
+compact numeric ranges like SuperSport's reach figure, turning "26-30M"
+into "26 to 30 million" everywhere. Kishan asked for the hyphenated form
+back explicitly. Refined rule: sentence-level em/en dashes always become
+commas, periods, or "to" — but a plain hyphen in a compact numeric range
+("26-30M") is range notation, not sentence punctuation, and stays a hyphen.
+
+## GA4 analytics activated, old Universal Analytics retired (2026-07-15)
+
+Audited `website_old/` (the current live 2010-era site, kept as migration
+source for `/visual` — see PROJECT-STATUS.md) for anything worth reusing.
+Nothing needed copying as-is: its `robots.txt` had `Disallow: /` (blocking
+every search engine, contradicting its own `index, follow` meta tag),
+`license.txt`/`readme.html` are stock WordPress boilerplate, and its
+Google Analytics snippet (`UA-18944179-2`, `ga.js` loader) is permanently
+dead — Universal Analytics stopped collecting data on 2023-07-01, and the
+`ga.js` loader itself was retired years before that.
+
+Added real fundamentals instead: `public/robots.txt` (crawlable),
+`app/sitemap.ts` (auto-generated from the work registry), `app/icon.png`
+(the real square logo-mark badge from `website_old`), and
+`components/shared/GoogleAnalytics.tsx` with Kishan's real GA4 property
+(`G-3C5292GLX7`) baked in as the default — not gated behind an env var,
+since a Measurement ID isn't a secret and a forgotten env var would
+silently kill analytics on a future build.
+
 ## Verifux framework copy corrected to ground truth (2026-07-15)
 
 **What was wrong:** site copy described Verifux's framework as "8 pillars,

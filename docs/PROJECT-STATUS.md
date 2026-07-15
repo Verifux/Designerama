@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-07-15_
+_Last updated: 2026-07-16_
 
 ## What this is
 
@@ -17,6 +17,14 @@ site, covering two brand contexts in one codebase:
   (uploaded manually via zip to Xeenlo, not yet the live root).
 - Production build (`npm run build`) and static export (`npm run export`)
   both pass clean with no TypeScript errors.
+- A visual design system reference exists at
+  [`designerama-design-system.html`](../designerama-design-system.html) —
+  self-hosted, no build step, open directly in a browser. Documents both
+  brand contexts against real source values (colour, type, spacing, motion,
+  components, the MX/BX/AIX/DX framework, voice/copy rules).
+- The site has real fundamentals now: `public/robots.txt` (crawlable),
+  `app/sitemap.ts` (auto-generated), `app/icon.png` (favicon), and live GA4
+  analytics. See the Known-correct facts section below and DEPLOYMENT.md.
 
 ## The live-site migration plan (important — read before deploying)
 
@@ -48,6 +56,15 @@ a path prefix at build time, so this is not just a copy-paste).
 - **GA4 analytics is live**, Measurement ID `G-3C5292GLX7`, baked directly
   into `components/shared/GoogleAnalytics.tsx` as the default (not a secret,
   so no env var required to activate it). See DEPLOYMENT.md.
+- **Verifux Spotlight is a dedicated Portfolio section, settled.** It was
+  briefly removed in favour of a work-grid tile, then explicitly reverted —
+  keep the dedicated section with its hover-gradient treatment. Selected
+  Work's grid simply has no Verifux tile; don't re-add one without asking.
+- **`website_old/` was audited for reuse and nothing needed copying as-is**
+  — its `robots.txt` blocks all crawlers, its licence/readme are WordPress
+  boilerplate, and its Google Analytics ID (`UA-18944179-2`) is permanently
+  dead (Universal Analytics sunset 2023-07-01). Don't resurrect any of these
+  three specifically. See DECISIONS.md for the full breakdown.
 
 ## Standing constraints (do not re-litigate without being asked)
 
