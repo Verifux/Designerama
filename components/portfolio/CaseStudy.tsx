@@ -17,19 +17,22 @@ function FramePlaceholder({ caption }: { caption: string }) {
   );
 }
 
-function ImageGallery({ images }: { images: { src: string; alt: string }[] }) {
+function ImageGallery({ images }: { images: { src: string; alt: string; note?: string }[] }) {
   return (
     <RevealGroup className="flex flex-wrap items-end justify-center gap-4" amount={0.1}>
       {images.map((img) => (
-        <RevealItem key={img.src} y={20} className="overflow-hidden rounded-card border border-line bg-paper">
-          <Image src={withBasePath(img.src)} alt={img.alt} width={540} height={1400} className="h-[420px] w-auto object-contain" />
+        <RevealItem key={img.src} y={20} className="flex flex-col items-center gap-2">
+          <div className="overflow-hidden rounded-card border border-line bg-paper">
+            <Image src={withBasePath(img.src)} alt={img.alt} width={540} height={1400} className="h-[420px] w-auto object-contain" />
+          </div>
+          {img.note && <span className="font-mono text-[0.72rem] text-ink-dim">{img.note}</span>}
         </RevealItem>
       ))}
     </RevealGroup>
   );
 }
 
-function Media({ images, caption }: { images?: { src: string; alt: string }[]; caption: string }) {
+function Media({ images, caption }: { images?: { src: string; alt: string; note?: string }[]; caption: string }) {
   if (images && images.length > 0) return <ImageGallery images={images} />;
   return <FramePlaceholder caption={caption} />;
 }

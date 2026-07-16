@@ -4,6 +4,39 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## FNB/bidorbuy "platform today" images moved into placeholder slots, deploy target moved to root (2026-07-16)
+
+**"Platform today" images:** four current-day screenshots (FNB Savings
+Pocket, FNB Channel Islands, Bob Shop home, Bob Shop seller page) were
+initially added as a standalone "The platform today" section with its own
+`today` field on `CaseStudyData`. Kishan rejected that approach after
+seeing it live ("i dont like this approach") and asked instead for the
+images to go directly into the existing situation/approach placeholder
+slots, each with a small "platform today" disclaimer underneath. Reworked:
+removed the `today` field and section entirely; added an optional `note`
+field to the `situationImages`/`approachImages` image type so `ImageGallery`
+can render a caption under specific images without affecting the rest.
+FNB and bidorbuy's `situationImages`/`approachImages` now carry one "today"
+image each (previously empty, falling back to `FramePlaceholder`).
+
+The images briefly looked broken during diagnosis (`naturalWidth: 0` in a
+JS check) — this turned out to be a false alarm, not a real bug: the check
+ran before the images had scrolled into view, and `next/image` defaults to
+`loading="lazy"`. Once actually scrolled into view they loaded correctly.
+Worth remembering if this pattern recurs: check `naturalWidth` only after
+`scrollIntoView`, not on initial page load.
+
+**Deploy target moved to root:** Kishan is now uploading to
+`www.designerama.co.za` root directly, not the `/new` test path. No code
+changes were needed — `next.config.mjs` already only applies `basePath`
+when `NEXT_PUBLIC_BASE_PATH` is set, so a root build is just
+`STATIC_EXPORT=true npm run export` with that variable unset. Verified
+locally by serving `out/` with a plain static server (`python3 -m
+http.server`) rather than `npm run dev`, since dev mode doesn't exercise
+the static-export output. DEPLOYMENT.md and PROJECT-STATUS.md updated to
+make root the primary documented path; the `/new` subpath instructions are
+kept but demoted, in case a subpath test build is ever needed again.
+
 ## DStv Now case study removed entirely, accordion defaults flipped (2026-07-16)
 
 **DStv Now removed:** the `slug: "dstv"` entry in `lib/content/work.ts` was

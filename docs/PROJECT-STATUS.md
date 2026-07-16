@@ -13,8 +13,10 @@ site, covering two brand contexts in one codebase:
 ## Where things stand right now
 
 - Local dev server: `npm run dev` → http://localhost:3000. Confirmed working.
-- Test deploy: a static export is being trialed at **designerama.co.za/new**
-  (uploaded manually via zip to Xeenlo, not yet the live root).
+- Deploy target: **www.designerama.co.za root** (no `/new` prefix). The
+  `/new` test-path phase is over — `designerama-static.zip` is now built
+  with no `NEXT_PUBLIC_BASE_PATH` and verified locally (served from `out/`
+  via a plain static server) before every upload. See DEPLOYMENT.md.
 - Production build (`npm run build`) and static export (`npm run export`)
   both pass clean with no TypeScript errors.
 - A visual design system reference exists at
@@ -28,14 +30,17 @@ site, covering two brand contexts in one codebase:
 
 ## The live-site migration plan (important — read before deploying)
 
-This is the eventual target state, confirmed with Kishan 2026-07-15:
+This is the target state, confirmed with Kishan 2026-07-15, and now in
+progress as of 2026-07-16:
 
-1. **This codebase becomes the live root of `designerama.co.za`** once approved.
+1. **This codebase becomes the live root of `designerama.co.za`.** As of
+   2026-07-16, Kishan is uploading root builds directly (no `/new` prefix)
+   for testing at the live domain.
 2. **The current live site** (the 2010-era brand/portfolio site, source preserved
    in [`website_old/`](../website_old)) **moves to `designerama.co.za/visual`**.
    It is not being discarded — `website_old/` is the literal source for that
-   future `/visual` deployment. Do not delete it.
-3. Until the swap happens, this build is only reachable at the `/new` test path.
+   future `/visual` deployment. Do not delete it. This move is a separate,
+   manual step on the hosting side and is not automated by this repo's build.
 
 See [DEPLOYMENT.md](./DEPLOYMENT.md) for the exact rebuild steps required when
 moving from the `/new` test path to the live root (the static export bakes in

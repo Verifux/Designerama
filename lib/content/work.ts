@@ -7,10 +7,10 @@ export type CaseStudyData = {
   meta: { label: string; value: string }[];
   situation: { heading: string; body: string[] };
   situationFrameCaption: string;
-  situationImages?: { src: string; alt: string }[];
+  situationImages?: { src: string; alt: string; note?: string }[];
   approach: { heading: string; body: string[] };
   approachFrameCaption: string;
-  approachImages?: { src: string; alt: string }[];
+  approachImages?: { src: string; alt: string; note?: string }[];
   outcome: { heading: string; body: string[] };
   proof: { num: string; label: string }[];
 };
@@ -167,6 +167,13 @@ export const workItems: WorkItem[] = [
         ],
       },
       situationFrameCaption: "The pre-redesign bidorbuy interface",
+      situationImages: [
+        {
+          src: "/images/work/bidorbuy/bobshop-home-today.jpg",
+          alt: "Bob Shop homepage, the current rebrand of bidorbuy",
+          note: "platform today",
+        },
+      ],
       approach: {
         heading: "The approach",
         body: [
@@ -174,6 +181,13 @@ export const workItems: WorkItem[] = [
         ],
       },
       approachFrameCaption: "The redesigned bidorbuy interface, key flows",
+      approachImages: [
+        {
+          src: "/images/work/bidorbuy/bobshop-sell-today.jpg",
+          alt: "Bob Shop seller sign-up page",
+          note: "platform today",
+        },
+      ],
       outcome: {
         heading: "The outcome",
         body: [
@@ -215,6 +229,13 @@ export const workItems: WorkItem[] = [
         ],
       },
       situationFrameCaption: "FNB digital banking, pre-redesign",
+      situationImages: [
+        {
+          src: "/images/work/fnb/savings-pocket-today.jpg",
+          alt: "FNB Savings Pocket product page",
+          note: "platform today",
+        },
+      ],
       approach: {
         heading: "The approach",
         body: [
@@ -223,6 +244,13 @@ export const workItems: WorkItem[] = [
         ],
       },
       approachFrameCaption: "FNB digital banking, redesigned",
+      approachImages: [
+        {
+          src: "/images/work/fnb/channel-islands-today.jpg",
+          alt: "FNB Channel Islands offshore banking page",
+          note: "platform today",
+        },
+      ],
       outcome: {
         heading: "The outcome",
         body: [

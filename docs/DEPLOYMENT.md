@@ -30,10 +30,35 @@ Trade-offs versus the regular build:
 - Images ship at source resolution — Next's image optimizer is disabled
   (`images.unoptimized: true`), since static export can't run it on-demand.
 
-### Subpath deploys (e.g. testing at `/new`)
+### Root deploy (current target: `www.designerama.co.za`)
 
-If the export is being uploaded to a subdirectory rather than a domain root,
-set `NEXT_PUBLIC_BASE_PATH` at build time:
+Build with no `NEXT_PUBLIC_BASE_PATH` at all:
+
+```bash
+STATIC_EXPORT=true npm run export
+```
+
+Every asset `src` ships unprefixed (`/_next/...`, `/images/...`), correct for
+upload straight to the domain root.
+
+### Verifying a root export locally before upload
+
+Don't just eyeball `out/` — serve it from a plain static server rooted at
+that directory so it behaves exactly like the live root will, then check it
+in a browser:
+
+```bash
+cd out && python3 -m http.server 5050
+# then browse http://localhost:5050/
+```
+
+`npm run dev` is not a substitute for this step — dev mode runs Next's own
+server and doesn't exercise the static-export output at all.
+
+### Subpath deploys (e.g. testing at `/new`) — not the current target
+
+If a subpath test build is ever needed again, set `NEXT_PUBLIC_BASE_PATH` at
+build time:
 
 ```bash
 NEXT_PUBLIC_BASE_PATH=/new STATIC_EXPORT=true npm run export
@@ -46,16 +71,10 @@ image, stylesheet, and script will 404, because Next's static image handling
 doesn't auto-prefix `basePath` reliably (a real gap in Next 14.2.18 — see
 `lib/basePath.ts` for the workaround wired into every hardcoded image `src`).
 
-**When you're ready to go live at `designerama.co.za` root**, rebuild with no
-`BASE_PATH` at all:
-
-```bash
-STATIC_EXPORT=true npm run export
-```
-
-Do not reuse a `/new`-prefixed build at the root — it will look broken
-(unstyled, no images) exactly the way the first `/new` upload attempt did
-before `lib/basePath.ts` existed.
+A `/new`-prefixed build must never be uploaded to the root — it will look
+broken (unstyled, no images) exactly the way the first `/new` upload attempt
+did before `lib/basePath.ts` existed. Always rebuild with no `BASE_PATH` for
+a root deploy; don't reuse an old `/new` build.
 
 ### Packaging for upload
 
