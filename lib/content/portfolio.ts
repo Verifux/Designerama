@@ -87,7 +87,7 @@ export const stats = [
 export const spotlight = {
   eyebrow: "Currently building",
   heading: "Verifux",
-  body: "An AI-powered evaluation SaaS built on the MX / BX / AIX triad: 54 checkpoints across 9 pillars, plus an optional DX craft score. Extending Nielsen's heuristics with behavioural science, dark-pattern detection and AI-agent readiness. Verifux automates expert-level audits into structured, actionable reports in minutes. The same diagnosis I'd otherwise run by hand.",
+  body: "The same diagnosis I'd otherwise run by hand, encoded once and run in minutes instead of days. Verifux audits a product across the MX / BX / AIX triad, 54 checkpoints spanning 9 pillars, plus a separate, optional DX craft score, catching what Nielsen's heuristics alone miss: dark patterns, and whether the product is even legible to AI agents.",
   tags: ["AI-powered", "MX · BX · AIX · DX", "Early stage"],
   panel: [
     { label: "Status", value: "In active build" },

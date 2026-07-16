@@ -1,7 +1,7 @@
 export const meta = {
-  title: "Designerama, AI design consultancy & Verifux",
+  title: "Designerama, product diagnosis before design. Home to Verifux.",
   description:
-    "Designerama is an AI design consultancy led by Kishan Rama. Product strategy, UX leadership and AI-enabled design consulting. Home to Verifux, an AI-powered MX, BX and AIX audit engine (54 checkpoints, 9 pillars) with an optional DX craft score.",
+    "Designerama is a product diagnosis and design consultancy led by Kishan Rama. Interfaces are cheap to generate now. Knowing what to build, and why, still is not. Home to Verifux, an AI-powered MX, BX and AIX audit engine (54 checkpoints, 9 pillars) with an optional DX craft score.",
 };
 
 export const nav = {
@@ -16,11 +16,11 @@ export const nav = {
 };
 
 export const hero = {
-  eyebrow: "AI design consultancy · Kishan Rama",
+  eyebrow: "Diagnosis before design · Kishan Rama",
   headline: "Most software isn't",
   headlineLine2: "badly designed.",
   headlineAccent: "It's badly diagnosed.",
-  lede: "Product strategy, UX leadership and AI-enabled design consulting. Designerama is an AI design consultancy. Home to Verifux, a proprietary audit engine that finds what's broken in a digital product before it costs you users, revenue or trust.",
+  lede: "Product strategy, UX leadership and design consulting. Generating a good looking screen is no longer the hard part. Knowing which problem it should solve still is. Home to Verifux, a proprietary audit engine that finds what's broken in a digital product before it costs you users, revenue or trust.",
   actions: [
     { label: "Book a systems diagnosis", href: "#cta", variant: "solid" as const },
     { label: "See the work", href: "#work", variant: "ghost" as const },
@@ -94,9 +94,9 @@ export const process = {
 
 export const whyItMatters = {
   eyebrow: "Why diagnosis matters",
-  heading: "Product decisions grounded in behavioural science, systems thinking and product design",
-  headingAccent: "outperform decisions grounded in opinion.",
-  body: "Twenty-six years of product design, UX leadership and behavioural analysis, paired with business management and systems thinking. The same discipline behind Verifux's audit engine, applied directly to your product before a single screen gets redrawn.",
+  heading: "Interfaces got cheap to generate.",
+  headingAccent: "Knowing which one to build didn't.",
+  body: "Twenty-six years of product design, UX leadership and behavioural analysis, paired with business management and systems thinking, decide what gets built. AI decides how fast it gets drawn. The same discipline behind Verifux's audit engine, applied directly to your product before a single screen gets redrawn.",
 };
 
 export const work = {
@@ -107,7 +107,7 @@ export const work = {
       idx: "01",
       tag: "Product / AI SaaS",
       title: "Verifux",
-      body: "An AI-powered evaluation SaaS covering the MX / BX / AIX triad: 54 checkpoints across 9 pillars, plus an optional DX craft score. Built on a research-backed framework extending Nielsen's heuristics with behavioural science and AI-agent readiness, Verifux automates expert-level audits into structured, actionable reports in minutes.",
+      body: "Finds what's actually broken in a product before it costs you users, revenue or trust, then proves it. Verifux runs a 54-checkpoint audit across 9 pillars (the MX / BX / AIX triad), plus a separate, optional DX craft score, and turns the findings into a structured report in minutes instead of a week of manual review.",
       goto: "Get early access",
       href: "#cta",
     },
@@ -115,7 +115,7 @@ export const work = {
       idx: "02",
       tag: "Studio practice",
       title: "Designerama",
-      body: "An ongoing design experimentation testbed. Every version of this site is a live test of a new visual system before it's offered to a client.",
+      body: "An ongoing design experimentation testbed, not a portfolio of pretty screens. Every version of this site tests a diagnosis and a visual system together before either is offered to a client.",
       goto: "About the practice",
       href: "#about",
     },
@@ -123,7 +123,7 @@ export const work = {
       idx: "03",
       tag: "Track record",
       title: "See what's actually shipped",
-      body: "SuperSport, GOtv, bidorbuy, FNB. The consulting practice behind Verifux is backed by 26 years of product design that reached real users at real scale.",
+      body: "SuperSport, GOtv, bidorbuy, FNB. Twenty-six years of shipping the fix that mattered, not just the redesign that looked good in review.",
       goto: "View Kishan's portfolio",
       href: "/portfolio#work",
     },

@@ -8,7 +8,7 @@ export function CheckpointStrip() {
     <section id="diagnose" className="border-t border-line">
       <div className="relative mx-auto max-w-container px-6 py-16 sm:px-8 sm:py-24">
         <Accordion
-          defaultOpen
+          defaultOpen={false}
           header={
             <RevealOnScroll y={16} duration={0.6} className="mb-8 max-w-2xl pr-16 sm:pr-20">
               <p className="eyebrow mb-4">{diagnose.eyebrow}</p>

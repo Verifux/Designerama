@@ -96,7 +96,7 @@ export const workItems: WorkItem[] = [
       eyebrow: "Product · UX · MultiChoice Group",
       headline: "Redesigning self-service across GOtv's prepaid TV app and web experience.",
       intro:
-        "GOtv is MultiChoice's prepaid satellite and streaming TV brand, serving customers across Africa. This project covered a full redesign of the self-service experience: the parts of the product where customers manage their own account without needing to call support.",
+        "A prepaid subscription customer who can't self-serve calls a support line instead. That's the failure mode GOtv's self-service experience needed fixed, across account management, content discovery, sign-in, payments and package selection.",
       meta: [
         { label: "Client", value: "GOtv, MultiChoice Group" },
         { label: "Platforms", value: "Mobile app & desktop web" },
@@ -153,7 +153,7 @@ export const workItems: WorkItem[] = [
       eyebrow: "Product · UX · Sep 2010 to Jun 2013",
       headline: "A full redesign that nearly doubled revenue in its first month.",
       intro:
-        "As Lead Product & UX Designer, I led visual design, usability and user-centred design for South Africa's leading online auction and shopping marketplace, across web, mobile site and apps.",
+        "Feature accumulation without a coherent usability strategy was costing the platform on discoverability and conversion. As Lead Product & UX Designer, I led the full UX and UI redesign across web, mobile site and apps.",
       meta: [
         { label: "Client", value: "Bobshop.co.za (bidorbuy)" },
         { label: "Role", value: "Lead Product & UX Designer" },
@@ -201,7 +201,7 @@ export const workItems: WorkItem[] = [
       eyebrow: "UX · 2013 to 2016",
       headline: "A usability-led banking redesign, rolled out in three months against an eight-month scope.",
       intro:
-        "As Senior Usability Analyst at FNB Digital Banking, I led the usability work behind a redesign rolled out across FNB's operations in Africa and the Channel Islands.",
+        "FNB's digital banking site needed a usability-led rebuild, and call centre teams were still working from paper documentation. As Senior Usability Analyst, I led the redesign across FNB's operations in Africa and the Channel Islands.",
       meta: [
         { label: "Client", value: "FNB (First National Bank)" },
         { label: "Role", value: "Senior Usability Analyst" },
@@ -237,51 +237,6 @@ export const workItems: WorkItem[] = [
     },
   },
   {
-    slug: "dstv",
-    title: "DStv Now",
-    tag: "UX · 2017 to 2018",
-    summary: "Usability and behavioural analysis across lean-back and lean-forward streaming, reducing drop-off in critical flows.",
-    featured: false,
-    caseStudy: {
-      title: "DStv Now, Case Study, Kishan Rama",
-      metaDescription:
-        "Usability and behavioural analysis across DStv Now's lean-back and lean-forward streaming experiences, reducing drop-off in critical flows.",
-      eyebrow: "UX · 2017 to 2018",
-      headline: "Reducing drop-off across two very different streaming contexts.",
-      intro:
-        "As Senior UX Analyst on DStv Now, I ran usability and behavioural analysis across both lean-back viewing (TV, connected devices) and lean-forward viewing (mobile, web).",
-      meta: [
-        { label: "Client", value: "DStv Now, MultiChoice Group" },
-        { label: "Role", value: "Senior UX Analyst" },
-        { label: "Duration", value: "2017 to 2018" },
-        { label: "Scope", value: "Lean-back & lean-forward streaming" },
-      ],
-      situation: {
-        heading: "The situation",
-        body: [
-          "DStv Now's streaming experience spans two very different usage contexts: lean-back viewing on TV and connected devices, and lean-forward viewing on mobile and web, each with its own failure points and drop-off patterns.",
-        ],
-      },
-      situationFrameCaption: "DStv Now, lean-back and lean-forward streaming",
-      approach: {
-        heading: "The approach",
-        body: [
-          "I ran usability and behavioural analysis across both viewing contexts, identifying specifically where critical flows were losing people, and fed those findings directly into design decisions for each context.",
-        ],
-      },
-      approachFrameCaption: "DStv Now, critical flow analysis",
-      outcome: {
-        heading: "The outcome",
-        body: ["The analysis reduced drop-off in the critical flows it targeted, across both DStv Now's lean-back and lean-forward experiences."],
-      },
-      proof: [
-        { num: "2", label: "Viewing contexts analyzed" },
-        { num: "↓", label: "Drop-off reduced in critical flows" },
-        { num: "2017 to 18", label: "MultiChoice Group, DStv Now" },
-      ],
-    },
-  },
-  {
     slug: "dstv-tv-guide",
     title: "DStv TV Guide",
     tag: "UX · 2017 to 2018",
@@ -295,7 +250,7 @@ export const workItems: WorkItem[] = [
       eyebrow: "UX · 2017 to 2018",
       headline: "Designing how you find what to watch, lean-back and lean-forward.",
       intro:
-        "As Senior User Experience Analyst on DStv Now, I designed the TV Guide and content-navigation experience: channel schedules, Live TV browsing, reminders and voice-assisted search, across DStv's lean-back (connected TV) and lean-forward (mobile/web) environments.",
+        "Drop-off in critical navigation flows and unclear onboarding were costing one of the platform's largest properties real engagement. As Senior User Experience Analyst on DStv Now, I designed the fix: TV Guide, Live TV, reminders and voice search, across lean-back and lean-forward environments.",
       meta: [
         { label: "Client", value: "DStv, MultiChoice Group" },
         { label: "Role", value: "Senior User Experience Analyst" },

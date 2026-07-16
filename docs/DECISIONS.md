@@ -4,6 +4,64 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## DStv Now case study removed entirely, accordion defaults flipped (2026-07-16)
+
+**DStv Now removed:** the `slug: "dstv"` entry in `lib/content/work.ts` was
+already unfeatured (dropped from the Selected Work grid in an earlier
+pass), but the case study itself and its `/portfolio/dstv` route still
+existed for anyone with a direct link. Kishan asked for it gone
+completely, not just unfeatured. The whole `WorkItem` object was deleted;
+`generateStaticParams()` in `app/portfolio/[slug]/page.tsx` derives its
+routes from `workItems.filter(w => w.caseStudy)`, so removing the object
+removed the route automatically, no route-file changes needed. Other
+prose mentions of "DStv Now" as an employer/role (in `arc` and in the
+DStv TV Guide / DStv Rewards case-study intros) are real career history,
+not the removed case study, and were left alone.
+
+**Accordion defaults flipped:** Diagnose (01) and How It Works (02) now
+default **closed**; Why Diagnosis Matters now defaults **open**. Selected
+Work (03) stays open. This reverses the previous defaults (01/02 open,
+Why Diagnosis Matters closed) set when the accordion pattern was first
+built. If touching `components/designerama/CheckpointStrip.tsx`,
+`Process.tsx`, or `WhyItMatters.tsx` again, this is the current settled
+state, don't revert to the original defaults without being asked.
+`designerama-design-system.html`'s accordion section table was updated to
+match.
+
+## Taste-arbitrage copy audit, pass two (2026-07-16)
+
+Ran the remaining body copy in `lib/content/designerama.ts`,
+`lib/content/portfolio.ts`, and the case-study intros in
+`lib/content/work.ts` through the `taste-arbitrage` skill's weak-versus-
+strong test (see [[taste-arbitrage-pivot]] memory for the full thesis).
+Most sections already passed: `diagnose` and `process` are structural/
+factual with no aesthetic claims, `about`, `arc`, `method`, and
+`philosophy` already led with judgment or named consequences rather than
+looks. Four sections failed and were rewritten to lead with the diagnosis
+or cost before the feature/spec list:
+
+- Designerama's Verifux work tile (idx 01) and "See what's actually
+  shipped" tile (idx 03).
+- Portfolio's Verifux Spotlight body, which also fixed a real AI-sense
+  ambiguity ("AI-agent readiness" was vague; now explicitly "legible to
+  AI agents," distinct from the thesis's AI-makes-UI-cheap sense).
+- Five case-study intros (GOtv, bidorbuy, FNB, DStv TV Guide, DStv Now)
+  were reordered to lead with the diagnosed problem instead of role/
+  scope. SuperSport and DStv Rewards were left untouched, both still
+  asset-blocked per the Open/pending section below, so no rewrite was
+  forced on them.
+
+Same pass also fixed a real location-rule violation found in bidorbuy's
+old intro ("South Africa's leading online auction and shopping
+marketplace"), unrelated to the taste-arbitrage test but caught while in
+that file. **Not fixed, flagged for Kishan's explicit call:**
+`legacyWork`'s JoziBond entry still has `client: "City of Johannesburg"`
+— that's the real historical client name for a 2010-era legacy campaign,
+not marketing copy, so it wasn't changed without confirmation either way.
+
+Verified with a clean `npm run build` (all 14 routes, including all 7
+case-study pages) after applying.
+
 ## Verifux Spotlight stays a dedicated Portfolio section, not a work-grid tile (2026-07-15)
 
 Briefly removed in favour of a work-grid tile linking out to the live

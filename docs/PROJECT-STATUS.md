@@ -65,6 +65,13 @@ a path prefix at build time, so this is not just a copy-paste).
   boilerplate, and its Google Analytics ID (`UA-18944179-2`) is permanently
   dead (Universal Analytics sunset 2023-07-01). Don't resurrect any of these
   three specifically. See DECISIONS.md for the full breakdown.
+- **DStv Now case study is gone entirely**, not just unfeatured — the
+  `WorkItem` object and its `/portfolio/dstv` route were both removed
+  2026-07-16. Don't re-add it without being asked.
+- **Designerama home accordion defaults**: Diagnose (01) and How It Works
+  (02) default **closed**, Why Diagnosis Matters defaults **open**,
+  Selected Work (03) stays open. This is the current settled state as of
+  2026-07-16 — see DECISIONS.md if it needs to change again.
 
 ## Standing constraints (do not re-litigate without being asked)
 

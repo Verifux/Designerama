@@ -10,7 +10,7 @@ export function WhyItMatters() {
     >
       <div className="relative mx-auto max-w-container px-6 py-20 sm:px-8 sm:py-28">
         <Accordion
-          defaultOpen={false}
+          defaultOpen
           header={
             <RevealOnScroll y={16} duration={0.6} className="max-w-2xl pr-16 sm:pr-20">
               <p className="eyebrow mb-4 !text-accent">{whyItMatters.eyebrow}</p>

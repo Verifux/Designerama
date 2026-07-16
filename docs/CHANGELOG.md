@@ -4,7 +4,29 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
-## 2026-07-15 (latest session)
+## 2026-07-16 (latest session)
+
+- Removed the DStv Now case study (`slug: "dstv"`) entirely from
+  `lib/content/work.ts` — was already unfeatured, now the whole entry
+  (and its `/portfolio/dstv` route) is gone. Confirmed via a clean build
+  (13 routes, was 14) and a 404 on the old route. Career-history mentions
+  of "DStv Now" as an employer/role elsewhere in `arc`/case-study prose
+  were left alone, only the dedicated case-study card and route were removed.
+- Flipped the Designerama home accordion defaults: Diagnose (01) and How
+  It Works (02) now default **closed**; Why Diagnosis Matters now defaults
+  **open**. Selected Work (03) stays open, unchanged. Updated the "Default
+  open state per section" table in `designerama-design-system.html` to match.
+- Ran a full taste-arbitrage copy audit (see `taste-arbitrage-pivot` memory
+  and the "Taste-arbitrage copy audit, pass two" entry in DECISIONS.md) —
+  rewrote four sections that led with spec/feature lists instead of the
+  diagnosis, across `designerama.ts`, `portfolio.ts`, and five case-study
+  intros in `work.ts`. Also fixed a real location-rule violation in
+  bidorbuy's old intro. SuperSport and DStv Rewards case studies were left
+  untouched, both still asset-blocked.
+- Both passes verified with a clean `npm run build` and a static export
+  rebuild for the `/new` test path, re-zipped for upload.
+
+## 2026-07-15
 
 - Added `designerama-design-system.html` — a self-hosted, framework-free
   living style guide covering both brand contexts (Designerama dark,
