@@ -8,6 +8,8 @@ export function VerifuxSpotlight() {
       <div className="mx-auto max-w-container px-5 sm:px-8">
         <RevealOnScroll y={20}>
           <GradientHoverCard
+            href="https://www.designerama.co.za/verifux"
+            ariaLabel="Visit Verifux"
             radius={520}
             className="verifux-card grid grid-cols-1 gap-10 rounded-lg2 border border-line p-7 sm:p-14 lg:grid-cols-[1.1fr_0.9fr]"
           >

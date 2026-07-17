@@ -4,6 +4,77 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Mobile nav, Speaking section, Stats removal, Verifux link, footer logo, ship-ready (2026-07-17)
+
+**Mobile nav was a real gap, not a style choice.** Both `Nav.tsx` components
+(Designerama and Portfolio) hid their links/CTA entirely below the `md`
+breakpoint with nothing to replace them — mobile visitors had zero way to
+navigate. Fixed with a proper animated hamburger (three bars morphing to
+an X) and a slide-down panel in both, reusing the same pattern. This
+required adding an `onClick` prop to `components/shared/Button.tsx` (it
+only accepted `href` before) so the Designerama mobile panel's CTA can
+close the panel on tap. Verified at 375px (mobile, panel opens/closes,
+all links reachable) and 768px (`md`, reverts cleanly to the full desktop
+nav) on both `/`, `/portfolio`, and a case-study page (which adds a
+`backLink` prop).
+
+**Portfolio Stats block removed.** The "26+ / 26-30M / 40% / CUA" row
+(`Stats.tsx`, rendered between Method and VerifuxSpotlight) was flagged
+via a screenshot as something to cut. Removed the component, its usage in
+`app/portfolio/page.tsx`, and the now-dead `stats` export from
+`portfolio.ts`.
+
+**Verifux Spotlight card now links out.** It was a static card with no
+click target. `GradientHoverCard` already supported an `href` prop
+(renders as `<a target="_blank">` for external URLs) — wired it to
+`https://www.designerama.co.za/verifux`, the same URL already used in
+Designerama's own nav, rather than guessing a new one.
+
+**Designerama footer logo reduced ~60%** (36px → 14px height) per direct
+request.
+
+**Conference speaking added, sourced from the real CV.** Kishan asked why
+speaking experience wasn't on the site — it wasn't an omission, there was
+simply no source for it anywhere in the repo's content files. He pointed
+at `Kishan_Rama_CV_2026.pdf` in Dropbox. No PDF text-extraction tool was
+available in the environment (no `pdftotext`, no `pypdf`), so a throwaway
+Python venv (`/tmp/pdfenv`) was set up with `pip install pypdf` to extract
+the CV's text directly, rather than guess or skip the request. Two real,
+dated speaking engagements came out of it: UX Africa Summit 2025 (May,
+"The Cultural Compass: Hacking Human Behaviour for UX Magic in Africa")
+and UPTechX Conference 2025 (October, "Unlocking Potential: Human-Centred
+Design in Higher Education," sharing the programme with Harvard
+University Library's Head of UX & Digital Accessibility). Added as a new
+`components/portfolio/Speaking.tsx` section (between Arc and Method) plus
+a nav link, a one-line mention in Portfolio's hero sub-copy, and a
+credential stat in Designerama's About section. Two deliberate edits from
+the CV's wording: the venue detail "Sandton Hotel, Johannesburg" was
+dropped per the standing no-JHB/SA rule (institution names like AMC
+International and University of Pretoria were kept, treated the same as
+real client names elsewhere on the site); and the CV's "8-pillar,
+48-checkpoint" description of Verifux was ignored entirely, since it
+contradicts the verified-correct 54-checkpoint/9-pillar figure already
+confirmed against Verifux's actual `heuristics.js` source in an earlier
+session, the CV's number is simply out of date.
+
+**Repo root cleaned up.** Deleted a stale extracted `designerama-static/`
+folder (a leftover unzipped copy of an earlier build, superseded and not
+git-tracked), `.DS_Store`, and `tsconfig.tsbuildinfo` — all pure local
+clutter, none tracked by git, all regenerable. Rebuilt a fresh root export
+and repackaged `designerama-static.zip` with everything through this
+session's changes, verified locally (served via `python3 -m http.server`)
+before packaging.
+
+**Kishan confirmed the site ready to ship** ("ready to ship now") and
+asked whether the whole zip needs re-uploading on every change. Answer
+documented in DEPLOYMENT.md: yes, for any code/content change, because
+Next's static export gives JS/CSS chunks a content hash that changes on
+nearly any edit — a partial upload risks referencing chunk files that
+were never uploaded. The one exception is swapping a same-named image
+file in place. Also noted that FTP/SFTP + a sync tool (rsync/lftp mirror)
+would solve this properly if Xeenlo supports it, versus manual zip
+replacement each time.
+
 ## FNB/bidorbuy "platform today" images moved into placeholder slots, deploy target moved to root (2026-07-16)
 
 **"Platform today" images:** four current-day screenshots (FNB Savings

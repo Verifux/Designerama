@@ -4,7 +4,33 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
-## 2026-07-16 (latest session)
+## 2026-07-17
+
+- Added a working mobile hamburger menu to both `Nav.tsx` components
+  (Designerama and Portfolio) — previously nav links/CTA just vanished
+  below `md` with no replacement. Added `onClick` support to
+  `components/shared/Button.tsx` to support this.
+- Moved the FNB/bidorbuy "platform today" screenshots from a standalone
+  section into the existing situation/approach placeholder slots, each
+  with a small caption. Diagnosed (and ruled out) a suspected image-load
+  bug — it was `loading="lazy"` plus an out-of-viewport JS check, not a
+  real defect.
+- Deploy target switched from `designerama.co.za/new` to the live root
+  (`www.designerama.co.za`) — no code changes needed, just building
+  without `NEXT_PUBLIC_BASE_PATH`.
+- Removed Portfolio's Stats section (26+/26-30M/40%/CUA), deleted
+  `Stats.tsx` and the `stats` content export.
+- Made the Portfolio Verifux Spotlight card a real link to
+  `https://www.designerama.co.za/verifux`.
+- Reduced the Designerama footer logo ~60% (36px → 14px height).
+- Added conference speaking content sourced from the real CV: a new
+  Portfolio "Speaking" section (`components/portfolio/Speaking.tsx`), a
+  nav link, a hero sub-copy mention, and a Designerama About credential.
+- Cleaned up repo root: removed stale `designerama-static/` extracted
+  folder, `.DS_Store`, `tsconfig.tsbuildinfo` (none git-tracked).
+  Rebuilt and repackaged `designerama-static.zip` fresh for shipping.
+
+## 2026-07-16
 
 - Removed the DStv Now case study (`slug: "dstv"`) entirely from
   `lib/content/work.ts` — was already unfeatured, now the whole entry

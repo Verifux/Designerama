@@ -10,9 +10,10 @@ type Props = {
   variant?: "solid" | "ghost";
   className?: string;
   magnetic?: boolean;
+  onClick?: () => void;
 };
 
-export function Button({ href, children, variant = "solid", className = "", magnetic = true }: Props) {
+export function Button({ href, children, variant = "solid", className = "", magnetic = true, onClick }: Props) {
   const glow = usePointerGlow<HTMLAnchorElement>();
   const mag = useMagnetic<HTMLAnchorElement>(magnetic ? { strength: 0.35, max: 12 } : { strength: 0 });
 
@@ -39,6 +40,7 @@ export function Button({ href, children, variant = "solid", className = "", magn
         href={href}
         onPointerMove={onPointerMove}
         onPointerLeave={mag.onPointerLeave}
+        onClick={onClick}
         className={classes}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
@@ -49,7 +51,7 @@ export function Button({ href, children, variant = "solid", className = "", magn
   }
 
   return (
-    <Link ref={setRef} href={href} onPointerMove={onPointerMove} onPointerLeave={mag.onPointerLeave} className={classes}>
+    <Link ref={setRef} href={href} onPointerMove={onPointerMove} onPointerLeave={mag.onPointerLeave} onClick={onClick} className={classes}>
       {children}
     </Link>
   );

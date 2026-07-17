@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-07-16_
+_Last updated: 2026-07-17_
 
 ## What this is
 
@@ -12,13 +12,24 @@ site, covering two brand contexts in one codebase:
 
 ## Where things stand right now
 
+- **Kishan confirmed the site ready to ship as of 2026-07-17.** Latest
+  `designerama-static.zip` at the repo root is a fresh root build (no
+  `/new` prefix) with everything through the mobile nav, Speaking section,
+  Verifux Spotlight link, and footer logo resize — verified locally before
+  packaging. Ready for upload to `www.designerama.co.za` root.
 - Local dev server: `npm run dev` → http://localhost:3000. Confirmed working.
 - Deploy target: **www.designerama.co.za root** (no `/new` prefix). The
   `/new` test-path phase is over — `designerama-static.zip` is now built
   with no `NEXT_PUBLIC_BASE_PATH` and verified locally (served from `out/`
-  via a plain static server) before every upload. See DEPLOYMENT.md.
+  via a plain static server) before every upload. See DEPLOYMENT.md,
+  including the "do you have to re-upload the whole thing every time"
+  answer (short version: yes, for any code/content change, because Next's
+  static export hashes chunk filenames on every build).
 - Production build (`npm run build`) and static export (`npm run export`)
   both pass clean with no TypeScript errors.
+- Both Designerama and Portfolio navs now have a working mobile hamburger
+  menu — this was a real gap before 2026-07-17 (nav links and CTA were
+  simply hidden below the `md` breakpoint with nothing to replace them).
 - A visual design system reference exists at
   [`designerama-design-system.html`](../designerama-design-system.html) —
   self-hosted, no build step, open directly in a browser. Documents both
@@ -77,6 +88,23 @@ a path prefix at build time, so this is not just a copy-paste).
   (02) default **closed**, Why Diagnosis Matters defaults **open**,
   Selected Work (03) stays open. This is the current settled state as of
   2026-07-16 — see DECISIONS.md if it needs to change again.
+- **Portfolio's old Stats block (26+/26-30M/40%/CUA) is gone**, removed
+  2026-07-17 along with the now-unused `Stats.tsx` component and `stats`
+  content export. Don't re-add it without being asked.
+- **Portfolio's Verifux Spotlight card is a real link** to
+  `https://www.designerama.co.za/verifux`, added 2026-07-17. It wasn't
+  clickable before.
+- **Conference speaking is now on the site**, sourced from Kishan's actual
+  CV (`Kishan_Rama_CV_2026.pdf`), added 2026-07-17: a dedicated "Speaking"
+  section on Portfolio (UX Africa Summit 2025, UPTechX Conference 2025),
+  plus a credential line in Designerama's About section. The CV's venue
+  details ("Sandton Hotel, Johannesburg") were deliberately dropped per the
+  no-JHB/SA rule below; institution names (AMC International, University
+  of Pretoria) were kept as factual attribution, same as real client names
+  elsewhere on the site. The CV's "8-pillar, 48-checkpoint" Verifux
+  description was NOT used — it's outdated; the site keeps the
+  verified-correct 54-checkpoint/9-pillar MX/BX/AIX+DX figure already
+  confirmed against `heuristics.js`.
 
 ## Standing constraints (do not re-litigate without being asked)
 

@@ -9,7 +9,7 @@ export const hero = {
   ],
   headline: "Twenty-six years shaping products",
   headlineAccent: "millions actually use.",
-  sub: "Principal Product Designer and UX Strategist. I've led UX and product design for platforms at SuperSport, DStv and FNB, blending behavioural science, business management and systems thinking into the work. CUA-certified usability analyst, also designing and building front-end interfaces hands-on, this site included. Now building Verifux, an AI-powered MX, BX and AIX audit engine with an optional DX craft score. Open to senior in-house roles, contract work, and select consulting.",
+  sub: "Principal Product Designer and UX Strategist. I've led UX and product design for platforms at SuperSport, DStv and FNB, blending behavioural science, business management and systems thinking into the work. CUA-certified usability analyst, also designing and building front-end interfaces hands-on, this site included. Invited conference speaker on behavioural UX. Now building Verifux, an AI-powered MX, BX and AIX audit engine with an optional DX craft score. Open to senior in-house roles, contract work, and select consulting.",
   actions: [
     { label: "See the work →", href: "#work", variant: "solid" as const },
     { label: "Work with me", href: "#contact", variant: "ghost" as const },
@@ -50,6 +50,25 @@ export const arc = {
   ],
 };
 
+export const speaking = {
+  eyebrow: "Speaking",
+  heading: "Invited to make the case for behavioural design on stage.",
+  items: [
+    {
+      event: "UX Africa Summit 2025",
+      date: "May 2025",
+      title: "The Cultural Compass: Hacking Human Behaviour for UX Magic in Africa",
+      body: "A 60 minute session on reading human behaviour and culture as design inputs, not afterthoughts, covering techniques for high-success usability outcomes in resource-constrained environments, presented to an audience of UX practitioners, designers and product teams.",
+    },
+    {
+      event: "UPTechX Conference 2025",
+      date: "October 2025",
+      title: "Unlocking Potential: Human-Centred Design in Higher Education",
+      body: "A 45 minute presentation on applying human-centred design in academic and digital environments, on the same programme as international speakers including Harvard University Library's Head of User Experience and Digital Accessibility.",
+    },
+  ],
+};
+
 export const method = {
   eyebrow: "How I work",
   heading: "Design thinking, behavioural science and systems thinking, applied to real product work.",
@@ -76,13 +95,6 @@ export const method = {
     },
   ],
 };
-
-export const stats = [
-  { num: "26+", label: "Years in design" },
-  { num: "26-30M", label: "Monthly users reached, SuperSport" },
-  { num: "40%", label: "Ad revenue lift from UX redesign" },
-  { num: "CUA", label: "Certified usability analyst" },
-];
 
 export const spotlight = {
   eyebrow: "Currently building",
@@ -129,6 +141,7 @@ export const nav = {
   links: [
     { label: "Work", href: "#work" },
     { label: "Approach", href: "#approach" },
+    { label: "Speaking", href: "#speaking" },
     { label: "Verifux", href: "#verifux" },
   ],
   designeramaLink: { label: "Designerama →", href: "/" },

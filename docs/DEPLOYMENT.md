@@ -86,6 +86,36 @@ Upload the *contents* of the zip (not the zip itself, not a wrapping folder)
 to the host's web root or target subdirectory. The zip is gitignored —
 regenerate it fresh any time from the steps above, don't rely on an old copy.
 
+### Do you have to re-upload the whole thing every time?
+
+Short answer: **yes, for any code or content change** — which is almost
+every change made in this repo. Next's static export gives every JS/CSS
+chunk a content hash (`117-4cc341509b5a20cb.js`, etc.), and that hash
+changes on nearly any edit, even a one-line copy tweak, because it shifts
+the compiled bundle. The old chunk filenames referenced by a stale
+`index.html` won't exist anymore once you've edited anything, so a partial
+upload risks a broken page (HTML asking for a chunk that was never
+uploaded). There's no reliable way to know in advance which specific files
+changed without diffing the whole `out/` folder — so the safe, boring
+answer is: rebuild, then overwrite the entire live root with the new
+`out/` contents every time.
+
+**The one real exception:** swapping a single image file where the
+filename and path stay exactly the same (e.g. re-exporting
+`/images/work/fnb/savings-pocket-today.jpg` with new content but the same
+name). Static assets under `public/` are copied through as-is, unhashed —
+so in that specific case, uploading just that one file to overwrite it on
+the host is genuinely enough. Anything that touches code, copy, or adds/
+renames a file needs the full folder.
+
+**If this gets tedious:** if Xeenlo offers FTP/SFTP access (not just a
+web-based zip upload), a sync tool (`rsync`, `lftp mirror`, Cyberduck,
+Transmit) can diff `out/` against the live root and transfer only what
+actually changed, automatically — solving the "which file" question for
+real instead of guessing. Worth asking Xeenlo support whether FTP/SFTP is
+available on the plan if this manual zip-and-replace workflow becomes a
+drag.
+
 ### Verifying an export before upload
 
 ```bash

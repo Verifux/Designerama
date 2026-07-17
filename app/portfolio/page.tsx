@@ -6,8 +6,8 @@ import { Hero } from "@/components/portfolio/Hero";
 import { TrustStrip } from "@/components/portfolio/TrustStrip";
 import { Marquee } from "@/components/portfolio/Marquee";
 import { Arc } from "@/components/portfolio/Arc";
+import { Speaking } from "@/components/portfolio/Speaking";
 import { Method } from "@/components/portfolio/Method";
-import { Stats } from "@/components/portfolio/Stats";
 import { VerifuxSpotlight } from "@/components/portfolio/VerifuxSpotlight";
 import { WorkGrid } from "@/components/portfolio/WorkGrid";
 import { LegacyWork } from "@/components/portfolio/LegacyWork";
@@ -31,8 +31,8 @@ export default function PortfolioPage() {
         <TrustStrip />
         <Marquee />
         <Arc />
+        <Speaking />
         <Method />
-        <Stats />
         <VerifuxSpotlight />
         <WorkGrid />
         <LegacyWork />

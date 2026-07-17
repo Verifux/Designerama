@@ -136,6 +136,7 @@ export const about = {
   credentials: [
     { stat: "26+", label: "Years across broadcast, motion & product" },
     { stat: "CUA", label: "Certified Usability Analyst" },
+    { stat: "2", label: "Invited conference talks on behavioural UX, 2025" },
     { stat: "AI", label: "Diagnosis backed by Verifux's audit engine" },
   ],
   copy: [
