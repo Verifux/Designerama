@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-07-20_
+_Last updated: 2026-07-20 (DStv TV Guide media rebuild)_
 
 ## What this is
 
@@ -106,6 +106,58 @@ a path prefix at build time, so this is not just a copy-paste).
   description was NOT used — it's outdated; the site keeps the
   verified-correct 54-checkpoint/9-pillar MX/BX/AIX+DX figure already
   confirmed against `heuristics.js`.
+- **The proof/stats row is gone from every case study**, removed
+  2026-07-20 along with the `proof` field from `CaseStudyData` in
+  `work.ts`. Don't re-add it to `CaseStudy.tsx` without being asked.
+- **DStv TV Guide is the first case study rebuilt with real media**:
+  a horizontal drag-scroll carousel (`ImageCarousel.tsx`) through 9 real
+  presentation slides, and a scrollable, click-to-zoom prototype viewer
+  (`PrototypeViewer.tsx` + `Lightbox.tsx`). This is the reference pattern
+  for upgrading the remaining case studies (SuperSport, GOtv, bidorbuy,
+  FNB, DStv Rewards) one at a time, per Kishan's stated intent to work
+  through selected work "one at a time until its perfect and beautiful."
+  See DECISIONS.md for the full build history. Headline and intro were
+  aligned 2026-07-20 to the mobile-feed framing (dropped "lean-back and
+  lean-forward"). **Dates corrected to 2025** (tag, eyebrow, meta
+  Duration) 2026-07-20, per Kishan's explicit instruction, resolving the
+  discrepancy between the slide deck's own 2025 date and the case
+  study's original 2017-2018 meta. Role/client fields left untouched.
+- **FNB Digital Banking is the second case study rebuilt**, using the
+  same `ImageCarousel.tsx` in both media slots (not the prototype
+  viewer): top slot is FNB 1-4 (Private Clients, Savings Pocket,
+  Channel Islands, Call Deposit), bottom slot is FNB 5-8 (Save + Invest,
+  Call Deposit Account, Home Loans, Premier Banking). The carousel
+  component was generalized to take real per-image width/height instead
+  of DStv's hardcoded aspect ratio, since FNB's screenshots are a
+  different ratio (~1.85:1 vs ~1.55:1). **Digital Wiki copy corrected**
+  2026-07-20: "I conceived and built" to "I helped build," per Kishan.
+- **bidorbuy is the third case study rebuilt**, top slot is the original
+  pre-redesign bidorbuy.co.za (6 images), bottom slot is the current
+  live Bob Shop rebrand (4 images). Added a `cropRatio` prop to
+  `ImageCarousel.tsx` (top 4:3, bottom 16:9) since bidorbuy's source
+  images span very inconsistent ratios (0.96:1 to 1.82:1), unlike
+  FNB's consistent set, plus click-to-zoom (reused `Lightbox.tsx`) so
+  cropped content is still viewable full-size. One bottom-slot image
+  (`bob2.jpg`) is a screenshot of Kishan's own logged-in account page;
+  four lines of personal info (name, location, email, User ID) are
+  blurred via `ffmpeg`, at his explicit request.
+- **SuperSport is the fourth case study rebuilt**, the first with a
+  four-slot layout: situation and approach each get a primary carousel
+  plus a secondary horizontal-scroll-with-zoom block directly below it
+  (new `situationSecondary` / `approachSecondary` fields on
+  `CaseStudyData`). Situation: 6-image carousel (`ss-web0` to `ss-web5`,
+  SuperSport.com web) + `ss-mobile1` (a wide mobile-screens montage).
+  Approach: 6-image carousel (`ss01` to `ss06`, homepage and Match
+  Center) + `ss07` (a 20116px-wide strategy-deck panorama that turned
+  out to be real evidence for the case study's existing "nudge theory" /
+  "OneBox" / "behavioural economics" copy, not just decoration).
+  `PrototypeViewer.tsx` gained an `orientation` prop for the new
+  horizontal mode, `Lightbox.tsx` a matching `wide` prop. Fixed a real
+  bug along the way: `PrototypeViewer` never set `loading="eager"` on
+  its image (unlike `ImageCarousel`, which got that fix in the very
+  first DStv pass), so both new horizontal blocks silently failed to
+  load until scrolled into view. Remaining case studies to rebuild one
+  at a time: GOtv, DStv Rewards.
 
 ## Standing constraints (do not re-litigate without being asked)
 

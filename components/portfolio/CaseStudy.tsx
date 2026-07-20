@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { RevealOnScroll, RevealGroup, RevealItem } from "@/components/shared/RevealOnScroll";
-import type { CaseStudyData } from "@/lib/content/work";
+import { ImageCarousel } from "@/components/shared/ImageCarousel";
+import { PrototypeViewer } from "@/components/shared/PrototypeViewer";
+import type { CaseStudyData, MediaImage, MediaMode, SecondaryMedia } from "@/lib/content/work";
 import { withBasePath } from "@/lib/basePath";
 
 function FramePlaceholder({ caption }: { caption: string }) {
@@ -32,9 +34,37 @@ function ImageGallery({ images }: { images: { src: string; alt: string; note?: s
   );
 }
 
-function Media({ images, caption }: { images?: { src: string; alt: string; note?: string }[]; caption: string }) {
-  if (images && images.length > 0) return <ImageGallery images={images} />;
-  return <FramePlaceholder caption={caption} />;
+function Media({
+  images,
+  caption,
+  mediaMode,
+  cropRatio,
+  orientation,
+}: {
+  images?: MediaImage[];
+  caption: string;
+  mediaMode?: MediaMode;
+  cropRatio?: [number, number];
+  orientation?: "vertical" | "horizontal";
+}) {
+  if (!images || images.length === 0) return <FramePlaceholder caption={caption} />;
+  if (mediaMode === "carousel") return <ImageCarousel images={images} cropRatio={cropRatio} />;
+  if (mediaMode === "prototype") return <PrototypeViewer image={images[0]} orientation={orientation} />;
+  return <ImageGallery images={images} />;
+}
+
+function SecondaryMediaBlock({ secondary }: { secondary: SecondaryMedia }) {
+  return (
+    <div className="mt-6">
+      <Media
+        images={secondary.images}
+        caption=""
+        mediaMode={secondary.mediaMode}
+        cropRatio={secondary.cropRatio}
+        orientation={secondary.orientation}
+      />
+    </div>
+  );
 }
 
 export function CaseStudy({ data, next }: { data: CaseStudyData; next?: { label: string; title: string; href: string } }) {
@@ -76,7 +106,13 @@ export function CaseStudy({ data, next }: { data: CaseStudyData; next?: { label:
         </section>
 
         <div className="border-b border-line py-16">
-          <Media images={data.situationImages} caption={data.situationFrameCaption} />
+          <Media
+            images={data.situationImages}
+            caption={data.situationFrameCaption}
+            mediaMode={data.situationMediaMode}
+            cropRatio={data.situationCropRatio}
+          />
+          {data.situationSecondary && <SecondaryMediaBlock secondary={data.situationSecondary} />}
         </div>
 
         <section className="max-w-2xl border-b border-line py-16">
@@ -91,7 +127,13 @@ export function CaseStudy({ data, next }: { data: CaseStudyData; next?: { label:
         </section>
 
         <div className="border-b border-line py-16">
-          <Media images={data.approachImages} caption={data.approachFrameCaption} />
+          <Media
+            images={data.approachImages}
+            caption={data.approachFrameCaption}
+            mediaMode={data.approachMediaMode}
+            cropRatio={data.approachCropRatio}
+          />
+          {data.approachSecondary && <SecondaryMediaBlock secondary={data.approachSecondary} />}
         </div>
 
         <section className="max-w-2xl border-b border-line py-16">
@@ -104,15 +146,6 @@ export function CaseStudy({ data, next }: { data: CaseStudyData; next?: { label:
             </div>
           </RevealOnScroll>
         </section>
-
-        <RevealGroup className="grid grid-cols-1 gap-8 border-b border-line py-14 sm:grid-cols-3">
-          {data.proof.map((p) => (
-            <RevealItem key={p.label} className="text-center sm:text-left">
-              <p className="text-[clamp(2rem,4vw,2.8rem)] font-extrabold text-accent">{p.num}</p>
-              <p className="mt-1 text-[0.9rem] text-ink-muted">{p.label}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
 
         {next && (
           <RevealOnScroll className="py-20 text-center">

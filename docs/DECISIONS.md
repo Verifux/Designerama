@@ -4,6 +4,227 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## SuperSport four-slot layout, horizontal scroll viewer, PrototypeViewer eager-load fix (2026-07-20, fourth pass)
+
+**Two media blocks per section instead of one.** Kishan's brief named
+four slots: "Slot 1a" and "Slot 1b" (the second "just below, same
+project") under situation, "Slot 2a" and "Slot 2b" under approach. The
+existing `CaseStudyData` shape only had one image set per section. Added
+`situationSecondary` / `approachSecondary`, each an optional
+`SecondaryMedia` object (images, media mode, crop ratio, orientation),
+rather than a flat array of unlimited blocks, since the brief was
+specifically "one primary, one secondary directly below," not an
+open-ended list. `CaseStudy.tsx` renders the secondary block with a
+plain `mt-6` gap under the primary, no heading or border of its own, so
+it reads as continuation of the same evidence rather than a fourth
+section.
+
+**New horizontal-scroll-with-zoom pattern, built by generalizing
+`PrototypeViewer`, not writing a new component.** Two of the four
+SuperSport images are extreme aspect ratios meant to be viewed at full
+height and scrolled sideways: `ss-mobile1.jpg` (6323px source, a row of
+mobile screens) and `ss07.jpg` (20116px source, a full strategy-deck
+panorama). `PrototypeViewer` already did the vertical version of this
+exact interaction for DStv TV Guide's prototype image, so added an
+`orientation: "vertical" | "horizontal"` prop rather than duplicating
+the component. Horizontal mode: `overflow-x-auto` instead of `-y`,
+image sized to full container height instead of full width, "more to
+scroll" fade gradient on the trailing edge instead of the bottom.
+`Lightbox` got a parallel `wide` prop (alongside the existing `tall`)
+so the zoomed view also scrolls horizontally at full source height.
+
+**SS07 is real evidence, not decoration.** Read the file directly (same
+discipline as the DStv/FNB/bidorbuy passes) rather than assuming it was
+another montage like `ss-mobile1`. It's an actual strategy-deck slide:
+Objective (Video Play Page, Match Video improvement goals), Approach
+(Behavioural Economics: Choice Architecture, Choice Overload, the EAST
+Framework), and Live Streaming redesign mockups. This directly
+corroborates the case study's existing approach copy ("nudge theory,"
+"OneBox," etc.), which was written before this image existed on the
+page. Left that copy as-is since it already holds up against the new
+evidence; only the frame captions changed, to describe what the two
+carousels actually show rather than the more specific "video play page"
+/ "news article page" framing that predates having page-type-general
+screenshots.
+
+**Real bug: `PrototypeViewer` was missing `loading="eager"`.** Both
+horizontal blocks initially failed to load in the verification browser,
+even after `scrollIntoView` and long waits, while the carousels above
+them loaded fine. Tracing it down: `ImageCarousel` already sets
+`loading="eager"` on every card (a fix from the very first DStv pass,
+for a different bug), but `PrototypeViewer`'s `Image` never got that
+treatment since its original single use case (DStv's tall prototype) is
+positioned near the top of a short page and loads fast enough by
+accident. Confirmed via direct `curl` against the dev server's image
+optimizer (both URLs resolved in ~1.5s once requested) that this was a
+client-side lazy-load timing issue, not a slow or broken server
+response, then fixed by adding `loading="eager"` to match
+`ImageCarousel`'s established pattern.
+
+## bidorbuy carousel with forced crop ratio, personal data blurred, two factual corrections (2026-07-20, third pass)
+
+**cropRatio added instead of relying on per-image sizing.** The FNB pass
+generalized `ImageCarousel` to size each card from its own real
+width/height, which worked because FNB's 8 screenshots were all a
+consistent ~1.85:1. Bidorbuy's 10 images range from 0.96:1 (a tall
+portrait payment form) to 1.82:1 (wide homepage screenshots), so
+per-image sizing would have made the horizontal scroll track visually
+chaotic, cards jumping in width as you drag past each one. Kishan asked
+explicitly to "fix images ratio, size and crop at bottom if needed," so
+added an optional `cropRatio: [number, number]` prop that forces every
+card in that carousel instance to one shared ratio via `object-cover`,
+cropping whatever doesn't fit. Top slot (old bidorbuy.co.za, 6 images)
+uses 4:3, matching the majority of that set. Bottom slot (current Bob
+Shop, 4 images) uses 16:9, matching 3 of its 4 images.
+
+**Click-to-zoom added since cropping now hides content.** Kishan's
+follow-on instruction: "add click to zoom for full image if you going to
+crop for the carousel." Reused the existing `Lightbox.tsx` component
+(already built for `PrototypeViewer`) rather than writing a new one.
+The tricky part was distinguishing a genuine click from the tail end of
+a desktop drag-to-scroll gesture, since both fire through the same
+pointer events on the card. Solved by tracking the maximum horizontal
+distance moved during an active pointer-drag; a click handler only opens
+the lightbox if that distance stayed under 6px, otherwise the click is
+treated as the end of a drag and ignored. Touch swiping doesn't have
+this problem since native scroll doesn't fire synthetic click events
+after a real swipe.
+
+**BOB 2 blurred, not cropped or skipped, per direct question to Kishan.**
+While reading the actual bidorbuy source images (same discipline as the
+DStv and FNB passes: read files directly rather than guess from pasted
+screenshots), found that `bob2.jpg`, one of the four "currently live"
+images Kishan specified for the bottom slot, is a screenshot of his own
+logged-in Bob Shop account page showing his real name, Johannesburg
+location, `kishan@designerama.co.za` email, and a numeric User ID. This
+wasn't something to silently publish or silently swap out. Asked via
+AskUserQuestion whether to crop the personal panel out, publish as-is, or
+substitute a different image. Kishan chose a fourth option not in the
+original three: blur just those details. Located the exact pixel region
+(four lines: name, location, email, User ID, excluding the "Skish 82"
+username badge and the "Become a verified user" links below, both fine
+to leave visible) via iterative `ffmpeg -vf crop` test renders, then
+applied a `crop` + `boxblur=25:15` + `overlay` filter chain to blur just
+that region in place, leaving the rest of the screenshot untouched.
+
+**Two factual corrections, applied literally, not expanded in scope.**
+Kishan corrected FNB's Digital Wiki line ("I conceived and built" to "I
+helped build") and confirmed DStv TV Guide's dates should read 2025, not
+2017 to 2018 (settling the discrepancy flagged in the previous DStv TV
+Guide pass, where the slide deck's own 2025 date conflicted with the
+case study's original meta). Both changes were applied narrowly: only
+the specific field/phrase named, not a broader rewrite of surrounding
+copy, role, or client fields that weren't mentioned. If Kishan wants
+those reconciled further (e.g. whether "Senior User Experience Analyst"
+/ "DStv, MultiChoice Group" still make sense as a 2025 date), that's a
+separate ask, not assumed from this instruction.
+
+## ImageCarousel generalized for FNB, dev server .next corruption (2026-07-20, later)
+
+**Generalized ImageCarousel instead of building a second component.**
+FNB's real screenshots are full desktop webpage captures at roughly 1.85:1
+(1920x1037), quite different from DStv TV Guide's app-screenshot slides at
+1.547:1 (1920x1241). The carousel had those DStv dimensions hardcoded as
+both the CSS `aspect-ratio` and the Next Image `width`/`height` props.
+Forcing FNB's images through that box would have used `object-cover` to
+crop roughly a quarter of each screenshot's width to force-fit the wrong
+ratio. Generalized by adding optional `width`/`height` to the image data
+type (defaulting to the original 1920x1241 for backward compatibility with
+existing DStv entries) and deriving both the box's `aspect-ratio` and the
+`Image` props from the real per-image dimensions, so `object-cover`
+becomes a no-op safeguard rather than an active crop. This means it's a
+true shared component now, not a DStv-specific one wearing a generic name.
+
+**FNB's carousel images are both slots, not carousel-plus-prototype.**
+Kishan explicitly asked for the same carousel pattern in both slots (not
+the scroll-and-zoom `PrototypeViewer` used for DStv's bottom slot), since
+FNB's assets are 8 discrete webpage screenshots rather than one tall
+prototype image. Top slot: images 1 to 4 (FNB 1.png through FNB 4.png,
+supplied pre-numbered in `/Users/kishanrama/Documents/Designerama/Portfolio/`).
+Bottom slot: images 5 to 8. Read all 8 directly rather than guessing from
+the pasted screenshots, since the DStv pass already proved that guessing
+from pasted images produces wrong ordering. The 8 screenshots turn out to
+be live FNB pages across four different markets (Namibia N$, Ghana GHS,
+Botswana registration number visible on Premier Banking, and the Channel
+Islands page), which fits the case study's real claim of a rollout across
+"FNB's operations in Africa and the Channel Islands" — used as the new
+frame captions ("FNB digital banking, live across markets") instead of
+the old "pre-redesign" / "redesigned" before/after framing, since these
+are current live pages demonstrating the pattern, not a before/after pair.
+
+**sips JPEG quality flag doesn't work reliably on this macOS install.**
+`sips -s formatOptions <N>` on already-resized JPEGs left files at
+1.6 to 2.6MB, barely smaller than the untouched resample. Recompressing
+from the original PNGs with `ffmpeg -q:v 5` got equivalent visual quality
+at 90 to 260KB. Worth remembering for any future image optimization pass
+in this repo rather than re-discovering the sips limitation.
+
+**Dev server `.next` corruption recurred, same root cause as before.**
+Ran `STATIC_EXPORT=true npm run build` (production build) in the
+background while the `npm run dev` preview server was still running to
+verify FNB. This is the same documented failure mode from earlier in the
+project (see PROJECT-STATUS.md): a production build while dev is running
+wipes shared `.next` state, and the dev server then 500s with
+`Cannot find module './vendor-chunks/framer-motion.js'`. Fixed by
+stopping the preview server, `rm -rf .next`, and restarting clean. Given
+this has now happened twice, the standing rule is: never run
+`npm run build` in the background while a `preview_start` dev server is
+active for the same project; stop the preview first, or use a second
+worktree/copy if both are genuinely needed at once.
+
+## DStv TV Guide case study: real media, proof row removed sitewide (2026-07-20)
+
+**Carousel rebuilt from arrow-paged to native horizontal drag scroll.**
+First attempt used a Framer Motion drag track with prev/next arrow
+buttons, one full slide visible at a time. Kishan didn't like the arrow
+pattern and wanted horizontal scroll/swipe like thefirstthelast.agency's
+work pages and vucko.co/projects. Opened both references (vucko.co
+rendered cleanly: peeking cards, no arrows, a thin scrub bar, a
+"(Scroll)" hint; TFTL's case-study overlay uses a similar drag gallery
+but the embedded verification browser couldn't render its GSAP-driven
+scroll). Rebuilt as a native `overflow-x` scroll-snap track: peeking
+cards at both edges, click-drag for desktop mouse (native scroll already
+covers touch/trackpad), a thumb-style progress bar, and a fading "Drag
+to explore" hint, no arrow buttons.
+
+**Fixed the real "images not displaying" and "wrong order" bugs.**
+The order bug was mine: I captioned situationImages by guessing which
+pasted screenshot matched which tvg file, and got it backwards (tvg9
+first). Fixed by reading each tvg1 through tvg9 file directly with the
+Read tool and confirming the actual narrative: TV Guide Reimagined
+(cover) → DStv Discover (problem/solution) → My Feed → Revamped Linear
+View → Intelligent Search & Voice → Proactive Planner → Strategic
+Spotlight Card → Sport Hub → Conclusion & Takeaway. The display bug
+traced to Next Image's `fill` prop inside a percentage-width Framer
+Motion track racing with layout measurement on mount; fixed by using
+fixed intrinsic image dimensions instead, which also happened to be a
+cleaner fit for the native-scroll rebuild.
+
+**Case study copy rewritten from the real deck, not overclaimed.**
+The tvg slides are themselves a personal proof-of-concept exploration
+dated 2025 ("Kishan Rama, 2025" on the title slide), distinct from the
+existing case study's professional meta (2017-2018, Senior UX Analyst,
+DStv MultiChoice Group). Left meta/eyebrow/dates alone since the
+situation/approach/outcome rewrite was explicitly scoped to the tvg
+content only, not a broader reconciliation of the two, but flagged this
+to Kishan as a follow-up if he wants the intro/eyebrow aligned to the
+mobile-only, feed-based framing the new copy uses (current headline
+still says "lean-back and lean-forward" which reads connected-TV, not
+mobile). The deck's own "Success Metrics & Impact" section is phrased as
+projected/intended impact ("session durations increases due to...", not
+a measured result), so the new outcome copy mirrors that hedge
+("designed to lift...") rather than repeating the old copy's stronger
+shipped-outcome claims, per the standing rule against fabricating
+case-study outcomes.
+
+**Proof/stats row removed from every case study, not just this one.**
+Kishan said "remove this section, see image from all work sections"
+about the 5 / 2 / 2017-to-18 style numbers row. Removed the whole
+render block from the shared `CaseStudy.tsx` template plus the `proof`
+field from `CaseStudyData` and all 6 case studies' data in `work.ts`
+(supersport, gotv, bidorbuy, fnb, dstv-tv-guide, dstv-rewards), since it
+was redundant with the numbers already stated in each outcome paragraph.
+
 ## Mobile menu cleanup: chips, ghost, pill buttons (2026-07-20)
 
 **Removed label chips and ghost wordmarks from both mobile menus.**

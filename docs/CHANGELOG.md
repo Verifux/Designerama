@@ -4,6 +4,145 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-07-20 (SuperSport case study rebuild, four-slot media pattern)
+
+- Rebuilt SuperSport's media sections with a new four-slot pattern, one
+  more layer than the previous two-slot case studies. Situation section:
+  a 6-image carousel (`ss-web0.jpg` through `ss-web5.jpg`, SuperSport.com
+  homepage and article pages) with a second block directly below it, a
+  single wide mobile-screens montage (`ss-mobile1.jpg`) in a new
+  horizontal-scroll-with-zoom viewer. Approach section: the same
+  pattern, a 6-image carousel (`ss01.jpg` through `ss06.jpg`, homepage
+  and Match Center states) plus a second block below, a single very wide
+  strategy-deck panorama (`ss07.jpg`, 20116px original width) in the
+  same horizontal viewer.
+- Added `situationSecondary` / `approachSecondary` to `CaseStudyData`
+  (a `SecondaryMedia` object: images, media mode, crop ratio,
+  orientation) so a case study section can stack two independent media
+  blocks instead of one. `CaseStudy.tsx` renders the secondary block
+  directly below the primary one, no extra heading or border, just an
+  `mt-6` gap, since it's framed as more of the same project rather than
+  a new section.
+- Generalized `PrototypeViewer.tsx` with an `orientation` prop
+  ("vertical", the existing DStv TV Guide prototype behaviour, or
+  "horizontal"). Horizontal mode scrolls sideways instead of down, sizes
+  the image to the container's full height instead of full width, and
+  moves the "more to see" fade gradient to the trailing edge. Generalized
+  `Lightbox.tsx` in parallel with a `wide` prop (alongside the existing
+  `tall`), letting the zoomed view scroll horizontally at full source
+  height for these panoramas instead of being squeezed to fit the
+  screen.
+- SS07 turned out to be a real strategy-deck slide (Objective, Approach:
+  Behavioural Economics, Choice Architecture, EAST Framework, Live
+  Streaming mockups), directly evidencing the case study's existing
+  "nudge theory," "OneBox," and "choice architecture" copy. Confirmed
+  by reading the actual file before writing alt text, same discipline as
+  the prior three passes.
+- Fixed a real bug found while verifying: `PrototypeViewer`'s `Image`
+  didn't set `loading="eager"` (unlike `ImageCarousel`, which already
+  had it from the DStv pass), so the two horizontal viewers silently
+  never loaded until scrolled into view, and the embedded verification
+  browser's programmatic scroll doesn't reliably trigger native lazy
+  load. Added `loading="eager"` to match.
+
+## 2026-07-20 (bidorbuy case study rebuild, factual corrections)
+
+- Rebuilt bidorbuy's media sections with the carousel pattern: top slot
+  is the original pre-redesign bidorbuy.co.za (6 images, `bob5.jpg`
+  through `bob10.jpg`), bottom slot is the current live Bob Shop
+  rebrand (4 images, `bob1.jpg` through `bob4.jpg`). Deleted the old
+  single-image `bobshop-home-today.jpg` / `bobshop-sell-today.jpg`
+  placeholders (unreferenced now).
+- Added a `cropRatio` option to `ImageCarousel.tsx`. Bidorbuy's 10
+  source images span very inconsistent aspect ratios (0.96:1 portrait
+  to 1.82:1 wide), so per-image sizing (the FNB approach) would have
+  made cards bounce around in width. `cropRatio` forces every card in
+  a carousel to a shared ratio via `object-cover` (top slot 4:3, bottom
+  slot 16:9), cropping outliers, paired with a new click-to-zoom
+  affordance (reused `Lightbox.tsx`) so the full uncropped image is
+  always one click away. Distinguishes a genuine click from the end of
+  a drag via pointer-move distance, so dragging the carousel doesn't
+  accidentally trigger the zoom.
+- Blurred four lines of personal information (name, location, email,
+  user ID) in `bob2.jpg`, a screenshot of Kishan's own logged-in Bob
+  Shop account page, via an `ffmpeg` crop + `boxblur` + overlay, at his
+  explicit request rather than cropping the image out or publishing as-is.
+- Corrected FNB's Digital Wiki copy: "I conceived and built" to "I
+  helped build," per Kishan's correction that he contributed to it
+  rather than originating it.
+- Corrected DStv TV Guide's dates from "2017 to 2018" to "2025"
+  (tag, eyebrow, and meta Duration), per Kishan's explicit instruction.
+  This settles the discrepancy flagged in the previous DStv TV Guide
+  pass, where the slide deck's own 2025 date conflicted with the case
+  study's original 2017-2018 meta.
+
+## 2026-07-20 (proof row removed, FNB case study rebuild)
+
+- Removed the proof/stats row (the "5 / 2 / 2017 to 18" style numbers
+  block) from every case study: the `<RevealGroup>` render block in
+  `CaseStudy.tsx`, the `proof` field from `CaseStudyData`, and all 6 case
+  studies' data in `work.ts` (supersport, gotv, bidorbuy, fnb,
+  dstv-tv-guide, dstv-rewards). Redundant with the numbers already in
+  each outcome paragraph.
+- Removed the carousel's left/right edge fade gradients (`ImageCarousel.tsx`)
+  per explicit dislike of the "white masking," and reduced the
+  prototype viewer's bottom fade from 80px full-opacity to 32px at 70%.
+- Aligned DStv TV Guide's headline and intro with the new mobile-feed
+  framing (`"Turning a static schedule grid into a personalised
+  discovery feed"`), dropping the old "lean-back and lean-forward"
+  connected-TV language that no longer matched the situation/approach
+  copy from the previous pass.
+- Generalized `ImageCarousel.tsx` to take real per-image `width`/`height`
+  instead of a hardcoded 1920x1241 (DStv screenshot) aspect ratio, so it
+  can be reused for case studies with differently-proportioned source
+  images without distortion or unwanted cropping.
+- Rebuilt FNB Digital Banking's media sections with the same carousel
+  pattern as DStv TV Guide: top slot is a 4-image carousel (FNB Private
+  Clients, Savings Pocket, Channel Islands, Call Deposit, showing the
+  redesigned pattern live in Namibia), bottom slot is a second 4-image
+  carousel (Save + Invest, Call Deposit Account, Home Loans, Premier
+  Banking, showing the pattern live in Ghana and Botswana). Replaced the
+  old single-image `savings-pocket-today.jpg` / `channel-islands-today.jpg`
+  placeholders (deleted, now unreferenced) with 8 real screenshots
+  (`fnb1.jpg` through `fnb8.jpg`), resized to 1920px wide and recompressed
+  via `ffmpeg` (sips's JPEG quality flag proved ineffective, files stayed
+  1.6 to 2.6MB; ffmpeg got them to 90 to 260KB each at equivalent quality).
+
+## 2026-07-20 (DStv TV Guide case study rebuild)
+
+- Built the first "selected work" media upgrade: DStv TV Guide's top media
+  slot is now a horizontal drag/swipe carousel (`ImageCarousel.tsx`,
+  `components/shared/`) through 9 real presentation slides (tvg1 through
+  tvg9), replacing the old single static overview image. Pattern is a
+  native `overflow-x` scroll-snap track with peeking cards, no arrow
+  buttons, a thumb-style scrub bar, and a fading "Drag to explore" hint,
+  modelled on vucko.co/projects and TFTL's case-study galleries per the
+  design-remix skill.
+- Bottom media slot is a scrollable, click-to-zoom prototype viewer
+  (`PrototypeViewer.tsx` + `Lightbox.tsx`) for the full tvgPrototype
+  image, vertical scroll inside the frame, click for a fullscreen
+  lightbox with its own vertical scroll.
+- Fixed a real image-order bug: slides were reversed and mislabeled
+  because captions were guessed from pasted screenshots rather than the
+  actual tvg1 through tvg9 files. Read each file directly, confirmed the
+  real narrative order (cover, DStv Discover, My Feed, Linear View,
+  Search & Voice, Proactive Planner, Spotlight Card, Sport Hub,
+  Conclusion), and rewrote alt text and the situation/approach/outcome
+  case-study copy to match what the slides actually show, avoiding the
+  original copy's overclaimed shipped-outcome language since the deck
+  itself frames results as projected/intended, not measured.
+- Removed the underlying cause of "images not displaying": the first
+  carousel attempt used Next Image's `fill` prop inside a Framer Motion
+  percentage-width track, which raced with layout measurement on mount.
+  Rebuilt with fixed intrinsic image dimensions and native scroll instead.
+- Removed the proof/stats row (the "5 / 2 / 2017 to 18" style numbers
+  block) from the shared `CaseStudy.tsx` template entirely, including the
+  `proof` field from `CaseStudyData` and all 6 case studies' data in
+  `work.ts`. Was redundant with the numbers already in the outcome copy.
+- Removed the left/right edge fade gradients from the carousel (user
+  didn't like the white masking) and drastically reduced the bottom fade
+  on the prototype viewer (80px full-opacity to 32px at 70%).
+
 ## 2026-07-20 (menu cleanup)
 
 - Removed label chips/tags from both mobile menus (were

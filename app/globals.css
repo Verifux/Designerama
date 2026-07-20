@@ -283,3 +283,11 @@ h3 {
   40% { transform: translate(-3rem, -3.5rem) scale(1.1); }
   70% { transform: translate(2rem, -1.5rem) scale(0.94); }
 }
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
