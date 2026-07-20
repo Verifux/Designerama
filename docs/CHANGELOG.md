@@ -4,6 +4,33 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-07-20 (menu cleanup)
+
+- Removed label chips/tags from both mobile menus (were
+  "Diagnosis before design" etc.).
+- Removed ghost wordmarks from both menus ("DESIGNERAMA" and
+  "KISHAN RAMA").
+- Converted secondary links (Portfolio/Designerama cross-links) to
+  centered pill buttons with `rounded-pill border` for clearer affordance.
+- Cleaned up the `ghost` prop usage in MobileMenu (still accepted but
+  no longer passed by either Nav).
+
+## 2026-07-17 (later, design-remix pass)
+
+- Upgraded the mobile menu from a slide-down dropdown to a TFTL-inspired
+  (thefirstthelast.agency) full-screen takeover: shared
+  `components/shared/MobileMenu.tsx` used by both Navs — centered
+  display-type links with stagger reveal, underlined CTA, label chips,
+  secondary links, ghost wordmark, body scroll lock. Fixed a real bug
+  where tapping a #section link left the page unscrolled because the
+  scroll lock was still on during hash navigation.
+- Added slow ambient drift (two accent blobs, 26s/32s loops) behind the
+  Why Diagnosis Matters block, and flipped that accordion closed by
+  default (reverses the 2026-07-16 default; explicit request).
+- Added a 9s idle breathing float to the portfolio hero portrait,
+  composed with its existing scroll parallax. Reduced motion respected
+  across all of the above.
+
 ## 2026-07-17
 
 - Added a working mobile hamburger menu to both `Nav.tsx` components

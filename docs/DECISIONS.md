@@ -4,6 +4,60 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Mobile menu cleanup: chips, ghost, pill buttons (2026-07-20)
+
+**Removed label chips and ghost wordmarks from both mobile menus.**
+After seeing the initial TFTL-inspired implementation, Kishan asked to
+strip the tags/chips at the bottom, remove the ghost wordmark text
+(both "DESIGNERAMA" and "KISHAN RAMA"), and give the secondary
+cross-links (Portfolio ↔ Designerama) more affordance by rendering
+them as centered pill buttons with a visible border. The result is a
+cleaner, more minimal takeover that keeps the stagger-reveal links and
+underlined CTA but drops the decorative elements.
+
+## TFTL-style full-screen mobile menu, ambient motion, portrait float (2026-07-17, later same day)
+
+**Mobile menu upgraded from dropdown to full-screen takeover.** Kishan
+asked (via the design-remix skill) for the mobile menu open state to
+mirror the TFTL site — that's **The First The Last**
+(thefirstthelast.agency), the Awwwards-winning agency, confirmed by
+opening their live site at mobile width and capturing the actual open
+state. Their pattern: full-screen brand-background takeover, logo stays
+top-left and the trigger becomes a Close/✕ top-right, large display-type
+links stacked and centered, a big underlined text CTA below them, then a
+bottom zone with small colored label chips, secondary/social links, and
+a giant ghost wordmark bleeding off the bottom edge. Implemented as a
+shared `components/shared/MobileMenu.tsx` used by both Navs (brand
+theming comes free via the CSS-variable tokens): Designerama gets chips
+"Diagnosis before design"/"Home to Verifux" and ghost "DESIGNERAMA";
+Portfolio gets "Principal Product Designer"/"Behavioural science" and
+ghost "KISHAN RAMA". Links stagger-reveal; body scroll locks while open;
+reduced motion collapses all of it to instant.
+
+**Real bug found while verifying:** tapping a `#section` link closed the
+menu but never scrolled, because the body scroll-lock was still applied
+when the browser processed the hash navigation. Fixed by releasing the
+lock synchronously in the link click handler, before the default action
+runs. Separately, the embedded verification browser turned out to
+suppress ALL smooth scrolling (even plain
+`scrollTo({behavior:'smooth'})` never moves) — hash-jump completion
+therefore can't be observed in that environment and needs a real
+browser; don't mistake that environment quirk for a site bug again.
+
+**Ambient motion behind Why Diagnosis Matters + flipped closed.** Two
+accent-tinted blurred blobs (`.why-ambient-a/b` in globals.css) drift on
+slow offset loops (26s/32s) behind the section content; the global
+prefers-reduced-motion kill-switch already freezes them. Same request
+flipped the accordion **closed by default**, reversing the 2026-07-16
+"Why Diagnosis Matters defaults open" decision — Kishan asked
+explicitly, so the settled state is now: 01, 02, and Why Diagnosis
+Matters all closed; Selected Work open.
+
+**Portrait idle float.** The portfolio hero portrait already had scroll
+parallax (y/scale via useScroll); added a slow 9s breathing loop (y 0→-9
+→0, scale 1→1.012→1) on a nested motion.div so the two compose instead
+of fighting over one transform. Disabled under reduced motion.
+
 ## Mobile nav, Speaking section, Stats removal, Verifux link, footer logo, ship-ready (2026-07-17)
 
 **Mobile nav was a real gap, not a style choice.** Both `Nav.tsx` components

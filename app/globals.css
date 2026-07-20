@@ -242,4 +242,44 @@ h3 {
   html[data-custom-cursor="true"] * {
     cursor: none !important;
   }
+
+  /* WhyItMatters ambient layer: two accent-tinted blobs drifting on slow,
+     offset loops behind the content. Reduced motion is handled by the global
+     prefers-reduced-motion kill-switch above. */
+  .why-ambient-a,
+  .why-ambient-b {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    will-change: transform;
+    pointer-events: none;
+  }
+  .why-ambient-a {
+    width: 34rem;
+    height: 34rem;
+    left: -10rem;
+    top: -12rem;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 13%, transparent), transparent 70%);
+    animation: why-drift-a 26s ease-in-out infinite;
+  }
+  .why-ambient-b {
+    width: 28rem;
+    height: 28rem;
+    right: -8rem;
+    bottom: -10rem;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent-deep, var(--accent)) 11%, transparent), transparent 70%);
+    animation: why-drift-b 32s ease-in-out infinite;
+  }
+}
+
+@keyframes why-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(3.5rem, 2.5rem) scale(1.08); }
+  66% { transform: translate(-1.5rem, 4rem) scale(0.96); }
+}
+
+@keyframes why-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-3rem, -3.5rem) scale(1.1); }
+  70% { transform: translate(2rem, -1.5rem) scale(0.94); }
 }

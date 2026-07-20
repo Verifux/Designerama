@@ -5,12 +5,14 @@ import { whyItMatters } from "@/lib/content/designerama";
 export function WhyItMatters() {
   return (
     <section
-      className="relative border-t border-line backdrop-blur-[2px]"
+      className="relative overflow-hidden border-t border-line backdrop-blur-[2px]"
       style={{ background: "color-mix(in srgb, var(--paper) 68%, transparent)" }}
     >
+      <div aria-hidden="true" className="why-ambient-a" />
+      <div aria-hidden="true" className="why-ambient-b" />
       <div className="relative mx-auto max-w-container px-6 py-20 sm:px-8 sm:py-28">
         <Accordion
-          defaultOpen
+          defaultOpen={false}
           header={
             <RevealOnScroll y={16} duration={0.6} className="max-w-2xl pr-16 sm:pr-20">
               <p className="eyebrow mb-4 !text-accent">{whyItMatters.eyebrow}</p>

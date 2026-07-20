@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-07-17_
+_Last updated: 2026-07-20_
 
 ## What this is
 
@@ -84,10 +84,11 @@ a path prefix at build time, so this is not just a copy-paste).
 - **DStv Now case study is gone entirely**, not just unfeatured — the
   `WorkItem` object and its `/portfolio/dstv` route were both removed
   2026-07-16. Don't re-add it without being asked.
-- **Designerama home accordion defaults**: Diagnose (01) and How It Works
-  (02) default **closed**, Why Diagnosis Matters defaults **open**,
-  Selected Work (03) stays open. This is the current settled state as of
-  2026-07-16 — see DECISIONS.md if it needs to change again.
+- **Designerama home accordion defaults**: Diagnose (01), How It Works
+  (02), **and Why Diagnosis Matters** all default **closed**; Selected
+  Work (03) stays open. Why Diagnosis Matters flipped open→closed
+  2026-07-17 (same request that added the ambient motion behind it) —
+  see DECISIONS.md if it needs to change again.
 - **Portfolio's old Stats block (26+/26-30M/40%/CUA) is gone**, removed
   2026-07-17 along with the now-unused `Stats.tsx` component and `stats`
   content export. Don't re-add it without being asked.

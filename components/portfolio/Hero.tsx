@@ -42,14 +42,19 @@ export function Hero() {
                 }
           }
         >
-          <Image
-            src={withBasePath("/images/kishan-portrait.webp")}
-            alt=""
-            width={900}
-            height={1574}
-            className="w-full opacity-70 grayscale [mix-blend-mode:multiply] [filter:contrast(1.04)_saturate(0.9)]"
-            priority
-          />
+          <motion.div
+            animate={reduce ? undefined : { y: [0, -9, 0], scale: [1, 1.012, 1] }}
+            transition={reduce ? undefined : { duration: 9, ease: "easeInOut", repeat: Infinity }}
+          >
+            <Image
+              src={withBasePath("/images/kishan-portrait.webp")}
+              alt=""
+              width={900}
+              height={1574}
+              className="w-full opacity-70 grayscale [mix-blend-mode:multiply] [filter:contrast(1.04)_saturate(0.9)]"
+              priority
+            />
+          </motion.div>
         </motion.div>
       </div>
 
