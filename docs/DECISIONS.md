@@ -4,6 +4,108 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## GOtv rebuild surfaces a new carousel edge case: min-width floor (2026-07-21, later)
+
+**GOtv's images are the most extreme aspect ratio the carousel has seen
+yet.** `gotv1.jpg` through `gotv5.jpg` are full-page desktop scroll
+captures at roughly 0.24:1 (source 2732x12368) — even more extreme than
+SuperSport's `ss-web0.jpg` (0.27:1) which prompted the full-width/scroll
+redesign earlier today. At the carousel's fixed card heights (240 to
+440px depending on breakpoint), an aspect-ratio-driven width with no
+floor would compute a card as narrow as ~55-105px, technically correct
+per the full-width-plus-scroll design but unusable as a preview: not
+enough surface to register as "a screenshot," just a sliver. Added a
+`min-w-[200px] sm:min-w-[260px] lg:min-w-[300px]` floor to the card,
+letting `min-width` override the aspect-ratio-computed width only when
+that computed width would fall below it. This is additive and doesn't
+touch any existing carousel's behaviour: DStv (~1.55:1), FNB (~1.85:1),
+bidorbuy (forced 4:3/16:9), and SuperSport's own carousels (forced
+16:9) all already compute card widths comfortably above the floor, so
+nothing shifts for them. GOtv 1-5 now render as ~260-300px cards
+(clamped by the floor) with the image filling that width edge to edge
+and scrolling vertically to reveal the rest, exactly the intended
+interaction, just at a usable card size.
+
+**Copy suggestion surfaced, not applied.** Kishan asked to "suggest
+copy updates once reading thru, if any" rather than rewrite unprompted.
+`gotv-guide1.jpg` (used for the new secondary slot below the situation
+carousel) turned out to be a genuine TV Guide feature: a channel
+schedule grid with date tabs and a live-events filter. None of the
+existing situation/approach/outcome copy mentions a TV Guide at all —
+it's scoped to "dashboard, discovery, sign-in, payments and package
+selection." Rather than fold this into the copy myself (which would
+mean guessing at how prominent a role TV Guide actually played in the
+real engagement), flagged it as an open question for Kishan to decide,
+consistent with the standing rule against fabricating case-study
+claims not evidenced by what he's actually confirmed.
+
+## Carousel full-width bug fixed by redesigning the interaction, not patching it (2026-07-21)
+
+**Root cause: `w-auto` computed width from the wrong aspect ratio.**
+Kishan sent screenshots showing SuperSport and bidorbuy carousel cards
+with a narrow image and a large blank gap. The card's outer `<div>` was
+correctly sized to the forced `cropRatio` via CSS `aspect-ratio`, but
+the inner `<Image>` had `className="h-full w-auto object-cover"` with
+`width`/`height` props set to the image's *real* dimensions. Browsers
+compute `w-auto` against an element's own intrinsic ratio (from its
+`width`/`height` attributes), not its parent's CSS `aspect-ratio` — so
+for an image whose real ratio was very different from the forced
+`cropRatio` (SuperSport's `ss-web0.jpg` at 0.27:1 forced into 16:9), the
+image rendered far narrower than the card, leaving the rest of the box
+blank. `object-cover` never got a chance to crop-to-fill, because the
+image's own box was already the wrong size before `object-fit` applied.
+
+**Fixed by changing the interaction, not just the CSS.** Kishan's
+request wasn't "make the crop math correct" — it was "images need to
+occupy the full width of the placeholder, edge to edge, and then be
+vertically scrollable within that placeholder to see the rest of the
+image." That's a different design entirely: instead of cropping content
+away via `object-cover`, each card now wraps its image in its own
+`overflow-y-auto` region, the image renders at `w-full h-auto` (always
+exactly fills the frame width), and any excess height becomes
+vertically scrollable inside that card — the same interaction
+`PrototypeViewer` already used for a single tall image, just applied
+per-card inside the horizontal carousel now. This is a nicer outcome
+than a pure bug fix would have been: no case study loses image content
+to cropping anymore, whether or not `cropRatio` is set.
+
+**Consequence: `cropRatio` no longer means "crop."** It still exists and
+still forces a shared frame shape across a carousel's cards (unchanged
+prop name and signature, to avoid unnecessary churn across
+`ImageCarousel.tsx`, `CaseStudy.tsx`, `work.ts`'s `CaseStudyData`, and
+the 2 case studies using it), but its job changed from "the ratio to
+crop everything to" to "the ratio of the visible window before vertical
+scroll kicks in." DStv and FNB never used `cropRatio` (their per-image
+frame always matched the image's real ratio, so they never hit the
+blank-gap bug), and now sit on the exact same interaction model as
+bidorbuy/SuperSport rather than a different one that happened to look
+fine by coincidence.
+
+**Zoom trigger moved from whole-card click to a dedicated button.**
+Once each card is independently vertically scrollable, "click anywhere
+on the card to zoom" becomes ambiguous against "drag to scroll this
+card vertically" and "drag to scroll the whole carousel horizontally."
+Kishan's separate ask ("replace 'click to view' with a magnify icon
+only, bottom right") solved both problems at once: a small, always-
+visible (not hover-only, since touch has no hover) icon button in the
+corner is the only zoom trigger now, with `stopPropagation` on both its
+`pointerdown` and `click` so it doesn't get swallowed by the outer
+drag-to-scroll handler. `PrototypeViewer`'s single-image viewers (1b/2b)
+were explicitly called out as "great" as-is, so only their visual hint
+changed (text pill to matching icon) — the whole-frame click-to-zoom
+behaviour there was left untouched, since it wasn't broken and 1b/2b
+don't have the per-card ambiguity problem the carousel does (there's
+only one image, no horizontal drag to disambiguate against).
+
+**Mobile back-link fix was a one-line CSS change, not a redesign.**
+`components/portfolio/Nav.tsx`'s `backLink` had `hidden sm:inline`,
+so on mobile the only way to it was the hamburger's secondary links,
+an extra tap. Kishan wanted it to "stay in the nav bar," i.e. always
+visible in the persistent top bar regardless of viewport. Removed
+`hidden sm:inline`, left it in the `MobileMenu`'s secondary links too
+(not asked to remove the duplicate, and having it in both places isn't
+harmful).
+
 ## SuperSport four-slot layout, horizontal scroll viewer, PrototypeViewer eager-load fix (2026-07-20, fourth pass)
 
 **Two media blocks per section instead of one.** Kishan's brief named
@@ -551,6 +653,85 @@ correctly). Fixed with a small `lib/basePath.ts` helper (`withBasePath()`)
 threaded through every hardcoded image `src` in the codebase, rather than
 relying on Next to handle it automatically. See `docs/DEPLOYMENT.md` for the
 build commands this affects.
+
+## React's `onWheel` (and `onTouchMove`) props are passive; `e.preventDefault()` inside them silently does nothing
+
+`ImageCarousel` and `PrototypeViewer` need to intercept a wheel event over
+a scrollable card/frame and redirect it to the page instead (see the
+scroll-trap entry below). The first attempt used React's `onWheel={...}`
+prop and called `e.preventDefault()` inside the handler. It looked
+correct and the handler's own logic ran, but the page never actually
+stopped receiving the "trapped" scroll: `e.preventDefault()` was a no-op.
+
+Root cause: React registers its internal delegated listener for `wheel`
+(and `touchstart`/`touchmove`) with `{ passive: true }` by default, a
+deliberate choice to avoid Chrome's "non-passive listener" scroll-jank
+warning. A passive listener's `preventDefault()` call is silently
+ignored by the browser, by design, no error, no warning at the call
+site. This is invisible from the component's own code; the only symptom
+is that the intended default-prevention doesn't happen.
+
+Fix: attach a real native listener manually, via `useEffect` +
+`element.addEventListener("wheel", handler, { passive: false })`, and
+clean it up on unmount. This is the only way to get a wheel/touchmove
+handler in React where `preventDefault()` actually works.
+
+**Rule of thumb:** if a component needs to call `preventDefault()` inside
+a wheel or touchmove handler, don't reach for `onWheel`/`onTouchMove`
+props — they can't do it. Use a manual `addEventListener` with
+`{ passive: false }` on a ref instead.
+
+## Never combine CSS `scroll-behavior: smooth` with direct `scrollLeft`/`scrollTop` writes on every pointermove
+
+`ImageCarousel`'s drag-to-scroll writes `el.scrollLeft = ...` directly on
+every `pointermove` event during a drag, to track the mouse 1:1. The
+track's className also had `scroll-smooth` (`scroll-behavior: smooth`) on
+it, left over from early scroll-snap styling. Those two don't mix: with
+`scroll-behavior: smooth` set, the browser treats a direct `scrollLeft`
+assignment as a smooth-scroll request (per the CSSOM View spec, not just
+`scrollTo()`/`scrollBy()`), so it animates toward the new value instead of
+jumping instantly. During a real drag, dozens of `pointermove` events fire
+in quick succession, each setting a new target `scrollLeft` before the
+browser's animation from the previous write has finished, so the writes
+fight each other. The visible symptom was exactly what Kishan reported:
+dragging over a card felt sluggish and unresponsive, like it "wasn't
+scrolling," even though the underlying pointer-event logic was correct.
+
+Fix: removed `scroll-smooth` from the track's className. The arrow-button
+clicks that DO want an animated scroll already pass `behavior: "smooth"`
+explicitly per call via `el.scrollBy({..., behavior: "smooth"})`, so
+they're unaffected by removing the CSS class.
+
+**Rule of thumb:** if a component writes to `scrollLeft`/`scrollTop`
+directly and repeatedly (drag-to-scroll, a scrub bar, anything driven by
+continuous pointer/frame updates), don't also set `scroll-behavior: smooth`
+on that same scrollable element. Request smooth behavior per-call via the
+`behavior` option on `scrollTo()`/`scrollBy()`/`scrollIntoView()` instead,
+never via the CSS property, when the element also receives frequent direct
+writes.
+
+## `onLoad` alone misses content-driven layout reflows; use a `ResizeObserver` on the `<img>`
+
+`ImageCarousel` and `PrototypeViewer` show scroll-affordance arrows only when
+the image actually overflows its frame, computed from `scrollHeight` vs
+`clientHeight`. Watching only `onLoad` plus a `window resize` listener wasn't
+enough: an `<img>` is initially laid out at its placeholder aspect ratio
+(from the declared `width`/`height` attributes), and only reflows to its real
+decoded ratio once the image finishes loading. For cached images the native
+`load` event can fire before React attaches the `onLoad` handler, so the
+scroll-state check would run once too early (against the placeholder ratio)
+and never rerun, leaving the arrows permanently absent even on cards that
+genuinely overflow. The wrapper's own box never changes size (it has a fixed
+CSS height), so a `resize` listener on `window` doesn't catch this either,
+since nothing about the window resized.
+
+Fix: attach a `ResizeObserver` directly to the `<img>` DOM node (needs a ref
+threaded onto `next/image`, which does forward refs correctly as of Next
+14.2.18) and rerun the scroll-state check on every observed resize. This
+robustly catches the placeholder-to-real-ratio reflow regardless of cache or
+`onLoad` timing. If a future component needs to measure "does this loaded
+image overflow its container," reach for this pattern rather than
+`onLoad`/`resize` alone.
 
 ## Tailwind color-opacity modifiers don't work on this project's color tokens
 

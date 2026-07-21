@@ -158,6 +158,111 @@ a path prefix at build time, so this is not just a copy-paste).
   first DStv pass), so both new horizontal blocks silently failed to
   load until scrolled into view. Remaining case studies to rebuild one
   at a time: GOtv, DStv Rewards.
+- **Carousel images always fill the full frame width now**, fixed
+  2026-07-21. Every card's image was previously sized from its own
+  intrinsic aspect ratio (`w-auto`), which left a blank gap next to
+  narrow-rendered images whenever `cropRatio` forced a frame shape very
+  different from the real image (bidorbuy, SuperSport). Redesigned:
+  image always renders `w-full h-auto` (full width, edge to edge), and
+  each card wraps it in its own `overflow-y-auto` so any excess height
+  scrolls vertically inside that card, matching how `PrototypeViewer`
+  already handled a single tall image. `cropRatio` still exists (same
+  name, unchanged prop signature) but now means "the visible window
+  before scroll," not "crop to this ratio." Applies to every case study
+  using `ImageCarousel`, not just the two that use `cropRatio`.
+- **Zoom trigger is a magnify-icon button, bottom-right, not whole-card
+  click**, changed 2026-07-21. Text hint ("Click to view full size")
+  replaced with a small always-visible icon on every `ImageCarousel`
+  card and both `PrototypeViewer` orientations. `PrototypeViewer` kept
+  its whole-frame click-to-zoom (only the icon changed there);
+  `ImageCarousel` moved to icon-only since whole-card click became
+  ambiguous once each card scrolls vertically on its own.
+- **Portfolio mobile nav always shows "← Back to work"** on case study
+  pages now, fixed 2026-07-21. Was `hidden sm:inline`, reachable only
+  via the hamburger's secondary links on mobile. Don't re-hide it below
+  `sm` without being asked.
+- **GOtv is the fifth case study rebuilt**, 2026-07-21. Situation:
+  5-image carousel (`gotv1` to `gotv5`, Get GOtv marketing/package/
+  discovery pages) + a secondary `PrototypeViewer` (vertical) showing
+  `gotv-guide1`, the TV Guide schedule grid. Approach: 6-image carousel
+  (`gotv-ss1` to `gotv-ss6`, MyGOtv dashboard, subscriptions, billing).
+  `ImageCarousel` gained a `min-w-[200px] sm:min-w-[260px]
+  lg:min-w-[300px]` floor on card width, since GOtv's images are ~0.24:1
+  (more extreme than SuperSport's 0.27:1), which without a floor would
+  compute unusably narrow (~55-105px) cards even though the full-width/
+  scroll behaviour itself was correct. Doesn't affect any other case
+  study's card widths. **Open question for Kishan**: `gotv-guide1`
+  shows a real TV Guide feature not mentioned anywhere in the existing
+  situation/approach/outcome copy (which only covers dashboard,
+  discovery, sign-in, payments, package selection) — flagged, not
+  applied. Remaining case study to rebuild: DStv Rewards.
+- **GOtv TV Guide copy gap resolved**: Kishan confirmed the line should
+  be added; approach copy now mentions "a TV Guide with a full channel
+  schedule and live-events filter" alongside the other self-service
+  flows.
+- **Horizontal drag-to-scroll no longer gets hijacked by image drag**,
+  fixed 2026-07-21. Starting a drag on top of a card's `<img>` (as
+  opposed to the gap between cards) used to trigger the browser's
+  native image-drag-ghost behaviour instead of the carousel's own
+  drag-to-scroll, making only the narrow gaps reliably draggable. Fixed
+  with `e.preventDefault()` in the track's `onPointerDown` for mouse
+  pointers. Applies everywhere `ImageCarousel` is used.
+- **Vertical scrollbar hidden on every carousel card, replaced with
+  glass-effect up/down arrow buttons**, matching the existing magnify
+  button's style. Same treatment (up/down or left/right depending on
+  orientation) applied to `PrototypeViewer`.
+- **Scroll arrows now reliably appear when a card's image overflows**,
+  fixed 2026-07-21. Root cause: `onLoad` alone missed the layout reflow
+  from an image's placeholder aspect ratio to its real decoded ratio,
+  especially for cached images. Fixed with a `ResizeObserver` on the
+  `<img>` DOM node itself (via a new ref forwarded through `next/image`)
+  so the overflow check reruns whenever the image's actual box size
+  changes. See `docs/DECISIONS.md` for the full lesson if this pattern
+  is needed again.
+- **Fixed a real bug**: cards without explicit per-image `width`/
+  `height` fell back to using `cropRatio`'s numbers (e.g. `[4,3]`) as
+  literal pixel dimensions. Now falls back to a fixed 1920x1241 default.
+- **DStv Rewards is the sixth and final case study rebuilt**, 2026-07-21,
+  completing this rebuild initiative. Situation: 5-image carousel
+  (`rewards1` to `rewards5`) + a secondary `PrototypeViewer` (horizontal)
+  showing `rewards-app1`, the app's Reconnect Challenge flow. Approach:
+  5-image carousel (`rewards6` to `rewards10`). All source images resized
+  to 1920px wide, cutting page weight and localhost load time.
+- **DStv Rewards copy corrected, a real scope overclaim.** Previous copy
+  said the whole rewards program ("discovery, redemption, an
+  account/rewards-history view") was designed end to end. Kishan
+  corrected this: DStv Rewards already existed; the actual work was two
+  specific gamified challenge campaigns added on top of it (Upgrade &
+  Earn, Reconnect) to promote package upgrades and service reconnections.
+  Headline, intro, situation, approach and outcome all rewritten to this
+  narrower, accurate scope. Don't re-broaden this back to "designed the
+  rewards experience" without being asked.
+- **Superseded: custom drag-to-scroll on carousel cards is now removed
+  entirely**, 2026-07-21, later the same day as the `scroll-smooth` fix
+  above. That fix was real, but Kishan reported the interaction still
+  felt broken. Rather than keep patching a hand-rolled pointer-drag
+  system that competed with each card's own vertical scroll and the
+  page's scroll for the same pointer, removed it outright. Carousels now
+  scroll via native `overflow-x` (trackpad swipe, shift+wheel) plus a
+  **newly draggable accent progress bar** below the track, the primary
+  mouse-driven way to scroll a carousel now. Don't re-add pointer-drag
+  capture directly on the cards without being asked.
+- **Fixed the real bug behind "can't scroll the page over images,"**
+  2026-07-21. Each card's internal vertical scroll (to see the rest of a
+  tall image) shares the page's own scroll axis, so a wheel over a card
+  scrolled the card first and only chained to the page once the card's
+  own scroll was exhausted, i.e. exactly Kishan's report of having to
+  move the mouse off the images to keep scrolling. Fixed by intercepting
+  wheel events on each card/frame and always forwarding them to the page
+  instead. The card's own vertical scroll is now reachable only via the
+  up/down glass arrow buttons or the lightbox, never by hovering + wheel.
+- **Real gotcha hit twice in one day, now documented**: React's
+  `onWheel`/`onTouchMove` props are registered passive internally, so
+  `e.preventDefault()` inside them silently no-ops. The wheel-forwarding
+  fix above needed a manual `addEventListener(..., { passive: false })`
+  via `useEffect` instead. See `docs/DECISIONS.md` for both this and the
+  earlier `scroll-behavior: smooth`-vs-direct-writes lesson — two
+  distinct real bugs found in the same scroll-interaction area today.
 
 ## Standing constraints (do not re-litigate without being asked)
 

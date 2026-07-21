@@ -22,7 +22,7 @@ export function Nav({ backLink }: { backLink?: { label: string; href: string } }
               <Logo height={34} priority />
             </Link>
             {backLink && (
-              <Link href={backLink.href} className="hidden font-mono text-[0.78rem] text-ink-dim transition-colors hover:text-accent sm:inline">
+              <Link href={backLink.href} className="font-mono text-[0.78rem] text-ink-dim transition-colors hover:text-accent">
                 {backLink.label}
               </Link>
             )}
