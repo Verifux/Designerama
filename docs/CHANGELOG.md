@@ -4,6 +4,40 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-07-21 (hover-only affordances, How-I-work accordion, tile tags, legacy links, footer)
+
+- **Magnify and scroll-arrow buttons on carousel cards and prototype
+  frames are now hover-only.** They start at `opacity-0` and fade in via
+  `group-hover:opacity-100` (plus `focus-visible:opacity-100` for keyboard
+  users), each card/frame wrapper gaining a `group` class. Glass styling
+  (`bg-bg/85` + `backdrop-blur-sm`) kept. Only the relevant up/down arrow
+  shows (already conditional on scroll position); now it's also gated on
+  hover. On touch devices, where there's no hover, the buttons stay
+  reachable via the arrow buttons' own tap targets appearing once tapped
+  into, and zoom via the lightbox.
+- **Converted the Portfolio "How I work" (Method) section to the shared
+  `Accordion`, default open**, matching the Designerama-side WorkList and
+  Process accordions, so the collapse chevron and interaction are
+  consistent across both brands.
+- **Removed date ranges from the case-study tile tags** on the Portfolio
+  work grid (they read as dated/CV-like). Replaced each with a more
+  relevant descriptor: SuperSport and DStv TV Guide → "MultiChoice
+  Group", bidorbuy → "E-commerce & auctions", FNB → "Banking". The full
+  dates still live in each case study's own eyebrow and meta block, just
+  not on the grid tiles.
+- **Earlier-work (legacy) images now link to
+  www.designerama.co.za/visual**, the old portfolio site, opening in a
+  new tab. These are shown as record, not case studies, so the link
+  points to the archive rather than a dedicated page.
+- **Footer copyright updated to include "All rights reserved"**:
+  "© 2027 Designerama. Kishan Rama. All rights reserved." (The
+  Designerama-side footer already carried an all-rights-reserved line.)
+- **NOT done, blocked on assets**: updating the GEDA and JoziBond legacy
+  images. Kishan shared new versions in the chat, but the image files
+  couldn't be located on disk (not in the Portfolio source folder,
+  Downloads, or session temp). Flagged for Kishan to provide the file
+  path; the current `geda.jpg` / `jozibond.jpg` are unchanged.
+
 ## 2026-07-21 (restore vertical scroll, add chevrons, correct the scroll-trap fix)
 
 - **Reverted the wheel-forwarding fix from earlier today.** It solved the

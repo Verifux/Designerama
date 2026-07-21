@@ -24,7 +24,7 @@ function MagnifyButton({ onClick }: { onClick: () => void }) {
         onClick();
       }}
       aria-label="View full size"
-      className="absolute bottom-2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-bg/85 text-ink shadow-md backdrop-blur-sm transition-colors hover:bg-bg hover:text-accent"
+      className="absolute bottom-2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-bg/85 text-ink opacity-0 shadow-md backdrop-blur-sm transition-opacity duration-200 hover:bg-bg hover:text-accent group-hover:opacity-100 focus-visible:opacity-100"
     >
       <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
         <circle cx="8.5" cy="8.5" r="5.5" />
@@ -82,7 +82,7 @@ function ScrollArrowButton({
         onClick();
       }}
       aria-label={direction === "up" ? "Scroll up" : "Scroll down"}
-      className={`absolute z-10 flex h-7 w-7 items-center justify-center rounded-full bg-bg/85 text-ink shadow-md backdrop-blur-sm transition-colors hover:bg-bg hover:text-accent ${className}`}
+      className={`absolute z-10 flex h-7 w-7 items-center justify-center rounded-full bg-bg/85 text-ink opacity-0 shadow-md backdrop-blur-sm transition-opacity duration-200 hover:bg-bg hover:text-accent group-hover:opacity-100 focus-visible:opacity-100 ${className}`}
     >
       <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         {direction === "up" ? <polyline points="4,12 10,6 16,12" /> : <polyline points="4,8 10,14 16,8" />}
@@ -131,7 +131,7 @@ function CarouselCard({ img, rw, rh, onZoom }: { img: CarouselImage; rw: number;
 
   return (
     <div
-      className="relative h-[240px] w-auto min-w-[200px] shrink-0 snap-center overflow-hidden rounded-card border border-line bg-paper sm:h-[340px] sm:min-w-[260px] lg:h-[440px] lg:min-w-[300px]"
+      className="group relative h-[240px] w-auto min-w-[200px] shrink-0 snap-center overflow-hidden rounded-card border border-line bg-paper sm:h-[340px] sm:min-w-[260px] lg:h-[440px] lg:min-w-[300px]"
       style={{ aspectRatio: `${rw} / ${rh}` }}
     >
       <div ref={scrollRef} onScroll={updateScrollState} className="scrollbar-hide h-full w-full overflow-y-auto">

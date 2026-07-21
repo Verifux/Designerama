@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-07-20 (DStv TV Guide media rebuild)_
+_Last updated: 2026-07-21 (hover-only affordances, tile tag cleanup, footer, legacy links)_
 
 ## What this is
 
@@ -269,6 +269,22 @@ a path prefix at build time, so this is not just a copy-paste).
   as the first fix for a scroll-trap complaint — try removing
   `overscroll-contain` first. See `docs/DECISIONS.md` for both this and
   the `scroll-behavior: smooth`-vs-direct-writes lesson.
+- **Carousel/prototype affordances are hover-only now** (2026-07-21):
+  magnify button and up/down scroll arrows start hidden (`opacity-0`) and
+  fade in on `group-hover` (card/frame wrapper carries `group`), plus
+  `focus-visible` for keyboard. Glass styling retained. Don't make these
+  always-visible again without being asked.
+- **Case-study tile tags carry no date ranges** (2026-07-21). The grid
+  tiles use a category/client descriptor ("MultiChoice Group",
+  "E-commerce & auctions", "Banking"), not "2018 to 2025" style ranges.
+  Full dates still live in each case study's eyebrow + meta block. Don't
+  put date ranges back on the tiles.
+- **The Portfolio "How I work" (Method) section is a default-open
+  `Accordion`** now, matching the Designerama WorkList/Process accordions.
+- **Legacy/earlier-work images link to www.designerama.co.za/visual** (the
+  old portfolio archive), new tab.
+- **Footer copyright is "© 2027 Designerama. Kishan Rama. All rights
+  reserved."**
 
 ## Standing constraints (do not re-litigate without being asked)
 
@@ -288,6 +304,14 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Open / pending
 
+- **GEDA and JoziBond legacy images need updating** (2026-07-21). Kishan
+  shared new versions in chat, but the image files couldn't be found on
+  disk (not in `~/Documents/Designerama/Portfolio/`, Downloads, or session
+  temp). Waiting on the file path from Kishan; current
+  `public/images/work/legacy/geda.jpg` and `jozibond.jpg` unchanged. When
+  the files arrive, drop them in at the same paths (or update the `image`
+  fields in `legacyWork` in `lib/content/work.ts` if names differ) and
+  rebuild.
 - SuperSport case study still lacks real Figma-sourced images (blocked on
   Figma quota as of last check).
 - GOtv Presentation slides — no additional usable Figma node-IDs found beyond

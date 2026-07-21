@@ -128,7 +128,7 @@ export const cta = {
 };
 
 export const footer = {
-  copyright: "© Designerama. Kishan Rama.",
+  copyright: "© 2027 Designerama. Kishan Rama. All rights reserved.",
   links: [
     { label: "Designerama", href: "/" },
     { label: "Blog", href: "https://www.designerama.co.za/blog" },

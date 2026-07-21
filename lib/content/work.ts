@@ -51,7 +51,7 @@ export const workItems: WorkItem[] = [
   {
     slug: "supersport",
     title: "SuperSport",
-    tag: "Product · UX · 2018 to 2025",
+    tag: "Product · UX · MultiChoice Group",
     summary: "UX strategy and product design across web, mobile and connected TV, reaching 26-30 million monthly users.",
     featured: true,
     caseStudy: {
@@ -197,7 +197,7 @@ export const workItems: WorkItem[] = [
   {
     slug: "bidorbuy",
     title: "bidorbuy (Bobshop)",
-    tag: "Product · UX · 2010 to 2013",
+    tag: "Product · UX · E-commerce & auctions",
     summary: "Full UX and UI redesign that nearly doubled revenue and lifted traffic in the first month post-launch.",
     featured: true,
     caseStudy: {
@@ -257,7 +257,7 @@ export const workItems: WorkItem[] = [
   {
     slug: "fnb",
     title: "FNB Digital Banking",
-    tag: "UX · 2013 to 2016",
+    tag: "UX · Banking",
     summary:
       "Usability-led redesign of FNB's digital banking site, rolled out across Africa and the Channel Islands in three months against an eight-month scope. Won the FNB Innovation Award.",
     featured: true,
@@ -315,7 +315,7 @@ export const workItems: WorkItem[] = [
   {
     slug: "dstv-tv-guide",
     title: "DStv TV Guide",
-    tag: "UX · 2025",
+    tag: "UX · MultiChoice Group",
     summary: "Lean-back UX and content navigation design for connected TV environments, across DStv's TV Guide, Live TV and reminders flows.",
     featured: true,
     previewImage: "/images/work/tv-guide/overview.png",
