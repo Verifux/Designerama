@@ -654,6 +654,31 @@ threaded through every hardcoded image `src` in the codebase, rather than
 relying on Next to handle it automatically. See `docs/DEPLOYMENT.md` for the
 build commands this affects.
 
+## Superseded: prefer `overscroll-behavior` (CSS) over a wheel-interception JS fix for nested-scroll-traps-the-page
+
+The entry below this one documents intercepting `wheel` events on a
+nested scrollable card and manually forwarding them to the page, to stop
+that card's own scroll from trapping the page's scroll. That fix worked,
+but it was solving the problem with the wrong tool: it also killed the
+card's own scrollability entirely (every wheel tick got redirected, none
+were left for the card itself), which broke a feature Kishan explicitly
+wanted (scrolling within a card to see the rest of a tall image).
+
+The actual, correct fix needs no JS at all: the card's scroll wrapper had
+`overscroll-behavior: contain` (Tailwind's `overscroll-contain`), which
+per spec blocks scroll chaining to the parent once the element's own
+scroll bounds are reached — that's the literal mechanism of the trap.
+Removing it (leaving the CSS default, `auto`) restores the browser's
+standard nested-scroll behavior for free: a wheel over the card scrolls
+the card first, and once the card's own scroll is exhausted, the same
+gesture chains naturally to the page.
+
+**Rule of thumb:** before reaching for a JS wheel/touch interception to
+fix a "scroll trapped inside a nested element" complaint, check whether
+`overscroll-behavior: contain` (or `none`) is set on that element first.
+Removing it is very likely the actual fix, and it preserves the nested
+element's own scrollability, which a blanket JS redirect does not.
+
 ## React's `onWheel` (and `onTouchMove`) props are passive; `e.preventDefault()` inside them silently does nothing
 
 `ImageCarousel` and `PrototypeViewer` need to intercept a wheel event over

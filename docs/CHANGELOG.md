@@ -4,6 +4,34 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-07-21 (restore vertical scroll, add chevrons, correct the scroll-trap fix)
+
+- **Reverted the wheel-forwarding fix from earlier today.** It solved the
+  page-scroll-trap complaint, but at a real cost Kishan flagged
+  immediately: it also killed each carousel card's own vertical scroll
+  (hovering + wheel no longer revealed the rest of a tall image at all,
+  since every wheel tick was unconditionally redirected to the page).
+  Removed the native `wheel` listeners and `overscroll-contain` fix from
+  `ImageCarousel` and `PrototypeViewer` entirely.
+- **Replaced with the correct, standard fix: allow scroll chaining.**
+  `overscroll-contain` was blocking the browser's own default behavior of
+  chaining a scroll to the parent once a nested scrollable element's
+  bounds are reached. Simply removing `overscroll-contain` (leaving the
+  CSS default, `overscroll-behavior: auto`) gets both properties for
+  free, with no JS: a wheel over a card scrolls the card first (so
+  vertical scroll-to-see-more-of-the-image still works), and once that
+  card's own scroll is exhausted, the same gesture chains naturally to
+  the page (so hovering a card never permanently traps page scroll).
+  This is what should have been reached for the first time; the earlier
+  wheel-interception approach was solving the right problem with the
+  wrong tool.
+- **Added left/right chevron buttons flanking each carousel's draggable
+  accent bar**, matching the accordion's chevron button style (bordered
+  circle, `border-line`, `hover:border-accent`) rather than the glass/blur
+  style used elsewhere, per Kishan's ask. Each click pages the track by
+  80% of its visible width with a smooth scroll, and dims/disables at
+  the start or end of the track.
+
 ## 2026-07-21 (remove drag-to-scroll on cards, draggable scrub bar, fix page-scroll trap)
 
 - **Removed the custom pointer drag-to-scroll on carousel cards entirely.**

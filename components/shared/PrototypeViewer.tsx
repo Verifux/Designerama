@@ -86,24 +86,6 @@ export function PrototypeViewer({ image, orientation = "vertical" }: PrototypeVi
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [horizontal]);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || horizontal) return;
-    // Vertical orientation shares its scroll axis with the page, so a wheel
-    // over the frame must always scroll the page, not the frame itself, or
-    // hovering a tall image traps page scroll until the frame's own scroll
-    // is exhausted. Horizontal orientation doesn't share an axis with the
-    // page, so it's left to scroll natively. React's onWheel prop is
-    // registered passive (can't call preventDefault), so this needs a real
-    // native listener attached with { passive: false }.
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      window.scrollBy({ top: e.deltaY, left: e.deltaX, behavior: "instant" as ScrollBehavior });
-    };
-    el.addEventListener("wheel", handleWheel, { passive: false });
-    return () => el.removeEventListener("wheel", handleWheel);
-  }, [horizontal]);
-
   const scrollByViewer = (dir: 1 | -1) => {
     const el = scrollRef.current;
     if (!el) return;
@@ -130,8 +112,8 @@ export function PrototypeViewer({ image, orientation = "vertical" }: PrototypeVi
             onScroll={updateScrollState}
             className={
               horizontal
-                ? "scrollbar-hide h-full w-full overflow-x-auto overscroll-contain"
-                : "scrollbar-hide h-full overflow-y-auto overscroll-contain"
+                ? "scrollbar-hide h-full w-full overflow-x-auto"
+                : "scrollbar-hide h-full overflow-y-auto"
             }
             onClick={(e) => {
               e.stopPropagation();

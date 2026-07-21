@@ -247,22 +247,28 @@ a path prefix at build time, so this is not just a copy-paste).
   **newly draggable accent progress bar** below the track, the primary
   mouse-driven way to scroll a carousel now. Don't re-add pointer-drag
   capture directly on the cards without being asked.
-- **Fixed the real bug behind "can't scroll the page over images,"**
-  2026-07-21. Each card's internal vertical scroll (to see the rest of a
-  tall image) shares the page's own scroll axis, so a wheel over a card
-  scrolled the card first and only chained to the page once the card's
-  own scroll was exhausted, i.e. exactly Kishan's report of having to
-  move the mouse off the images to keep scrolling. Fixed by intercepting
-  wheel events on each card/frame and always forwarding them to the page
-  instead. The card's own vertical scroll is now reachable only via the
-  up/down glass arrow buttons or the lightbox, never by hovering + wheel.
-- **Real gotcha hit twice in one day, now documented**: React's
-  `onWheel`/`onTouchMove` props are registered passive internally, so
-  `e.preventDefault()` inside them silently no-ops. The wheel-forwarding
-  fix above needed a manual `addEventListener(..., { passive: false })`
-  via `useEffect` instead. See `docs/DECISIONS.md` for both this and the
-  earlier `scroll-behavior: smooth`-vs-direct-writes lesson — two
-  distinct real bugs found in the same scroll-interaction area today.
+- **Superseded within the hour: the wheel-forwarding fix above was
+  reverted.** It fixed the page-scroll trap but broke a feature Kishan
+  wanted kept — vertical scroll within a card to see the rest of a tall
+  image. The actual correct fix needed no JS: `overscroll-contain` on
+  the card's scroll wrapper was blocking the browser's own default
+  scroll-chaining. Removing it (default `overscroll-behavior: auto`)
+  gets both properties for free — card scrolls first, page continues
+  once the card's own scroll is exhausted. See `docs/DECISIONS.md`.
+- **Added left/right chevron buttons flanking each carousel's draggable
+  bar**, matching the accordion's chevron style (bordered circle) rather
+  than the glass/blur buttons used elsewhere on cards. Pages the track by
+  80% of its visible width per click, smooth scroll, dims/disables at
+  either end.
+- **Real gotcha hit and documented, even though the fix it belonged to
+  was later superseded**: React's `onWheel`/`onTouchMove` props are
+  registered passive internally, so `e.preventDefault()` inside them
+  silently no-ops; needs a manual `addEventListener(...,
+  { passive: false })`. Keep this in mind for any future component that
+  genuinely does need to intercept wheel/touch, just don't reach for it
+  as the first fix for a scroll-trap complaint — try removing
+  `overscroll-contain` first. See `docs/DECISIONS.md` for both this and
+  the `scroll-behavior: smooth`-vs-direct-writes lesson.
 
 ## Standing constraints (do not re-litigate without being asked)
 

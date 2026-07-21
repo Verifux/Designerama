@@ -34,6 +34,36 @@ function MagnifyButton({ onClick }: { onClick: () => void }) {
   );
 }
 
+function ChevronButton({
+  direction,
+  onClick,
+  disabled,
+}: {
+  direction: "left" | "right";
+  onClick: () => void;
+  disabled: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={direction === "left" ? "Scroll left" : "Scroll right"}
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent disabled:pointer-events-none disabled:opacity-30 sm:h-10 sm:w-10"
+    >
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+        <path
+          d={direction === "left" ? "M12 4l-6 6 6 6" : "M8 4l6 6-6 6"}
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+  );
+}
+
 function ScrollArrowButton({
   direction,
   onClick,
@@ -95,26 +125,6 @@ function CarouselCard({ img, rw, rh, onZoom }: { img: CarouselImage; rw: number;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    // Wheel over a card must always scroll the page, never the card itself,
-    // whichever way it can reach: the arrow buttons or the lightbox. Without
-    // this, hovering a card that has any internal overflow traps the page
-    // scroll until the card's own scroll is exhausted. React's onWheel prop
-    // is registered passive (can't call preventDefault), so this needs a
-    // real native listener attached with { passive: false }.
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      // Explicit "instant": rapid successive wheel ticks with the global
-      // smooth scroll-behavior would otherwise queue and fight each other,
-      // the same jank this codebase already hit once with drag-to-scroll.
-      window.scrollBy({ top: e.deltaY, left: e.deltaX, behavior: "instant" as ScrollBehavior });
-    };
-    el.addEventListener("wheel", handleWheel, { passive: false });
-    return () => el.removeEventListener("wheel", handleWheel);
-  }, []);
-
   const scrollByCard = (dir: 1 | -1) => {
     scrollRef.current?.scrollBy({ top: dir * (scrollRef.current.clientHeight * 0.8), behavior: "smooth" });
   };
@@ -124,7 +134,7 @@ function CarouselCard({ img, rw, rh, onZoom }: { img: CarouselImage; rw: number;
       className="relative h-[240px] w-auto min-w-[200px] shrink-0 snap-center overflow-hidden rounded-card border border-line bg-paper sm:h-[340px] sm:min-w-[260px] lg:h-[440px] lg:min-w-[300px]"
       style={{ aspectRatio: `${rw} / ${rh}` }}
     >
-      <div ref={scrollRef} onScroll={updateScrollState} className="scrollbar-hide h-full w-full overflow-y-auto overscroll-contain">
+      <div ref={scrollRef} onScroll={updateScrollState} className="scrollbar-hide h-full w-full overflow-y-auto">
         <Image
           ref={imgRef}
           src={withBasePath(img.src)}
@@ -155,6 +165,8 @@ export function ImageCarousel({ images, cropRatio }: ImageCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const [thumb, setThumb] = useState({ left: 0, width: 100 });
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [zoomImage, setZoomImage] = useState<CarouselImage | null>(null);
   const barDragging = useRef(false);
@@ -166,6 +178,8 @@ export function ImageCarousel({ images, cropRatio }: ImageCarouselProps) {
     const ratio = el.clientWidth / el.scrollWidth;
     const progress = max > 0 ? el.scrollLeft / max : 0;
     setThumb({ left: progress * (1 - ratio) * 100, width: ratio * 100 });
+    setAtStart(el.scrollLeft <= 4);
+    setAtEnd(el.scrollLeft >= max - 4);
   };
 
   useEffect(() => {
@@ -211,6 +225,13 @@ export function ImageCarousel({ images, cropRatio }: ImageCarouselProps) {
     barDragging.current = false;
   };
 
+  const scrollByTrack = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * (el.clientWidth * 0.8), behavior: "smooth" });
+    setHasInteracted(true);
+  };
+
   return (
     <>
       <div className="flex flex-col gap-3">
@@ -224,7 +245,9 @@ export function ImageCarousel({ images, cropRatio }: ImageCarouselProps) {
           })}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <ChevronButton direction="left" onClick={() => scrollByTrack(-1)} disabled={atStart} />
+
           <div
             ref={barRef}
             onPointerDown={handleBarPointerDown}
@@ -239,8 +262,11 @@ export function ImageCarousel({ images, cropRatio }: ImageCarouselProps) {
               style={{ left: `${thumb.left}%`, width: `${thumb.width}%` }}
             />
           </div>
+
+          <ChevronButton direction="right" onClick={() => scrollByTrack(1)} disabled={atEnd} />
+
           <span
-            className={`whitespace-nowrap font-mono text-[0.72rem] text-ink-dim transition-opacity duration-500 ${
+            className={`hidden whitespace-nowrap font-mono text-[0.72rem] text-ink-dim transition-opacity duration-500 sm:inline ${
               hasInteracted ? "opacity-0" : "opacity-100"
             }`}
           >
