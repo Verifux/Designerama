@@ -7,7 +7,7 @@ export function Method() {
     <section className="border-b border-line bg-paper py-32">
       <div className="relative mx-auto max-w-container px-5 sm:px-8">
         <Accordion
-          defaultOpen
+          defaultOpen={false}
           header={
             <RevealOnScroll className="mb-14 max-w-2xl pr-16 sm:pr-20">
               <p className="eyebrow mb-4">{method.eyebrow}</p>

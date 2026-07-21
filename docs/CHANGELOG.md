@@ -4,6 +4,27 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-07-21 (corrections: GEDA/JoziBond images, accordion closed, chevrons removed)
+
+- **Updated the GEDA and JoziBond legacy images** (the item flagged blocked
+  in the entry below). The source files were in `website_old/Projects_Images/`
+  all along, not the Portfolio source folder: GEDA = `5_1.jpg` (the black
+  folder corner with the GEDA logo), JoziBond = `11_3.jpg` (the JoziBond
+  "The BIG Bonsela" card). Both already web-sized (~1110px, ~90-110KB) so
+  copied straight into `public/images/work/legacy/geda.jpg` and
+  `jozibond.jpg`. Deliberately did NOT use `5_5.jpg`, which shows a GEDA
+  business card with a real person's name and phone number, per the
+  standing rule to keep personal data out of case-study media.
+- **"How I work" (Method) accordion is now closed by default**
+  (`defaultOpen={false}`). The previous entry set it open; Kishan clarified
+  he meant closed.
+- **Removed the left/right chevron buttons from the carousels.** They were
+  added as a drag-bar aid while the horizontal-scroll interaction was still
+  being sorted; now that the draggable accent bar works reliably, the
+  chevrons are redundant. Reverted the `ChevronButton` component, the
+  `atStart`/`atEnd` state, and `scrollByTrack`. The draggable bar (plus
+  native trackpad/shift-wheel) is the scroll control again.
+
 ## 2026-07-21 (hover-only affordances, How-I-work accordion, tile tags, legacy links, footer)
 
 - **Magnify and scroll-arrow buttons on carousel cards and prototype

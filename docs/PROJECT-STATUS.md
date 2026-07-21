@@ -279,12 +279,21 @@ a path prefix at build time, so this is not just a copy-paste).
   "E-commerce & auctions", "Banking"), not "2018 to 2025" style ranges.
   Full dates still live in each case study's eyebrow + meta block. Don't
   put date ranges back on the tiles.
-- **The Portfolio "How I work" (Method) section is a default-open
-  `Accordion`** now, matching the Designerama WorkList/Process accordions.
+- **The Portfolio "How I work" (Method) section is a `defaultOpen={false}`
+  `Accordion`** — collapsed by default (Kishan clarified he wanted it
+  closed, not open), using the same shared Accordion as the
+  Designerama-side WorkList/Process.
 - **Legacy/earlier-work images link to www.designerama.co.za/visual** (the
-  old portfolio archive), new tab.
+  old portfolio archive), new tab. The GEDA and JoziBond images now use the
+  real source art from `website_old/Projects_Images/` (`5_1.jpg` and
+  `11_3.jpg`). Note `5_5.jpg` was deliberately avoided — it contains a GEDA
+  business card with a real person's name/phone.
 - **Footer copyright is "© 2027 Designerama. Kishan Rama. All rights
   reserved."**
+- **Carousels have NO left/right chevron buttons.** They were briefly added
+  as a drag-bar aid, then removed once the draggable accent bar proved
+  reliable. The bar (plus native trackpad/shift-wheel) is the scroll
+  control. Don't re-add chevrons without being asked.
 
 ## Standing constraints (do not re-litigate without being asked)
 
@@ -304,14 +313,6 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Open / pending
 
-- **GEDA and JoziBond legacy images need updating** (2026-07-21). Kishan
-  shared new versions in chat, but the image files couldn't be found on
-  disk (not in `~/Documents/Designerama/Portfolio/`, Downloads, or session
-  temp). Waiting on the file path from Kishan; current
-  `public/images/work/legacy/geda.jpg` and `jozibond.jpg` unchanged. When
-  the files arrive, drop them in at the same paths (or update the `image`
-  fields in `legacyWork` in `lib/content/work.ts` if names differ) and
-  rebuild.
 - SuperSport case study still lacks real Figma-sourced images (blocked on
   Figma quota as of last check).
 - GOtv Presentation slides — no additional usable Figma node-IDs found beyond
