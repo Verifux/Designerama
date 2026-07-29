@@ -533,7 +533,7 @@ code.inline{font-family:var(--mono);font-size:13px;background:var(--bg3);border:
 <div class="section section-id" id="accordion">
   <div class="sec-eyebrow">Components</div>
   <h2 class="sec-title">Accordion.</h2>
-  <p class="sec-sub">Site-specific pattern (<code class="inline">components/shared/Accordion.tsx</code>) wrapping the Diagnose, How It Works, and Selected Work sections on the Designerama home. A circular chevron toggle sits top-right of the section content; clicking collapses/expands the body via Framer Motion height + opacity animation.</p>
+  <p class="sec-sub">Site-specific pattern (<code class="inline">components/shared/Accordion.tsx</code>) wrapping the How It Works and Selected Work sections on the Designerama home, the Why Diagnosis Matters section, and the Framework section on <code class="inline">/why-verifux</code>. As of the Phase 2 repositioning, Diagnose (01) is a static teaser, not an accordion, it links out to <code class="inline">/why-verifux</code> for the full framework instead of expanding in place. A circular chevron toggle sits top-right of the section content; clicking collapses/expands the body via Framer Motion height + opacity animation.</p>
   <div class="demo">
     <div class="demo-label">Click the chevron to toggle</div>
     <div class="brand-panel dr">
@@ -541,8 +541,8 @@ code.inline{font-family:var(--mono);font-size:13px;background:var(--bg3);border:
         <div class="acc-chevron" onclick="toggleAccDemo()" style="border-color:#333;color:#f2f0ec">
           <svg id="accChevron" width="18" height="18" viewBox="0 0 20 20" fill="none" style="transition:transform .3s"><path d="M4 7l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div style="font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#b3b1ad;margin-bottom:8px">01 / What we diagnose</div>
-        <div style="font-family:'Big Shoulders Display',sans-serif;font-size:24px;font-weight:700;color:#f2f0ec;max-width:70%">Three experience layers, 54 checkpoints.</div>
+        <div style="font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#b3b1ad;margin-bottom:8px">03 / The framework</div>
+        <div style="font-family:'Big Shoulders Display',sans-serif;font-size:24px;font-weight:700;color:#f2f0ec;max-width:70%">Three questions, nine pillars, 54 checkpoints.</div>
         <div id="accBody" style="overflow:hidden;transition:max-height .4s cubic-bezier(0.4,0,0.2,1),opacity .4s;max-height:200px;opacity:1;margin-top:16px">
           <p style="font-size:14px;color:#b3b1ad;line-height:1.7;max-width:60ch">Verifux runs a 54-checkpoint audit across 9 pillars, grouped into the MX / BX / AIX triad.</p>
         </div>
@@ -554,11 +554,14 @@ code.inline{font-family:var(--mono);font-size:13px;background:var(--bg3);border:
     <table class="bp-table">
       <thead><tr><th>Section</th><th>Default</th></tr></thead>
       <tbody>
-        <tr><td>01 Diagnose</td><td>Closed</td></tr>
-        <tr><td>02 How it works</td><td>Closed</td></tr>
-        <tr><td>Why diagnosis matters</td><td>Open</td></tr>
-        <tr><td>03 Selected work</td><td>Open</td></tr>
-        <tr><td>04 Start here (Cta)</td><td>No accordion, always visible</td></tr>
+        <tr><td>01 Diagnose (home)</td><td>No accordion, static teaser linking to /why-verifux</td></tr>
+        <tr><td>02 How it works (home)</td><td>Closed</td></tr>
+        <tr><td>03 Why diagnosis matters (home)</td><td>Closed</td></tr>
+        <tr><td>04 Selected work (home)</td><td>Open</td></tr>
+        <tr><td>05 About (home)</td><td>No accordion, always visible</td></tr>
+        <tr><td>06 Start here / Cta (home)</td><td>No accordion, always visible</td></tr>
+        <tr><td>01 The problem (/why-verifux)</td><td>Open</td></tr>
+        <tr><td>02-06 remaining sections (/why-verifux)</td><td>Closed, except 03 The framework which is the only section with expandable content (the four pillar cards)</td></tr>
       </tbody>
     </table>
   </div>
@@ -697,7 +700,7 @@ code.inline{font-family:var(--mono);font-size:13px;background:var(--bg3);border:
 
   <div class="demo-block" style="background:var(--docred-soft);border:1px solid #f3c9d0;margin-top:16px">
     <div class="demo-label" style="margin-bottom:8px">Where this is used on the Designerama site</div>
-    <p style="font-size:13.5px;color:var(--g1);line-height:1.65">The Diagnose section (01) presents these as four checkpoint cards. The Verifux tile in Selected Work and the Verifux Spotlight on Portfolio (<code class="inline">components/portfolio/VerifuxSpotlight.tsx</code>) both reference the same framework language. If Verifux's real pillar/checkpoint counts ever change, re-verify against <code class="inline">/Users/kishanrama/Documents/Verifux/heuristics.js</code> before updating copy here — don't propagate stale numbers.</p>
+    <p style="font-size:13.5px;color:var(--g1);line-height:1.65">The Framework section (03) on <code class="inline">/why-verifux</code> presents these as four checkpoint cards, single-sourced from <code class="inline">lib/content/verifux.ts</code>'s <code class="inline">pillars</code> export. The homepage Diagnose section (01) is a static teaser that links there rather than duplicating the cards. The Verifux tile in Selected Work and the Verifux Spotlight on Portfolio (<code class="inline">components/portfolio/VerifuxSpotlight.tsx</code>) both reference the same framework language. If Verifux's real pillar/checkpoint counts ever change, re-verify against <code class="inline">/Users/kishanrama/Documents/Verifux/heuristics.js</code> before updating copy here — don't propagate stale numbers.</p>
   </div>
 </div>
 

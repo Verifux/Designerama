@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: BASE_URL, lastModified: new Date(), priority: 1 },
+    { url: `${BASE_URL}/services`, lastModified: new Date(), priority: 0.9 },
+    { url: `${BASE_URL}/why-verifux`, lastModified: new Date(), priority: 0.9 },
     { url: `${BASE_URL}/portfolio`, lastModified: new Date(), priority: 0.9 },
     ...caseStudyRoutes,
   ];

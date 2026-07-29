@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-07-29 (Phase 1 of strategic repositioning: homepage copy, numbering, nav/footer fixes)_
+_Last updated: 2026-07-29, later (Phase 2 of strategic repositioning: /services, /why-verifux, case-study depth schema, trust-strip fix)_
 
 ## Strategic repositioning (in progress)
 
@@ -20,14 +20,17 @@ strategy, and a phased roadmap) lives at
   footer copyright year fixed and made self-correcting, a dead anchor fixed
   on Portfolio's "Approach" nav link, and nav/footer internal links made
   path-absolute (`/#work` not `#work`) as prep for the next phase.
-- **Phase 2 (portfolio, case studies, trust, services): not started.** Will
-  add a `/services` route, an internal Verifux explainer route (path still
-  to be decided, there's a real risk of colliding with whatever currently
-  serves the live `/verifux` path, see the plan document), optional
-  additive depth fields on `CaseStudyData` (constraints, alternatives
-  considered, research method, lessons learned), and a fix for the
-  Standard Bank / Telkom trust-strip logos that currently have no case
-  study behind either.
+- **Phase 2 (portfolio, case studies, trust, services): mostly done**,
+  2026-07-29. Shipped: `/services` (five transformation-framed tiers, no
+  pricing yet), an internal Verifux explainer at `/why-verifux` (not
+  `/verifux`, see DECISIONS.md for the deploy-collision reasoning) with the
+  framework facts single-sourced from `lib/content/verifux.ts`, the
+  homepage Diagnose section trimmed to a teaser linking there, optional
+  additive depth fields on `CaseStudyData`, and the Standard Bank / Telkom
+  trust-strip logos removed (Kishan's explicit call). **Still open**: real
+  depth content (constraints, alternatives considered, research method,
+  lessons learned) for the SuperSport case study, waiting on Kishan to
+  walk through the real detail, nothing invented in the meantime.
 - **Phases 3 to 4: not started.** Phase 4 (a scoped-down "ecosystem" layer)
   is deliberately narrower than the original brief's full list, see the
   plan document's Strategic Risks section for why.
@@ -104,6 +107,22 @@ a path prefix at build time, so this is not just a copy-paste).
   render via `next/link` in `Nav.tsx` and `Footer.tsx`. This is prep for a
   second Designerama route (Phase 2's `/services`), don't revert to bare
   hash hrefs on those two components.
+- **Designerama now has three routes**: `/` (home), `/services`, and
+  `/why-verifux`, added 2026-07-29. All three share the same `Nav`/`Footer`.
+  The nav's "Verifux" link points to `/why-verifux` (internal), not the
+  external product directly, the external product is reachable via that
+  page's own closing CTA. "Blog" was dropped from the nav/footer, not
+  relabelled, don't re-add it without confirming the content is real and
+  diagnosis-relevant.
+- **Verifux's framework facts (MX/BX/AIX, 54 checkpoints, 9 pillars, DX
+  separate/optional) are single-sourced in `lib/content/verifux.ts`'s
+  `pillars` export**, changed 2026-07-29. The homepage's Diagnose section no
+  longer has its own copy, it's a static teaser linking to `/why-verifux`.
+  If editing the framework facts, edit them in exactly one place.
+- **`CaseStudyData` has four optional depth fields** (`constraints`,
+  `alternativesConsidered`, `researchMethod`, `lessonsLearned`), added
+  2026-07-29, all undefined on the six existing case studies. Never fill
+  these with invented content, only real recollection confirmed by Kishan.
 
 - **Verifux's real framework** is the MX / BX / AIX triad — 54 checkpoints
   across 9 pillars — plus a separate, optional DX (design excellence) craft

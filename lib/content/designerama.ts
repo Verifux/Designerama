@@ -7,9 +7,9 @@ export const meta = {
 export const nav = {
   links: [
     { label: "Work", href: "/#work" },
+    { label: "Services", href: "/services" },
     { label: "About", href: "/#about" },
-    { label: "Blog", href: "https://www.designerama.co.za/blog" },
-    { label: "Verifux", href: "https://www.designerama.co.za/verifux" },
+    { label: "Verifux", href: "/why-verifux" },
   ],
   portfolioLink: { label: "Portfolio", href: "/portfolio" },
   cta: { label: "Get in touch", href: "/#cta" },
@@ -42,32 +42,7 @@ export const diagnose = {
   eyebrow: "01 / What we diagnose",
   heading: "Three experience layers, 54 checkpoints, one structured audit.",
   body: "Most audits stop at whether a button works. Verifux also catches whether a product persuades instead of manipulating, and whether AI agents can even find it, both routinely missed by a standard heuristics review. It runs a 54-checkpoint audit across 9 pillars, grouped into the MX / BX / AIX triad: can people use it, will people act, can AI use it. A separate DX craft score benchmarks the visual design and content voice against design-award criteria.",
-  checkpoints: [
-    {
-      num: "01",
-      title: "MX, human experience",
-      tag: "Can people use it? · 7 pillars",
-      body: "The usability layer. Visibility and feedback, control and freedom, consistency and standards, error prevention, cognitive load, accessibility and conversion. Grounded in Nielsen's heuristics and WCAG.",
-    },
-    {
-      num: "02",
-      title: "BX, behavioural experience",
-      tag: "Will people act? · 1 pillar",
-      body: "Persuasion, not manipulation. Nudge architecture, anchoring, social proof, loss aversion, dark-pattern detection. The behavioural science that decides whether an interface converts ethically or predatorily.",
-    },
-    {
-      num: "03",
-      title: "AIX, AI experience",
-      tag: "Can AI use it? · 1 pillar",
-      body: "How the site reads to AI agents, LLM crawlers and answer engines. Structured data, semantic HTML, llms.txt, agent-actionable interfaces. The layer that decides whether AI surfaces recommend you or skip you.",
-    },
-    {
-      num: "04",
-      title: "DX, design excellence",
-      tag: "Optional craft score · 0 to 100",
-      body: "A separate, holistic first-impression score benchmarked against design-award criteria. Hierarchy, typography, colour, whitespace, originality and content voice. Never affects the 54-checkpoint score.",
-    },
-  ],
+  link: { label: "Read the full framework", href: "/why-verifux" },
 };
 
 export const process = {
@@ -157,9 +132,9 @@ export const cta = {
 export const footer = {
   links: [
     { label: "Work", href: "/#work" },
+    { label: "Services", href: "/services" },
     { label: "About", href: "/#about" },
-    { label: "Blog", href: "https://www.designerama.co.za/blog" },
-    { label: "Verifux", href: "https://www.designerama.co.za/verifux" },
+    { label: "Verifux", href: "/why-verifux" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Contact", href: "mailto:hello@designerama.co.za" },
   ],

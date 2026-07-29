@@ -18,7 +18,7 @@ export const hero = {
 
 export const trust = {
   label: "Design work trusted by",
-  logos: ["SuperSport", "DStv / MultiChoice", "FNB", "bidorbuy", "Hollard", "Coca-Cola", "Standard Bank", "Telkom"],
+  logos: ["SuperSport", "DStv / MultiChoice", "FNB", "bidorbuy", "Hollard", "Coca-Cola"],
 };
 
 export const marqueeItems = ["UX Strategy", "Product Design", "Verifux", "26 Years", "26-30M Users", "Broadcast to Product"];

@@ -4,6 +4,42 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-07-29, later (Phase 2 of strategic repositioning: /services, /why-verifux, case-study depth schema, trust-strip fix)
+
+- **New `/services` route** (`app/services/page.tsx`, `lib/content/services.ts`,
+  `components/designerama/{ServicesHero,ServicesList,ServicesCta}.tsx`).
+  Five transformation-framed engagement tiers (Systems Diagnosis,
+  Diagnosis-Led Redesign, AI Product Strategy, Fractional Product Direction,
+  MVP Validation), each naming who it's for and what changes, no deliverable
+  lists. No pricing shown yet.
+- **New internal `/why-verifux` route**, a Problem → Diagnosis → Framework →
+  Method → Evidence → Solution explainer (`app/why-verifux/page.tsx`,
+  `lib/content/verifux.ts`, `components/designerama/{VerifuxHero,VerifuxSections,VerifuxCta}.tsx`),
+  ending in an external CTA to the live product. Deliberately not at
+  `/verifux`, see DECISIONS.md for the deploy-collision reasoning.
+- **Verifux's framework facts single-sourced.** `lib/content/verifux.ts`'s
+  `pillars` export is now the only place MX/BX/AIX/DX checkpoint copy is
+  defined; the homepage no longer duplicates it.
+- **Homepage "What we diagnose" trimmed from an accordion with four
+  checkpoint cards to a static teaser** with a "Read the full framework"
+  link to `/why-verifux`. `CheckpointStrip.tsx` simplified accordingly.
+- **Fixed a second dead-link bug**: the Designerama nav logo's home link was
+  a hardcoded `#top` anchor, broken from any page but `/`. Now `next/link`
+  to `/`.
+- **"Blog" removed from Designerama's primary nav and footer**, "Services"
+  and the internal Verifux link added in its place.
+- **`CaseStudyData` extended with optional depth fields**: `constraints`,
+  `alternativesConsidered`, `researchMethod`, `lessonsLearned`
+  (`lib/content/work.ts`), rendered via a new guarded, Accordion-wrapped
+  block in `components/portfolio/CaseStudy.tsx`. Renders nothing on all six
+  existing case studies until real content is supplied per study.
+- **Standard Bank and Telkom removed from the portfolio trust strip**
+  (`lib/content/portfolio.ts`), neither had a case study behind it.
+- **`app/sitemap.ts` updated** with `/services` and `/why-verifux`.
+- **`designerama-design-system.html` corrected**: the accordion default-state
+  table and framework-facts explainer were stale even before this session
+  and are now current.
+
 ## 2026-07-29 (Phase 1 of strategic repositioning: homepage copy, numbering, nav/footer fixes)
 
 - **Homepage "What we diagnose" section rewritten to lead with consequence

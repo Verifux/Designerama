@@ -4,6 +4,105 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Phase 2 of the strategic repositioning: /services, an internal Verifux explainer, case-study depth schema, trust-strip fix (2026-07-29, later)
+
+Continues the roadmap in
+`~/.claude/plans/https-github-com-verifux-designerama-git-snazzy-origami.md`.
+Two items in this phase needed Kishan's real judgment rather than invented
+content, and were resolved via direct questions before building: the
+trust-strip fix (remove Standard Bank and Telkom rather than fabricate
+credential detail for either) and the case-study depth fields (ship the
+schema now, fill real content per study later, rather than invent trade-offs
+that were never confirmed).
+
+**The `/verifux` path was rejected for the internal explainer after reading
+`docs/DEPLOYMENT.md`, not guessed around.** The plan flagged a real risk:
+this repo's deploy process is "overwrite the entire live root with the new
+`out/` contents every time" (see DEPLOYMENT.md), and `https://www.designerama.co.za/verifux`
+is a path on that same root, not a subdomain, currently served by a
+separately deployed artifact (`verifux-app.html` per Verifux's own
+engineering log). Adding `app/verifux/page.tsx` here would risk the next
+deploy silently overwriting the live product's own page at that path. Used
+`/why-verifux` instead, a distinct path, zero collision risk, and arguably a
+better nav label anyway ("Verifux" the nav link now points to the *story*,
+the external product stays reachable via that page's own closing CTA).
+
+**Verifux's framework facts (MX/BX/AIX, 54 checkpoints, 9 pillars, DX
+separate/optional) are now single-sourced in `lib/content/verifux.ts`'s
+`pillars` export, not duplicated.** Before this change they were typed out
+in full at least seven separate times across the homepage and portfolio
+(Risk 5 in the plan document). The homepage's Diagnose section
+(`lib/content/designerama.ts`) no longer carries its own copy of the four
+checkpoint cards at all — it dropped from an accordion with four cards down
+to a plain teaser (eyebrow, heading, one paragraph, a "Read the full
+framework" link to `/why-verifux`). `components/designerama/CheckpointStrip.tsx`
+was simplified accordingly, it no longer needs `Accordion`, `GradientHoverCard`,
+or `RevealGroup`/`RevealItem`, since there's nothing left to expand in place.
+The full four-card breakdown now lives in exactly one place, the Framework
+section of `/why-verifux`, which imports `pillars` from `verifux.ts` directly
+rather than redefining them.
+
+**The internal Verifux explainer uses the Accordion pattern only where
+there's real content to hide.** An earlier draft wrapped every section
+(Problem, Diagnosis, Framework, Method, Evidence, Solution) in an
+`Accordion`, matching the homepage's established pattern. On review this was
+wrong for five of the six: their body copy already lives in full in the
+`header` prop (always visible), so the accordion's collapsible `children`
+would have been empty, a chevron that toggles nothing. Only "The framework"
+(section 03) has real expandable content, the four pillar cards, so only
+that section uses `Accordion`; the other five render as plain static
+sections. `components/designerama/VerifuxSections.tsx` branches on a
+`showPillars` flag per section rather than accordion-wrapping everything
+uniformly.
+
+**A second, separate dead-link bug was found and fixed while touching
+`Nav.tsx` for the Verifux link change.** The Designerama logo's "home" link
+was a hardcoded `<a href="#top">`, not sourced from content and not using
+`next/link`, same class of bug as the Phase 1 nav-href fix, just missed
+because it wasn't in `lib/content/designerama.ts` to grep for. On any page
+other than `/`, this would silently fail to navigate anywhere (`#top`
+doesn't exist on `/services` or `/why-verifux`, and there's no path prefix
+to fall back to `/`). Fixed to `<Link href="/">`, works correctly from every
+route now.
+
+**"Blog" was dropped from the primary nav, not just relabelled.** Per the
+plan's Information Architecture section (Risk in Section 4): the nav
+shouldn't carry prime real estate for a destination whose content quality
+and diagnosis-relevance haven't been confirmed. It's not removed from the
+site, just no longer in `nav.links`/`footer.links` for Designerama. Revisit
+if/when the blog's content is confirmed to serve the diagnosis-first
+narrative.
+
+**`CaseStudyData`'s new depth fields (`constraints`, `alternativesConsidered`,
+`researchMethod`, `lessonsLearned`) are fully optional and render nothing on
+any of the six existing case studies.** This was a hard constraint, not a
+preference: the project's standing rule against fabricating case-study facts
+means these fields can only ever be filled from Kishan's real recollection,
+never inferred or invented to make the schema look used. `CaseStudy.tsx`
+guards the entire render block on whether any of the four fields are
+present, so shipping the schema ahead of the content is genuinely
+zero-risk, nothing changes for the reader of an existing case study until a
+field is actually set.
+
+**Standard Bank and Telkom removed from the portfolio trust strip, not
+given placeholder credential cards.** Kishan's explicit call, asked directly
+rather than guessed, given the standing rule against fabricating facts and
+the plan's own Risk 7 (an unbacked logo is a credibility liability for a
+business whose whole pitch is evidence over assertion, not a neutral
+placeholder).
+
+**`designerama-design-system.html` updated to match**, its accordion
+section had gone stale even before this session (it still said "Why
+diagnosis matters: Open" when that was flipped closed back on 2026-07-17,
+see the entry below), and was now further out of date from the Diagnose
+teaser change and the new `/why-verifux` sections. Corrected the accordion
+wrapping description, the default-open-state table (now covers both the
+homepage and `/why-verifux`), and the framework-facts explainer paragraph.
+
+Verified with `npx tsc --noEmit` (clean), a full `STATIC_EXPORT=true npm run
+build` (all 15 routes, including the two new ones), and direct checks of
+the rendered `/`, `/services`, `/why-verifux`, and `/portfolio` pages.
+
 ## Phase 1 of the strategic repositioning: diagnosis-first sequencing applied to the site's own copy (2026-07-29)
 
 Kishan asked for a strategic planning exercise on evolving Designerama from a

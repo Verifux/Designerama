@@ -19,9 +19,9 @@ export function Nav() {
     <>
       <nav className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/80 backdrop-blur-md">
         <div className="flex items-center justify-between px-6 py-4 sm:px-8">
-          <a href="#top" className="flex items-center gap-4" aria-label="Designerama home" onClick={() => setOpen(false)}>
+          <Link href="/" className="flex items-center gap-4" aria-label="Designerama home" onClick={() => setOpen(false)}>
             <Logo height={45} priority />
-          </a>
+          </Link>
 
           <ul className="hidden items-center gap-8 md:flex">
             {nav.links.map((l) => {

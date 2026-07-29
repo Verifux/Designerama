@@ -3,6 +3,7 @@ import Image from "next/image";
 import { RevealOnScroll, RevealGroup, RevealItem } from "@/components/shared/RevealOnScroll";
 import { ImageCarousel } from "@/components/shared/ImageCarousel";
 import { PrototypeViewer } from "@/components/shared/PrototypeViewer";
+import { Accordion } from "@/components/shared/Accordion";
 import type { CaseStudyData, MediaImage, MediaMode, SecondaryMedia } from "@/lib/content/work";
 import { withBasePath } from "@/lib/basePath";
 
@@ -51,6 +52,21 @@ function Media({
   if (mediaMode === "carousel") return <ImageCarousel images={images} cropRatio={cropRatio} />;
   if (mediaMode === "prototype") return <PrototypeViewer image={images[0]} orientation={orientation} />;
   return <ImageGallery images={images} />;
+}
+
+function Supplement({ heading, body }: { heading: string; body: string[] }) {
+  return (
+    <section className="max-w-2xl py-10 first:pt-0">
+      <RevealOnScroll>
+        <h3 className="text-[1.15rem] font-bold tracking-[-0.01em]">{heading}</h3>
+        <div className="mt-4 space-y-4 text-ink-muted">
+          {body.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      </RevealOnScroll>
+    </section>
+  );
 }
 
 function SecondaryMediaBlock({ secondary }: { secondary: SecondaryMedia }) {
@@ -146,6 +162,24 @@ export function CaseStudy({ data, next }: { data: CaseStudyData; next?: { label:
             </div>
           </RevealOnScroll>
         </section>
+
+        {(data.constraints || data.alternativesConsidered || data.researchMethod || data.lessonsLearned) && (
+          <section className="border-b border-line py-16">
+            <Accordion
+              defaultOpen={false}
+              header={<p className="eyebrow">Process notes</p>}
+            >
+              <div className="mt-8">
+                {data.constraints && <Supplement {...data.constraints} />}
+                {data.alternativesConsidered && <Supplement {...data.alternativesConsidered} />}
+                {data.researchMethod && <Supplement {...data.researchMethod} />}
+                {data.lessonsLearned && (
+                  <p className="max-w-2xl py-10 first:pt-0 font-mono text-[0.9rem] text-ink-muted">{data.lessonsLearned}</p>
+                )}
+              </div>
+            </Accordion>
+          </section>
+        )}
 
         {next && (
           <RevealOnScroll className="py-20 text-center">

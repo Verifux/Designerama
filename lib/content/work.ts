@@ -29,6 +29,13 @@ export type CaseStudyData = {
   approachCropRatio?: [number, number];
   approachSecondary?: SecondaryMedia;
   outcome: { heading: string; body: string[] };
+  // Optional, additive depth fields. Undefined on most case studies until
+  // real recollection is supplied per study, never fabricated. See
+  // docs/DECISIONS.md's Phase 2 entry for the reasoning.
+  constraints?: { heading: string; body: string[] };
+  alternativesConsidered?: { heading: string; body: string[] };
+  researchMethod?: { heading: string; body: string[] };
+  lessonsLearned?: string;
 };
 
 export type WorkItem = {
