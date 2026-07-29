@@ -13,10 +13,13 @@ import { About } from "@/components/designerama/About";
 import { Cta } from "@/components/designerama/Cta";
 import { Footer } from "@/components/designerama/Footer";
 import { meta } from "@/lib/content/designerama";
+import { OG_DEFAULTS } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
+  alternates: { canonical: "/" },
+  openGraph: { ...OG_DEFAULTS, title: meta.title, description: meta.description, url: "/" },
 };
 
 export default function HomePage() {

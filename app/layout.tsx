@@ -3,6 +3,8 @@ import { Plus_Jakarta_Sans, Big_Shoulders_Display, IBM_Plex_Sans, IBM_Plex_Mono 
 import { CursorProvider } from "@/components/shared/CursorProvider";
 import { CustomCursor } from "@/components/shared/CustomCursor";
 import { GoogleAnalytics } from "@/components/shared/GoogleAnalytics";
+import { StructuredData } from "@/components/shared/StructuredData";
+import { OG_DEFAULTS } from "@/lib/metadata";
 import "./globals.css";
 
 const displayFont = Plus_Jakarta_Sans({
@@ -34,9 +36,12 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://designerama.co.za"),
   title: "Kishan Rama & Designerama · Product Design, UX Strategy & Consulting",
   description:
     "Kishan Rama's portfolio for recruiters and hiring teams, and Designerama's UX consulting and Verifux for businesses.",
+  openGraph: OG_DEFAULTS,
+  twitter: { card: "summary" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -47,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${displayFont.variable} ${bigShoulders.variable} ${plexSans.variable} ${plexMono.variable}`}
     >
       <body>
+        <StructuredData />
         <GoogleAnalytics />
         <CursorProvider>
           {children}

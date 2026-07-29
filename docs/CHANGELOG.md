@@ -4,6 +4,32 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-07-29, later still (Phase 3 of strategic repositioning: AIX self-application, structured data, OG, a11y)
+
+- **Added `public/llms.txt`** guiding LLM crawlers to canonical facts
+  about Designerama, Kishan, and Verifux. Real emerging standard; Verifux's
+  own AIX pillar checks for it.
+- **Added JSON-LD structured data** (`components/shared/StructuredData.tsx`,
+  wired into `app/layout.tsx`): one `@graph` with Organization, Person,
+  WebSite. All facts grounded in existing content.
+- **Set `metadataBase` and site-wide Open Graph + Twitter defaults** in
+  `app/layout.tsx`. Every main route now emits `og:title`,
+  `og:description`, `og:type`, `og:site_name`, `og:locale`, `og:url`, plus
+  `twitter:card`, `twitter:title`, `twitter:description`, and a canonical
+  URL. Case studies get `og:type=article`.
+- **Added `lib/metadata.ts`** with an `OG_DEFAULTS` constant, spread into
+  each page's `openGraph` override. Necessary because Next 14 replaces the
+  `openGraph` field wholesale on merge rather than merging its fields.
+- **`Accordion` a11y improvements**: added `aria-controls` linking button
+  to content (using React `useId()`), `role="region"` on content,
+  `aria-hidden` on the decorative chevron, and a configurable `label` prop
+  for screen reader announcement. New Phase 2 callers (VerifuxSections,
+  CaseStudy Process notes) pass meaningful labels.
+- **No visible change to the site's motion, design system, or layout.**
+  Phase 3 was scoped to AIX + a11y after finding no defects that warranted
+  general polish; broad "polish everything" is the phase where scope
+  creep lives.
+
 ## 2026-07-29, later (Phase 2 of strategic repositioning: /services, /why-verifux, case-study depth schema, trust-strip fix)
 
 - **New `/services` route** (`app/services/page.tsx`, `lib/content/services.ts`,

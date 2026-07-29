@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-07-29, later (Phase 2 of strategic repositioning: /services, /why-verifux, case-study depth schema, trust-strip fix)_
+_Last updated: 2026-07-29, later still (Phase 3 of strategic repositioning: AIX self-application, structured data, OG, a11y)_
 
 ## Strategic repositioning (in progress)
 
@@ -31,9 +31,18 @@ strategy, and a phased roadmap) lives at
   depth content (constraints, alternatives considered, research method,
   lessons learned) for the SuperSport case study, waiting on Kishan to
   walk through the real detail, nothing invented in the meantime.
-- **Phases 3 to 4: not started.** Phase 4 (a scoped-down "ecosystem" layer)
-  is deliberately narrower than the original brief's full list, see the
-  plan document's Strategic Risks section for why.
+- **Phase 3 (AIX self-application + a11y): done**, 2026-07-29. Reframed
+  from the plan's original "motion, design system, performance, SEO,
+  accessibility" scope, which was too broad, to a narrower and more
+  ownable "apply Verifux's own AIX pillar to Designerama's own site."
+  Shipped: `public/llms.txt`, site-wide JSON-LD (Organization + Person +
+  WebSite), Open Graph + Twitter + canonical URLs on every main route,
+  `Accordion` `aria-controls` + `role=region` improvements. Deliberately
+  skipped generic motion/design-system polish, no defects were observed
+  and open-ended polish invites scope creep.
+- **Phase 4: not started.** Deliberately narrower than the original
+  brief's full list (Labs / Insights / Newsletter / Courses / Templates /
+  Community), see the plan document's Strategic Risks section.
 
 ## What this is
 
@@ -123,6 +132,25 @@ a path prefix at build time, so this is not just a copy-paste).
   `alternativesConsidered`, `researchMethod`, `lessonsLearned`), added
   2026-07-29, all undefined on the six existing case studies. Never fill
   these with invented content, only real recollection confirmed by Kishan.
+- **`public/llms.txt` is the canonical LLM-crawler summary** of the site,
+  added 2026-07-29. If Verifux framework facts, Kishan's bio, or any core
+  page changes, update this file too. Verifux's own AIX pillar checks
+  sites for exactly this file.
+- **JSON-LD structured data lives in `components/shared/StructuredData.tsx`
+  and is rendered site-wide via `app/layout.tsx`**, added 2026-07-29. One
+  `@graph` with Organization + Person + WebSite. Facts grounded in
+  existing content; if the Organization/Person facts change (email, URL,
+  logo path), edit this file. Don't add a Product/SoftwareApplication
+  entity for Verifux here, that structured data belongs on Verifux's own
+  domain, not on Designerama's marketing site.
+- **`lib/metadata.ts`'s `OG_DEFAULTS` is site-wide OpenGraph baseline**
+  (type/siteName/locale). Every page's `openGraph` override must spread
+  `...OG_DEFAULTS` first, because Next 14 replaces the `openGraph` field
+  wholesale on merge rather than merging its constituent fields.
+- **`Accordion` has `aria-controls`, `role="region"`, and a `label` prop**,
+  added 2026-07-29. If adding a new Accordion caller, pass a meaningful
+  `label` describing what the button toggles; leaving the default is
+  acceptable but not ideal.
 
 - **Verifux's real framework** is the MX / BX / AIX triad — 54 checkpoints
   across 9 pillars — plus a separate, optional DX (design excellence) craft

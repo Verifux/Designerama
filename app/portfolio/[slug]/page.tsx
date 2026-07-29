@@ -6,6 +6,7 @@ import { Nav } from "@/components/portfolio/Nav";
 import { CaseStudy } from "@/components/portfolio/CaseStudy";
 import { Footer } from "@/components/portfolio/Footer";
 import { workItems, getWorkItem, getNextCaseStudy } from "@/lib/content/work";
+import { OG_DEFAULTS } from "@/lib/metadata";
 
 export function generateStaticParams() {
   return workItems.filter((w) => w.caseStudy).map((w) => ({ slug: w.slug }));
@@ -14,9 +15,18 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const item = getWorkItem(params.slug);
   if (!item?.caseStudy) return {};
+  const canonical = `/portfolio/${params.slug}`;
   return {
     title: item.caseStudy.title,
     description: item.caseStudy.metaDescription,
+    alternates: { canonical },
+    openGraph: {
+      ...OG_DEFAULTS,
+      type: "article",
+      title: item.caseStudy.title,
+      description: item.caseStudy.metaDescription,
+      url: canonical,
+    },
   };
 }
 

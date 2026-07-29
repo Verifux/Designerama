@@ -22,6 +22,7 @@ export function VerifuxSections() {
             {section.showPillars ? (
               <Accordion
                 defaultOpen={section.defaultOpen}
+                label={`Toggle ${section.heading}`}
                 header={<SectionHeader eyebrow={section.eyebrow} heading={section.heading} body={section.body} padRight />}
               >
                 <RevealGroup amount={0.12} className="mt-8">

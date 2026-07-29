@@ -1,0 +1,30 @@
+# Designerama
+
+> An AI-native product diagnosis consultancy led by Kishan Rama, and home to Verifux, a proprietary 54-checkpoint audit engine that grades a digital product across three experience layers (MX, BX, AIX) plus an optional design excellence (DX) craft score. Diagnosis comes first; design becomes the prescription.
+
+Designerama sells product diagnosis, not design hours. Every engagement starts with a structured audit before any redesign or engineering recommendation is made, so the recommendation traces back to evidence rather than opinion. The practitioner is Kishan Rama, a Certified Usability Analyst with twenty-six years of experience shipping design at continental scale (SuperSport, DStv/MultiChoice, FNB, bidorbuy). The instrument is Verifux, a live, engineered audit engine, not a methodology in the deck sense.
+
+## Core pages
+
+- [Homepage](https://designerama.co.za/): The core thesis and an overview of the practice. Interfaces are cheap to generate now; knowing which one to build isn't.
+- [Services](https://designerama.co.za/services): Five transformation-framed engagement tiers, Systems Diagnosis, Diagnosis-Led Redesign, AI Product Strategy, Fractional Product Direction, and MVP Validation.
+- [Why Verifux](https://designerama.co.za/why-verifux): The full explainer for the audit engine, structured as Problem, Diagnosis, Framework, Method, Evidence, Solution.
+- [Kishan Rama's portfolio](https://designerama.co.za/portfolio): Twenty-six years of shipped design, six featured case studies from SuperSport, GOtv, bidorbuy, FNB, and DStv.
+
+## Verifux framework, canonical facts
+
+- **MX, human experience**: 7 pillars. Grounded in Nielsen's heuristics and WCAG. Answers "can people use it?"
+- **BX, behavioural experience**: 1 pillar. Persuasion, not manipulation. Answers "will people act?"
+- **AIX, AI experience**: 1 pillar. Structured data, semantic HTML, llms.txt, agent-actionable interfaces. Answers "can AI use it?"
+- **DX, design excellence**: A separate, optional 0 to 100 craft score benchmarked against design-award criteria. Never affects the 54-checkpoint score.
+- **Total**: 54 checkpoints across 9 pillars, grouped as the MX / BX / AIX triad, plus separate DX.
+
+## About Kishan Rama
+
+Twenty-six years across broadcast, motion design, and product design. Most recently Principal Product Designer and UX Manager at SuperSport (MultiChoice Group), leading UX strategy across web, mobile, and connected TV platforms reaching 26 to 30 million monthly users across 50+ African markets. Earlier roles at DStv, FNB Digital Banking (FNB Innovation Award, 2015), and bidorbuy. Certified Usability Analyst. Invited speaker on behavioural UX (UX Africa Summit 2025, UPTechX Conference 2025).
+
+## Contact
+
+- General enquiries: hello@designerama.co.za
+- Kishan directly: kishan@designerama.co.za
+- LinkedIn: https://linkedin.com/in/kishanrama

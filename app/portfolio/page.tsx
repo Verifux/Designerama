@@ -14,11 +14,17 @@ import { LegacyWork } from "@/components/portfolio/LegacyWork";
 import { Philosophy } from "@/components/portfolio/Philosophy";
 import { Cta } from "@/components/portfolio/Cta";
 import { Footer } from "@/components/portfolio/Footer";
+import { OG_DEFAULTS } from "@/lib/metadata";
+
+const PORTFOLIO_TITLE = "Kishan Rama · Principal Product Designer & UX Strategist";
+const PORTFOLIO_DESCRIPTION =
+  "Principal Product Designer and UX Strategist. 26 years, 26-30 million monthly users reached. Open to senior roles, contract work and consulting.";
 
 export const metadata: Metadata = {
-  title: "Kishan Rama · Principal Product Designer & UX Strategist",
-  description:
-    "Principal Product Designer and UX Strategist. 26 years, 26-30 million monthly users reached. Open to senior roles, contract work and consulting.",
+  title: PORTFOLIO_TITLE,
+  description: PORTFOLIO_DESCRIPTION,
+  alternates: { canonical: "/portfolio" },
+  openGraph: { ...OG_DEFAULTS, title: PORTFOLIO_TITLE, description: PORTFOLIO_DESCRIPTION, url: "/portfolio" },
 };
 
 export default function PortfolioPage() {

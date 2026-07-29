@@ -8,10 +8,13 @@ import { ServicesList } from "@/components/designerama/ServicesList";
 import { ServicesCta } from "@/components/designerama/ServicesCta";
 import { Footer } from "@/components/designerama/Footer";
 import { meta } from "@/lib/content/services";
+import { OG_DEFAULTS } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
+  alternates: { canonical: "/services" },
+  openGraph: { ...OG_DEFAULTS, title: meta.title, description: meta.description, url: "/services" },
 };
 
 export default function ServicesPage() {

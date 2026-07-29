@@ -4,6 +4,81 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Phase 3 of the strategic repositioning: applying Verifux's AIX discipline to our own site (2026-07-29, later still)
+
+Continues the roadmap in
+`~/.claude/plans/https-github-com-verifux-designerama-git-snazzy-origami.md`.
+Phase 3 in the plan was described as "motion, design system, performance,
+SEO, accessibility polish" but that framing was too broad; the on-brand
+version of it is much narrower and specifically ownable: **apply Verifux's
+own AIX pillar to Designerama's own site**. If our product audits whether
+other people's sites are legible to AI agents and answer engines, ours had
+better be exemplary on that axis. General motion/design-system polish was
+deliberately skipped, nothing was observed as broken, and open-ended
+"polish" is the phase where scope creep lives.
+
+Also chose to skip pre-existing routes for the Accordion label rework, and
+skip designing an OG image asset from scratch. Both would have been
+scope-creep dressed as thoroughness. The OG image in particular, inventing
+a designed card just to look complete would have been the exact "make it
+pretty without evidence" pattern the taste-arbitrage discipline explicitly
+warns against; fallbacks to the favicon are acceptable until a real,
+designed card exists.
+
+**Added `public/llms.txt`.** This is a real, emerging standard for guiding
+LLM crawlers and AI answer engines; Verifux's own AIX pillar explicitly
+checks for it. Its absence would have been embarrassing for a business
+whose whole pitch is "we audit for exactly this." Contains a plain-English
+summary of what Designerama sells, canonical Verifux framework facts
+(MX/BX/AIX/DX, 54 checkpoints, 9 pillars), the practitioner's background,
+and direct links to the core pages and contact info.
+
+**Added JSON-LD structured data** (`components/shared/StructuredData.tsx`,
+rendered once site-wide via `app/layout.tsx`). One `@graph` with three
+entities: Organization (Designerama), Person (Kishan Rama), WebSite. Every
+fact grounded in the site's own content files, no invention. Verifux
+itself is deliberately not included as a separate Product/SoftwareApplication
+entity, that page belongs on Verifux's own domain, not here.
+
+**Set metadataBase and site-wide OpenGraph/Twitter defaults in
+`app/layout.tsx`**, added `alternates.canonical` and `openGraph` overrides
+to every main route (`/`, `/services`, `/why-verifux`, `/portfolio`,
+`/portfolio/[slug]`). Case-study routes get `og:type: "article"`, others
+inherit `"website"`. `lib/metadata.ts` exports an `OG_DEFAULTS` constant
+that each page spreads into its own openGraph object; Next 14's metadata
+merging replaces `openGraph` wholesale rather than merging fields, so
+without spreading defaults, per-page overrides would silently drop
+site-wide `type`/`siteName`/`locale`. Verified by grepping the emitted HTML
+for all six expected `og:*` tags.
+
+**Improved `Accordion` accessibility with `aria-controls`.** The toggle
+button already had `aria-expanded`, but no `aria-controls`, so screen
+reader users could tell a button toggled *something* but not what. Added
+`aria-controls` linking button to content, using React's `useId()` for
+stable unique ids, `role="region"` on the collapsible content, and a
+configurable `label` prop (default "Toggle section"). Only the two new
+Phase 2 Accordion callers, `VerifuxSections.tsx` and `CaseStudy.tsx`'s
+Process notes, were updated to pass meaningful labels; existing pre-Phase-2
+callers keep the default, changing those is Phase-3-adjacent polish, not a
+fix, and pushing into unrelated existing code is scope creep. The
+decorative chevron SVG got `aria-hidden="true"` while I was in there.
+
+**Hit and worked around Next.js layout export restriction.** First draft
+exported `OG_DEFAULTS` directly from `app/layout.tsx`, but Next 14's type
+system rejects arbitrary named exports from layout files
+(`OmitWithTag<..., "metadata" | ...>` types the layout as only allowing a
+specific set of named exports). Moved `OG_DEFAULTS` to `lib/metadata.ts`,
+which is a plain module and can be imported freely. Worth remembering:
+never add named exports beyond the Next.js allowlist to any `page.tsx`,
+`layout.tsx`, or other App Router special file.
+
+Verified with `npx tsc --noEmit` (clean after moving the constant), a full
+`STATIC_EXPORT=true npm run build` (all 15 routes, clean), a Node-based
+JSON.parse check of the JSON-LD graph, direct grep-checks that all six
+expected `og:*` tags render on `/services`, that the case-study route
+carries `og:type=article`, that `aria-controls` is emitted on Accordion
+buttons, and that `llms.txt` is copied to `out/`.
+
 ## Phase 2 of the strategic repositioning: /services, an internal Verifux explainer, case-study depth schema, trust-strip fix (2026-07-29, later)
 
 Continues the roadmap in

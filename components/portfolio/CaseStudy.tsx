@@ -167,6 +167,7 @@ export function CaseStudy({ data, next }: { data: CaseStudyData; next?: { label:
           <section className="border-b border-line py-16">
             <Accordion
               defaultOpen={false}
+              label="Toggle process notes"
               header={<p className="eyebrow">Process notes</p>}
             >
               <div className="mt-8">
