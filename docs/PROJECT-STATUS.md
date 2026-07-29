@@ -1,6 +1,36 @@
 # Project status
 
-_Last updated: 2026-07-21 (hover-only affordances, tile tag cleanup, footer, legacy links)_
+_Last updated: 2026-07-29 (Phase 1 of strategic repositioning: homepage copy, numbering, nav/footer fixes)_
+
+## Strategic repositioning (in progress)
+
+Designerama is mid-repositioning from a portfolio site into an AI-native
+product diagnosis consultancy, with "diagnosis before design" as the
+organising principle of the whole business, not just a homepage tagline.
+The full strategy document (current-state assessment, strategic risks,
+brand positioning, information architecture, copy strategy, 3-year business
+strategy, and a phased roadmap) lives at
+`~/.claude/plans/https-github-com-verifux-designerama-git-snazzy-origami.md`.
+
+- **Phase 1 (messaging, positioning, copy, navigation, homepage): done**,
+  2026-07-29. See `DECISIONS.md` for the full reasoning. Covered: the
+  "What we diagnose" section rewritten to lead with consequence before
+  taxonomy, "Why diagnosis matters" repurposed into a forward bridge with a
+  real CTA, homepage section numbering fixed to run 01 to 06 sequentially,
+  footer copyright year fixed and made self-correcting, a dead anchor fixed
+  on Portfolio's "Approach" nav link, and nav/footer internal links made
+  path-absolute (`/#work` not `#work`) as prep for the next phase.
+- **Phase 2 (portfolio, case studies, trust, services): not started.** Will
+  add a `/services` route, an internal Verifux explainer route (path still
+  to be decided, there's a real risk of colliding with whatever currently
+  serves the live `/verifux` path, see the plan document), optional
+  additive depth fields on `CaseStudyData` (constraints, alternatives
+  considered, research method, lessons learned), and a fix for the
+  Standard Bank / Telkom trust-strip logos that currently have no case
+  study behind either.
+- **Phases 3 to 4: not started.** Phase 4 (a scoped-down "ecosystem" layer)
+  is deliberately narrower than the original brief's full list, see the
+  plan document's Strategic Risks section for why.
 
 ## What this is
 
@@ -58,6 +88,22 @@ moving from the `/new` test path to the live root (the static export bakes in
 a path prefix at build time, so this is not just a copy-paste).
 
 ## Known-correct facts (verified against source, not guessed)
+
+- **Homepage sections are numbered 01 to 06 sequentially**, changed
+  2026-07-29: 01 Diagnose, 02 How it works, 03 Why diagnosis matters, 04
+  Selected work, 05 About, 06 Start here. Previously "Why diagnosis
+  matters" and "About" carried no number. Don't reintroduce the gap.
+- **Footer copyright year is computed at build time**
+  (`new Date().getFullYear()` in both `Footer.tsx` components), not
+  hardcoded, changed 2026-07-29 after the year had drifted to a stale
+  "© 2027". Content files (`lib/content/designerama.ts`,
+  `lib/content/portfolio.ts`) hold only the trailing "Designerama. All
+  rights reserved." text, not the year.
+- **Designerama's internal nav/footer hash links are path-absolute**
+  (`/#work`, `/#about`, `/#cta`, not `#work`), changed 2026-07-29, and
+  render via `next/link` in `Nav.tsx` and `Footer.tsx`. This is prep for a
+  second Designerama route (Phase 2's `/services`), don't revert to bare
+  hash hrefs on those two components.
 
 - **Verifux's real framework** is the MX / BX / AIX triad — 54 checkpoints
   across 9 pillars — plus a separate, optional DX (design excellence) craft

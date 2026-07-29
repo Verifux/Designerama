@@ -4,6 +4,81 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Phase 1 of the strategic repositioning: diagnosis-first sequencing applied to the site's own copy (2026-07-29)
+
+Kishan asked for a strategic planning exercise on evolving Designerama from a
+portfolio into a product diagnosis consultancy, worked through as a full
+audit (three parallel research passes over the homepage, the Verifux-related
+copy, and the six case studies, plus direct reads of `CLAUDE.md`, this file,
+`PROJECT-STATUS.md`, and the design system reference). The resulting
+strategy document lives at
+`~/.claude/plans/https-github-com-verifux-designerama-git-snazzy-origami.md`
+and lays out a four-phase roadmap. This entry covers **Phase 1**: messaging,
+navigation, and homepage fixes. Phases 2 through 4 (a services page, an
+internal Verifux explainer, case-study schema depth, trust-strip fixes, and
+a deliberately scoped-down "ecosystem" phase) are not yet started.
+
+**The homepage's "What we diagnose" section was the one part of the site
+that had never been run through the taste-arbitrage lens.** The 2026-07-16
+taste-arbitrage audit pass (see "Taste-arbitrage copy audit, pass two"
+below) explicitly exempted this section, reasoning it was
+"structural/factual with no aesthetic claims" rather than persuasive copy.
+On review, that distinction is exactly the trap a diagnosis-first business
+should avoid: the section opened with "Verifux runs a 54-checkpoint audit
+across 9 pillars..." — taxonomy before consequence — while every other
+section on the site had already been rewritten to lead with stakes. Rewrote
+the body to state what a typical audit misses first, then the same
+MX/BX/AIX/54/9 facts, unchanged.
+
+**"Why diagnosis matters" was a near-verbatim third telling of the same
+thesis already stated in the hero.** Across the homepage, the "interfaces
+are cheap now, diagnosis isn't" idea appeared in the hero eyebrow, hero
+lede, meta description, and this section's own heading and body — four full
+statements before a first-time visitor reaches anything else. Rather than
+cut the section (its heading is a nice rhetorical echo of the hero, not a
+real problem on its own), repurposed the body to stop re-arguing the point
+and instead point forward: what happens next if you buy the argument. Added
+a real link ("Start with a diagnosis" → `/#cta`) where none existed before.
+
+**The 01 through 06 numbering gap was worth fixing outright, not leaving as
+"deliberate."** Two sections ("Why diagnosis matters" and "About") had never
+carried a number while the other four did. There's no strategic reason for
+the asymmetry, and a business whose whole pitch is structured rigor
+undercuts itself with inconsistent internal numbering. Renumbered all six
+sections sequentially (01 Diagnose, 02 How it works, 03 Why diagnosis
+matters, 04 Selected work, 05 About, 06 Start here); no component change
+required since the number is part of each section's `eyebrow` string, not a
+separate prop.
+
+**Nav and footer `#hash` links are now absolute (`/#work`, not `#work`) and
+render via `next/link`.** Zero visible effect today, since Designerama is
+still a single route and every hash target lives on the same page. It's
+prep, not a fix: Phase 2 adds a `/services` route (and likely an internal
+`/verifux` explainer) that reuses the same shared `Nav`/`Footer`, and a bare
+`#work` href from a different route silently fails (tries to scroll to an
+element that isn't on that page). Landing this now, while it's a zero-risk
+change, avoids a real bug the moment the second route ships.
+
+**Footer copyright year was hardcoded to "© 2027," a stale/wrong future
+year.** Rather than just correct the digit (which reintroduces the same bug
+next calendar year), both `Footer.tsx` components now compute
+`new Date().getFullYear()` at build/render time; the content files hold only
+the trailing "Designerama. All rights reserved." text. These are plain
+server components with no client-side re-render, so this bakes in the
+build's year at static-export time the same way everything else on this
+statically exported site is baked in — no hydration-mismatch risk.
+
+**Fixed a real, separately-discovered dead anchor while in the area.**
+Portfolio's nav has a working link labelled "Approach" pointing at
+`#approach`, but `components/portfolio/Method.tsx` (the section it's meant
+to scroll to) never had a matching `id`. Added `id="approach"` to that
+section. Unrelated to the messaging work above, caught during the same
+research pass, cheap enough to fix immediately rather than file separately.
+
+Verified with `npx tsc --noEmit` (clean), a full `STATIC_EXPORT=true npm run
+build` (all 13 routes, clean), and a direct browser check of the rendered
+homepage and portfolio pages.
+
 ## GOtv rebuild surfaces a new carousel edge case: min-width floor (2026-07-21, later)
 
 **GOtv's images are the most extreme aspect ratio the carousel has seen

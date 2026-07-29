@@ -4,7 +4,7 @@ import { method } from "@/lib/content/portfolio";
 
 export function Method() {
   return (
-    <section className="border-b border-line bg-paper py-32">
+    <section id="approach" className="border-b border-line bg-paper py-32">
       <div className="relative mx-auto max-w-container px-5 sm:px-8">
         <Accordion
           defaultOpen={false}

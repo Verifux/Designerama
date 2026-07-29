@@ -24,6 +24,13 @@ export function WhyItMatters() {
           }
         >
           <p className="mt-6 max-w-xl text-[17px] leading-[1.8] tracking-[0.01em] text-ink-dim">{whyItMatters.body}</p>
+          <a
+            href={whyItMatters.cta.href}
+            className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-accent transition-colors hover:opacity-80"
+          >
+            {whyItMatters.cta.label}
+            <span aria-hidden="true">→</span>
+          </a>
         </Accordion>
       </div>
     </section>

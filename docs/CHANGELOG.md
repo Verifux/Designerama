@@ -4,6 +4,39 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-07-29 (Phase 1 of strategic repositioning: homepage copy, numbering, nav/footer fixes)
+
+- **Homepage "What we diagnose" section rewritten to lead with consequence
+  before taxonomy.** Previously opened straight into "Verifux runs a
+  54-checkpoint audit across 9 pillars..."; now opens with what a typical
+  audit misses (persuasion vs. manipulation, AI-agent legibility) before
+  stating the MX/BX/AIX/54/9 facts. Facts themselves unchanged.
+- **"Why diagnosis matters" repurposed from a third restatement of the core
+  thesis into a forward-pointing bridge.** Body rewritten to point at what
+  happens next rather than re-argue the same point a third time; added a
+  `cta` field ("Start with a diagnosis" → `/#cta`) rendered as a new link
+  inside the section's existing accordion body.
+- **Homepage section eyebrow numbering fixed to run 01 to 06 sequentially.**
+  Previously "Why diagnosis matters" and "About" carried no number while the
+  other four did. Renumbered: 01 Diagnose, 02 How it works, 03 Why diagnosis
+  matters, 04 Selected work, 05 About, 06 Start here.
+- **Footer copyright year fixed and made self-correcting.** Was hardcoded
+  "© 2027" on both Designerama and Portfolio footers. Now computed as
+  `new Date().getFullYear()` at build time in both `Footer.tsx` components;
+  content files hold only the trailing text.
+- **Fixed a real dead anchor**: Portfolio nav's "Approach" link (`#approach`)
+  pointed at `Method.tsx`, which had no matching `id`. Added
+  `id="approach"` to that section.
+- **Nav/footer internal links made path-absolute and switched to
+  `next/link`**, prep for the next phase. `lib/content/designerama.ts`'s
+  `nav.links`, `nav.cta`, and `footer.links` changed `#work`/`#about`/`#cta`
+  to `/#work`/`/#about`/`/#cta`; `components/designerama/Nav.tsx` and
+  `Footer.tsx` now render internal links via `next/link`. No visible change
+  today, prevents dead in-page links once a second Designerama route (e.g. a
+  future `/services`) exists and reuses the same shared `Nav`/`Footer`.
+- This is Phase 1 of a larger strategic repositioning initiative; see
+  `DECISIONS.md` for the full reasoning and the roadmap reference.
+
 ## 2026-07-21 (corrections: GEDA/JoziBond images, accordion closed, chevrons removed)
 
 - **Updated the GEDA and JoziBond legacy images** (the item flagged blocked

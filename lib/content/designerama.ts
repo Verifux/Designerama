@@ -6,13 +6,13 @@ export const meta = {
 
 export const nav = {
   links: [
-    { label: "Work", href: "#work" },
-    { label: "About", href: "#about" },
+    { label: "Work", href: "/#work" },
+    { label: "About", href: "/#about" },
     { label: "Blog", href: "https://www.designerama.co.za/blog" },
     { label: "Verifux", href: "https://www.designerama.co.za/verifux" },
   ],
   portfolioLink: { label: "Portfolio", href: "/portfolio" },
-  cta: { label: "Get in touch", href: "#cta" },
+  cta: { label: "Get in touch", href: "/#cta" },
 };
 
 export const hero = {
@@ -41,7 +41,7 @@ export const ticker = [
 export const diagnose = {
   eyebrow: "01 / What we diagnose",
   heading: "Three experience layers, 54 checkpoints, one structured audit.",
-  body: "Verifux runs a 54-checkpoint audit across 9 pillars, grouped into the MX / BX / AIX triad: can people use it, will people act, can AI use it. A separate DX craft score benchmarks the visual design and content voice against design-award criteria.",
+  body: "Most audits stop at whether a button works. Verifux also catches whether a product persuades instead of manipulating, and whether AI agents can even find it, both routinely missed by a standard heuristics review. It runs a 54-checkpoint audit across 9 pillars, grouped into the MX / BX / AIX triad: can people use it, will people act, can AI use it. A separate DX craft score benchmarks the visual design and content voice against design-award criteria.",
   checkpoints: [
     {
       num: "01",
@@ -93,14 +93,15 @@ export const process = {
 };
 
 export const whyItMatters = {
-  eyebrow: "Why diagnosis matters",
+  eyebrow: "03 / Why diagnosis matters",
   heading: "Interfaces got cheap to generate.",
   headingAccent: "Knowing which one to build didn't.",
-  body: "Twenty-six years of product design, UX leadership and behavioural analysis, paired with business management and systems thinking, decide what gets built. AI decides how fast it gets drawn. The same discipline behind Verifux's audit engine, applied directly to your product before a single screen gets redrawn.",
+  body: "That's the discipline this practice runs on: twenty-six years of product design, UX leadership and behavioural analysis, backed by Verifux's audit engine, pointed at your product before a single screen gets redrawn. The diagnosis comes first. What gets built after it is smaller, faster to ship, and aimed at what's actually broken.",
+  cta: { label: "Start with a diagnosis", href: "/#cta" },
 };
 
 export const work = {
-  eyebrow: "03 / Selected work",
+  eyebrow: "04 / Selected work",
   heading: "Built on a real audit practice, not a slide deck.",
   items: [
     {
@@ -131,7 +132,7 @@ export const work = {
 };
 
 export const about = {
-  eyebrow: "About",
+  eyebrow: "05 / About",
   heading: "26 years, one discipline.",
   credentials: [
     { stat: "26+", label: "Years across broadcast, motion & product" },
@@ -147,7 +148,7 @@ export const about = {
 };
 
 export const cta = {
-  eyebrow: "04 / Start here",
+  eyebrow: "06 / Start here",
   heading: "Something in your operation isn't working,",
   headingAccent: "and everyone already knows which one.",
   action: { label: "Book a systems diagnosis", href: "mailto:hello@designerama.co.za" },
@@ -155,15 +156,13 @@ export const cta = {
 
 export const footer = {
   links: [
-    { label: "Work", href: "#work" },
-    { label: "About", href: "#about" },
+    { label: "Work", href: "/#work" },
+    { label: "About", href: "/#about" },
     { label: "Blog", href: "https://www.designerama.co.za/blog" },
     { label: "Verifux", href: "https://www.designerama.co.za/verifux" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Contact", href: "mailto:hello@designerama.co.za" },
   ],
-  bottom: [
-    "© 2027 Designerama. All rights reserved.",
-    "Design consultancy for UX strategy & Verifux. hello@designerama.co.za",
-  ],
+  copyright: "Designerama. All rights reserved.",
+  bottom: ["Design consultancy for UX strategy & Verifux. hello@designerama.co.za"],
 };

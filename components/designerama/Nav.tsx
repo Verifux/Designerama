@@ -28,14 +28,15 @@ export function Nav() {
               const external = l.href.startsWith("http");
               return (
                 <li key={l.href}>
-                  <a
-                    href={l.href}
-                    className={navLinkClasses}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noopener noreferrer" : undefined}
-                  >
-                    {l.label}
-                  </a>
+                  {external ? (
+                    <a href={l.href} className={navLinkClasses} target="_blank" rel="noopener noreferrer">
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link href={l.href} className={navLinkClasses}>
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               );
             })}
