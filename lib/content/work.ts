@@ -132,6 +132,15 @@ export const workItems: WorkItem[] = [
           "The video play page changes drove an average of 26-30 million views and impressions per month across web and mobile. The article page changes lifted ad revenue by close to 40%, alongside increased article reads and engagement time.",
         ],
       },
+      researchMethod: {
+        heading: "The research method",
+        body: [
+          "The diagnosis surfaced from several channels at once, not a single formal study. We heard from actual sport fans and site users, through editorial channels, on-site comments, and internal conversations across the product team. Multiple angles converging on the same pattern.",
+          "The reframe came from an asset check that most UX audits wouldn't do. SuperSport owns the broadcast rights to the match highlights fans were struggling to find. Every unofficial clip catching search intent for that content was catching intent that should have been flowing to the rights holder. The finding stopped being 'the discovery UX needs work' and became 'we're not surfacing the one thing nobody else can legally surface.' That reframe is what made the eventual OneBox investment justifiable to the product team, discoverability wasn't a nice-to-have UX metric, it was defending an owned asset.",
+        ],
+      },
+      lessonsLearned:
+        "The strongest finding wasn't a design one. It was realising the discovery gap was worst on the content we owned exclusively.",
     },
   },
   {

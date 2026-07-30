@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-07-29, later still (Phase 3 of strategic repositioning: AIX self-application, structured data, OG, a11y)_
+_Last updated: 2026-07-30, SuperSport case-study depth shipped (provisional, SS-only), Phase 4 Insights reverted the day before_
 
 ## Strategic repositioning (in progress)
 
@@ -40,9 +40,18 @@ strategy, and a phased roadmap) lives at
   `Accordion` `aria-controls` + `role=region` improvements. Deliberately
   skipped generic motion/design-system polish, no defects were observed
   and open-ended polish invites scope creep.
-- **Phase 4: not started.** Deliberately narrower than the original
-  brief's full list (Labs / Insights / Newsletter / Courses / Templates /
-  Community), see the plan document's Strategic Risks section.
+- **Phase 4 (Insights): built and reverted the same day**, 2026-07-29.
+  Nine real Verifux teardowns were fully shipped at `/insights` +
+  `/insights/[slug]`, then reverted after Kishan reviewed and decided
+  the content belongs on the Verifux marketing site rather than on the
+  Designerama consultancy site (positioning drift risk). Content
+  preserved at
+  `~/.claude/projects/-Users-kishanrama-Documents-Designerama/parked-work/insights-for-verifux-website/`
+  for later re-templating on the Verifux side. **Phase 4 is closed for
+  Designerama.** The newsletter, courses, community, templates, and
+  Verifux-expansion sub-items from the plan were deliberately not
+  built either, all deferred per Risk 2 of the plan or blocked on real
+  usage data.
 
 ## What this is
 
@@ -151,6 +160,15 @@ a path prefix at build time, so this is not just a copy-paste).
   added 2026-07-29. If adding a new Accordion caller, pass a meaningful
   `label` describing what the button toggles; leaving the default is
   acceptable but not ideal.
+- **Insights section is not in the Designerama repo**, removed
+  2026-07-29 after a same-day build-and-revert. The `lib/content/insights.ts`
+  data file, `Teardown.tsx` template, and `InsightsList.tsx` listing are
+  parked at
+  `~/.claude/projects/-Users-kishanrama-Documents-Designerama/parked-work/insights-for-verifux-website/`,
+  intended for the Verifux marketing site. If a future session wants to
+  reintroduce Insights to Designerama, first confirm that the
+  positioning decision (teardowns are Verifux-product marketing, not
+  Designerama consulting) hasn't been re-evaluated.
 
 - **Verifux's real framework** is the MX / BX / AIX triad — 54 checkpoints
   across 9 pillars — plus a separate, optional DX (design excellence) craft

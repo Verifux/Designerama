@@ -4,6 +4,104 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## SuperSport case-study depth content shipped, provisional, keep SS-only per Kishan (2026-07-30)
+
+Walked through the SuperSport case study with Kishan on 2026-07-30 to
+fill in the Phase 2 depth schema (`researchMethod`, `lessonsLearned`,
+`constraints`, `alternativesConsidered`) with real recollection rather
+than fabrication.
+
+**What was written into `lib/content/work.ts`:**
+
+- `researchMethod` (heading + two-paragraph body): the diagnosis surfaced
+  from multiple channels at once (fan comments through editorial, on-site
+  comments, internal conversations across the product team), reframed
+  after an asset check that showed SuperSport owned the broadcast rights
+  to the exact match highlights fans were struggling to find. Written in
+  "we" throughout, matching Kishan's explicit correction that the OneBox
+  decision was a product-team call, not his alone.
+- `lessonsLearned` (one-liner): "The strongest finding wasn't a design
+  one. It was realising the discovery gap was worst on the content we
+  owned exclusively."
+- `constraints`: **left null**. Kishan explicitly said "no hard trade-offs"
+  and that the OneBox cost decision was a product-management call, not
+  his. Fabricating a hero-narrative trade-off would have been the exact
+  overclaim the site's discipline rules against (same class as the FNB
+  "conceived and built" → "helped build" correction).
+- `alternativesConsidered`: **left null**. No specific rejected
+  alternative was named. The schema was scaffolded exactly for this;
+  optional and additive means renders nothing when unset.
+
+**Kishan reviewed and didn't fully like it.** Direct instruction:
+"i dont really like it...tho keep it for SS only now..ill revisit later
+on." The reason wasn't specified, so both the copy and the pattern
+(accordion collapse, "Process notes" section title, placement,
+"asset check that most UX audits wouldn't do" framing) are all in
+scope for the revisit. Full note captured in the persistent memory
+`~/.claude/projects/-Users-kishanrama-Documents-Designerama/memory/feedback-case-study-depth-approach.md`.
+
+**What this means going forward:**
+
+- SuperSport keeps its `researchMethod` + `lessonsLearned` for now.
+  Both fields are provisional until the revisit.
+- **Do not add depth fields to any other case study** (GOtv, bidorbuy,
+  FNB, DStv TV Guide, DStv Rewards) until the approach is revised.
+  Adding more before the pattern is settled would compound the problem
+  Kishan flagged, not clarify it.
+- The Phase 2 recommendation of extending "1-2 flagship case studies
+  first" (SuperSport and DStv TV Guide) is now half-done. DStv TV Guide
+  is on hold, not scheduled.
+
+## Phase 4 (Insights) built, then reverted at Kishan's request; content parked for the Verifux website (2026-07-29, same day)
+
+**Built:** a full nine-teardown Insights section at `/insights` and
+`/insights/[slug]`, using the same static-content pattern the six case
+studies use (`lib/content/insights.ts` + `components/designerama/Teardown.tsx`
++ `components/designerama/Insights{Hero,List,Cta}.tsx`). Nine real
+Verifux audits of real, named products: Stripe (73), Mozilla (68),
+Premier League (63), Weshoptech (59), Property24 (59), iStore (58),
+Woolworths (58), Airbnb (56), Hollywoodbets (17). Every finding, score,
+count, and quote traced back to a real Verifux audit PDF at
+`/Users/kishanrama/Documents/Verifux/PDFs/`; nothing invented. Extracted
+via a throwaway `pypdf` venv at `/tmp/pdfenv/` (the environment doesn't
+have poppler for the Read tool's PDF handling). Wired Insights into
+`nav.links`, `footer.links`, `app/sitemap.ts`, and `public/llms.txt`.
+Verified clean with `tsc --noEmit`, a full static export (25 routes),
+and a browser walk of the listing and one detail page.
+
+**Reverted the same day.** Kishan reviewed and decided public Verifux
+teardowns belong on the Verifux marketing site rather than on the
+Designerama consultancy site. The instinct is right: Designerama sells
+consulting engagements, and teardowns are Verifux product marketing
+(demonstrating what the audit engine finds). Publishing them on
+Designerama would have blurred the boundary between the consultancy and
+the SaaS product, which is exactly the kind of positioning drift the
+plan's Section 3 (Brand Positioning) argues against.
+
+**Content preserved.** The full `insights.ts` data file (all nine
+teardowns, verbatim), the `Teardown.tsx` template, the `InsightsList.tsx`
+listing template, and a handoff README are saved at
+`~/.claude/projects/-Users-kishanrama-Documents-Designerama/parked-work/insights-for-verifux-website/`.
+Outside both the Designerama and Verifux repos, per the standing rule
+never to write into the Verifux codebase. When the Verifux marketing
+site is ready to receive them, the content is portable, only the render
+layer needs re-templating (Verifux's site is `verifux-landing.html`
+static HTML per its own repo, not Next.js).
+
+**What was reverted in the Designerama repo**: all seven files created
+(the two route files and five components) deleted; the `Insights` entry
+removed from `nav.links` and `footer.links`; the `/insights` sitemap
+entry and teardown routes removed from `app/sitemap.ts`; the "Insights"
+core-page entry and "Insights teardowns" section removed from
+`public/llms.txt`. All other Phase 3 and earlier work is unchanged.
+
+**Preserved in memory**: `~/.claude/projects/-Users-kishanrama-Documents-Designerama/memory/designerama-repositioning.md`
+updated to reflect the revert plus the parked-content location, so
+future sessions understand why `/insights` isn't in the tree.
+
+Verified after revert with `tsc --noEmit` (clean) and a full static
+export build back to 15 routes (down from 25).
+
 ## Phase 3 of the strategic repositioning: applying Verifux's AIX discipline to our own site (2026-07-29, later still)
 
 Continues the roadmap in

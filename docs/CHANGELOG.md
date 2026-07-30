@@ -4,6 +4,37 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-07-30 (SuperSport case-study depth shipped, provisional)
+
+- **SuperSport case study extended with `researchMethod` + `lessonsLearned`
+  fields** in `lib/content/work.ts`. `constraints` and
+  `alternativesConsidered` deliberately left null (Kishan said no hard
+  trade-offs and OneBox was a product-team call, not a solo decision).
+- **Kishan reviewed and didn't fully like the depth-content approach.**
+  SuperSport kept as-is per instruction ("keep it for SS only now"),
+  provisional pending later revisit. **Do not add depth to any other
+  case study** until the approach is revised. See `docs/DECISIONS.md`
+  for full reasoning.
+
+## 2026-07-29 (Phase 4 Insights built and reverted the same day)
+
+- **Built** a full nine-teardown Insights section (routes
+  `/insights` + `/insights/[slug]`, content in
+  `lib/content/insights.ts`, renderer in
+  `components/designerama/Teardown.tsx` + `Insights{Hero,List,Cta}.tsx`,
+  wired into nav, footer, sitemap, and llms.txt). Nine real Verifux
+  audits, each grounded in a source PDF at
+  `/Users/kishanrama/Documents/Verifux/PDFs/`; no invention.
+- **Reverted the same day** after Kishan reviewed. Public teardowns are
+  Verifux-product marketing, not Designerama consulting collateral;
+  they belong on the Verifux website. Publishing on Designerama would
+  have blurred the positioning line the strategy explicitly protects.
+- **Content preserved** at
+  `~/.claude/projects/-Users-kishanrama-Documents-Designerama/parked-work/insights-for-verifux-website/`,
+  outside both repos, for later use on the Verifux site.
+- Build back to 15 routes (down from 25 during the brief build).
+- See `docs/DECISIONS.md` for the full reasoning.
+
 ## 2026-07-29, later still (Phase 3 of strategic repositioning: AIX self-application, structured data, OG, a11y)
 
 - **Added `public/llms.txt`** guiding LLM crawlers to canonical facts
