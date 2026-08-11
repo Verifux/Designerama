@@ -1,5 +1,18 @@
 # Designerama — Design Intelligence System
 
+## Stack
+
+Next.js, TypeScript, Tailwind CSS.
+
+## Commands
+
+```bash
+npm install          # install deps
+npm run dev          # dev server
+npm run build        # production build
+npm run design:check # impeccable post-flight (exit 2 = fix before shipping)
+```
+
 ## The 5-stage chain
 
 For every design, redesign, copy, or UI task, run through this chain before writing code. Do not skip stages because the task feels small.
