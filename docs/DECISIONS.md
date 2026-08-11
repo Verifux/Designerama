@@ -4,6 +4,49 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Contact form uses FormSubmit.co, not Formspree; per-context message labels (2026-08-11)
+
+Block 1 of the site upgrade prompt replaced every `mailto:` CTA with an
+inline `components/shared/ContactForm.tsx`.
+
+**FormSubmit.co, not Formspree.** The upgrade prompt suggested a Formspree
+endpoint, but Kishan asked why, given the live Verifux contact form at
+`verifux.app/contact` already runs on a form service. Inspected that form
+directly: it POSTs to `https://formsubmit.co/hello@designerama.co.za` with
+`_subject`, `_captcha`, and `_next` hidden fields. So the new form reuses
+FormSubmit.co rather than introducing a second service Kishan would have to
+learn and configure. Endpoint is overridable via `NEXT_PUBLIC_FORM_ENDPOINT`
+so the service can still be swapped later without a code change. Two
+deliberate improvements over the Verifux version: an inline success state
+instead of FormSubmit's `_next` page redirect (better UX, no navigation),
+and FormSubmit's built-in `_honey` honeypot for spam.
+
+**Message label and email subject vary by brand context.** The form is one
+shared component, but the message field's label, placeholder, and the
+delivered email subject are props. Designerama and Services keep the
+diagnosis framing ("What's not working?"), which fits a consultancy that
+sells product diagnosis. Kishan flagged that the same label reads wrong on
+Portfolio, which is a personal hiring/consulting/"conversations about
+Verifux" context, not a diagnosis pitch. Portfolio now uses "What's on your
+mind?" with placeholder "A role, a project, or just to talk...". The email
+subject also differs per source ("New enquiry from Designerama" vs "New
+message from your portfolio site") so Kishan can tell at a glance in his
+inbox which site a message came from. Defaults on the component are the
+diagnosis variant, so any future caller inherits the consultancy framing
+unless it opts into the personal one.
+
+**`globals.css` placeholder tint uses `color-mix`, not a Tailwind opacity
+modifier.** Per the standing gotcha (this project's color tokens are plain
+`var(--x)` refs, so `text-ink-dim/50`-style modifiers silently no-op and
+also fail the build inside `@apply`). The first build failed on exactly
+this; fixed with a `color-mix(in srgb, var(--ink-dim) 50%, transparent)`
+placeholder color instead.
+
+**`public/llms.txt` deliberately not updated.** The form replaced mailto
+buttons but changed no page copy, facts, or core content. The llms.txt
+crawler summary reflects content and facts, not interaction mechanics, so
+there was nothing material for it to carry.
+
 ## SuperSport case-study depth content shipped, provisional, keep SS-only per Kishan (2026-07-30)
 
 Walked through the SuperSport case study with Kishan on 2026-07-30 to

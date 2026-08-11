@@ -110,6 +110,17 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Known-correct facts (verified against source, not guessed)
 
+- **CTAs use an inline `components/shared/ContactForm.tsx`, not `mailto:`
+  buttons**, added 2026-08-11. Submits via `fetch` to FormSubmit.co (same
+  service as the live Verifux contact form), endpoint overridable via
+  `NEXT_PUBLIC_FORM_ENDPOINT` (default
+  `https://formsubmit.co/hello@designerama.co.za`). Used in three places:
+  Designerama `/#cta`, Designerama `/services` bottom CTA, and Portfolio
+  `#contact` (which also keeps a LinkedIn secondary link). The message
+  label, placeholder, and email subject are props: Designerama/Services use
+  the diagnosis framing, Portfolio uses a personal framing. Footer `mailto:`
+  links kept as a fallback. Don't reintroduce mailto CTAs. See DECISIONS.md
+  for the FormSubmit-over-Formspree reasoning.
 - **Homepage sections are numbered 01 to 06 sequentially**, changed
   2026-07-29: 01 Diagnose, 02 How it works, 03 Why diagnosis matters, 04
   Selected work, 05 About, 06 Start here. Previously "Why diagnosis

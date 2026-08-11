@@ -4,6 +4,36 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-08-11 (Contact form replaces mailto CTAs, block 1 of the site upgrade)
+
+- **New shared `components/shared/ContactForm.tsx`.** Inline contact form
+  replacing the `mailto:` CTAs across the site. Fields: Name, Email,
+  Company (optional), a configurable message field, and a hidden `_honey`
+  honeypot for spam. Submits via `fetch` POST to FormSubmit.co (the same
+  service already used on the live Verifux contact form), endpoint
+  overridable via `NEXT_PUBLIC_FORM_ENDPOINT`, default
+  `https://formsubmit.co/hello@designerama.co.za`. Inline success and error
+  states, no page redirect. Accessible: real labels, `aria-live` regions,
+  focus-visible accent rings. New `.cf-label` / `.cf-input` primitives in
+  `globals.css` (using `color-mix` for the placeholder tint, not a Tailwind
+  opacity modifier, which this project's tokens don't support).
+- **Wired into three places**: Designerama `/#cta` (`components/designerama/Cta.tsx`),
+  Designerama `/services` bottom CTA (`components/designerama/ServicesCta.tsx`),
+  and Portfolio `#contact` (`components/portfolio/Cta.tsx`). The Portfolio
+  form keeps the LinkedIn link as a secondary action below it. `mailto:`
+  links kept in both footers as a fallback.
+- **Message label and email subject are per-context.** Designerama and
+  Services use the diagnosis framing ("What's not working?", subject "New
+  enquiry from Designerama"). Portfolio uses a personal framing ("What's on
+  your mind?", placeholder "A role, a project, or just to talk...", subject
+  "New message from your portfolio site") to match its hiring/consulting
+  context. See `docs/DECISIONS.md`.
+- **`.claude/launch.json`** switched from a direct `node` invocation to
+  `npx next dev` to work around an `EPERM: uv_cwd` error in the dev
+  environment.
+- Verified: clean `tsc`, clean static export (15 routes), FormSubmit
+  endpoint and both label variants confirmed baked into the right pages.
+
 ## 2026-07-30 (SuperSport case-study depth shipped, provisional)
 
 - **SuperSport case study extended with `researchMethod` + `lessonsLearned`

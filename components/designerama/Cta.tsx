@@ -1,4 +1,5 @@
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
+import { ContactForm } from "@/components/shared/ContactForm";
 import { cta } from "@/lib/content/designerama";
 
 export function Cta() {
@@ -10,10 +11,8 @@ export function Cta() {
           <h2 className="max-w-3xl text-[clamp(30px,5vw,56px)] leading-[1.04] tracking-[-0.01em]">
             {cta.heading} <span className="text-accent">{cta.headingAccent}</span>
           </h2>
-          <div className="mt-9 flex w-fit border border-line">
-            <a href={cta.action.href} className="btn btn--solid rounded-none">
-              {cta.action.label}
-            </a>
+          <div className="mt-10 max-w-xl">
+            <ContactForm />
           </div>
         </RevealOnScroll>
       </div>
