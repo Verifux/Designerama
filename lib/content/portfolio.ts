@@ -18,7 +18,19 @@ export const hero = {
 
 export const trust = {
   label: "Design work trusted by",
-  logos: ["SuperSport", "DStv / MultiChoice", "FNB", "bidorbuy", "Hollard", "Coca-Cola"],
+  // Real client logos, rendered as uniform dark/black marks in TrustStrip.tsx
+  // (recoloured via CSS so the source colour doesn't matter). Files live in
+  // public/images/logos/ as transparent PNG or SVG.
+  logos: [
+    { id: "supersport", label: "SuperSport", file: "/images/logos/supersport.png" },
+    { id: "dstv", label: "DStv", file: "/images/logos/dstv.png" },
+    { id: "fnb", label: "FNB", file: "/images/logos/fnb.png" },
+    { id: "bobshop", label: "Bob Shop", file: "/images/logos/bobshop.png" },
+    { id: "hollard", label: "Hollard", file: "/images/logos/hollard.png" },
+    { id: "cocacola", label: "Coca-Cola", file: "/images/logos/cocacola.png" },
+    { id: "joburg", label: "City of Johannesburg", file: "/images/logos/joburg.png" },
+    { id: "barclays", label: "Barclays", file: "/images/logos/barclays.png" },
+  ],
 };
 
 export const marqueeItems = ["UX Strategy", "Product Design", "Verifux", "26 Years", "26-30M Users", "Broadcast to Product"];

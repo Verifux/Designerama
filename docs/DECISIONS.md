@@ -4,6 +4,59 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Trust strip: real client logos as uniform black marks, Joburg exception, Barclays cap (2026-08-12)
+
+Block 2 replaced the portfolio trust strip's plain-text client names with
+real logos.
+
+**Styled text wordmarks were tried first, then dropped.** The initial
+approach (chosen via AskUserQuestion for the trademark caution it carried)
+was to set each client's name in tailored type rather than reproduce logo
+artwork. Kishan then supplied the actual logo files and asked to use those
+instead, recoloured dark/black. So the styled-text component was replaced
+with an image-based one. The trademark posture is fine here: these are
+Kishan's real past clients, displayed as factual attribution on his own
+portfolio (nominative use), and he supplied and directed the assets.
+
+**All logos are pre-baked to uniform black on transparency, offline.** A
+throwaway Pillow venv recoloured each source to black: transparent-bg PNGs
+(SuperSport, bidorbuy, Barclays, Joburg) had their opaque pixels set to
+black keeping anti-aliased alpha; white-bg JPEGs (DStv, Hollard, Coca-Cola)
+had white keyed out first. No CSS recolour filter is used, because one would
+have destroyed the FNB exception below.
+
+**FNB is a black circle with a white tree, not a black silhouette.** FNB's
+badge (teal ring, orange disc, black tree) can't flatten to solid black
+without losing the tree, which reads only via colour contrast. Kishan's
+instruction was "white tree on black circles". After a first automated
+attempt (and an accidental in-place overwrite of the source, a lesson: never
+read-and-write the same path, and macOS is case-insensitive so `COJ.png` and
+`coj.png` collide), Kishan supplied `fnb2.png`, a clean black-circle/
+white-tree mark, which is used as-is.
+
+**Barclays is width-capped, not height-matched.** Barclays is an intrinsically
+wide wordmark (about 5.6:1). At a uniform 38px height it sprawled to ~210px
+wide and dominated the row. Rather than special-case its height, `.trust-logo`
+got a 148px `max-width`; with `object-fit: contain` this scales down only the
+logos that would otherwise exceed it (just Barclays), leaving every narrower
+logo untouched.
+
+**Joburg (City of Johannesburg) is a deliberate exception to the
+no-Johannesburg rule.** The standing rule (`CLAUDE.md`, "never override
+these") keeps Johannesburg/JHB/SA location references off the site so it
+reads as location-agnostic. The Joburg mark names a place, which is exactly
+what that rule guards against, and this was flagged to Kishan directly. He
+confirmed including it anyway: it's a brand he genuinely worked on, and the
+credibility of a real client logo outweighs the location-agnostic concern in
+this one case. This does not reopen the rule for copy elsewhere; it's a
+one-logo, client-attribution exception made with eyes open.
+
+**Interaction inverted from the first pass: full strength by default, muted
+on hover.** The original block-2 spec had muted-default and accent-on-hover.
+Kishan asked for the logos at full strength by default, fading to 55% opacity
+on hover, and 25% larger (30px to 38px). Since the set is monochrome black by
+his call, hover is an opacity change, not an accent-red tint.
+
 ## Contact form uses FormSubmit.co, not Formspree; per-context message labels (2026-08-11)
 
 Block 1 of the site upgrade prompt replaced every `mailto:` CTA with an

@@ -110,6 +110,20 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Known-correct facts (verified against source, not guessed)
 
+- **The portfolio trust strip renders real client logos as uniform black
+  marks, not text**, changed 2026-08-12. Eight transparent PNGs in
+  `public/images/logos/` (supersport, dstv, fnb, bobshop, hollard, cocacola,
+  joburg, barclays), all pre-baked to black on transparency. **FNB is a black
+  circle with a white tree** (`fnb2.png` supplied by Kishan, used as-is), not
+  a black silhouette. `TrustStrip.tsx` renders them at 38px height, full
+  strength by default, 55% opacity on hover, with a 148px `max-width` cap so
+  Barclays (a wide wordmark) doesn't dominate. **No CSS recolour filter** is
+  applied (files are pre-baked; a filter would blacken FNB's white tree).
+  `trust.logos` in `lib/content/portfolio.ts` is `{ id, label, file }`
+  objects. **The Joburg (City of Johannesburg) logo is a deliberate,
+  Kishan-approved exception to the no-Johannesburg rule** (a real client he
+  worked on); don't remove it as a rule violation, and don't treat it as
+  licence to add JHB/SA references in copy. See DECISIONS.md.
 - **CTAs use an inline `components/shared/ContactForm.tsx`, not `mailto:`
   buttons**, added 2026-08-11. Submits via `fetch` to FormSubmit.co (same
   service as the live Verifux contact form), endpoint overridable via

@@ -191,6 +191,21 @@ h3 {
     @apply bg-[#f2f0ec] text-[#0a0a0a] border-[#f2f0ec];
   }
 
+  /* Trust strip client logos. Source files are pre-baked to uniform black
+     marks on transparency (FNB is a black badge with a white tree), so no
+     recolour filter is applied. Muted by default, full strength on hover. */
+  .trust-logo {
+    height: 38px;
+    width: auto;
+    max-width: 148px; /* caps very wide wordmarks (e.g. Barclays) so they don't dominate the row */
+    object-fit: contain;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+  .trust-logo:hover {
+    opacity: 0.55;
+  }
+
   /* Contact form inputs */
   .cf-label {
     @apply block mb-1.5 font-mono text-[0.75rem] uppercase tracking-[0.1em] text-ink-dim font-medium;

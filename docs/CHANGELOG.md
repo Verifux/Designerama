@@ -4,6 +4,36 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-08-12 (Trust strip real logos, block 2 of the site upgrade)
+
+- **Portfolio trust strip now renders real client logos as uniform black
+  marks**, replacing the plain-text client names. Eight logos in
+  `public/images/logos/` (transparent PNG): SuperSport, DStv, FNB, bobshop,
+  Hollard, Coca-Cola, Joburg (City of Johannesburg), Barclays.
+- **All logos normalised to a single dark/black treatment** offline via a
+  Pillow script: the colour/white-background source files were recoloured to
+  black on transparency (white backgrounds keyed out). **FNB is the one
+  exception**: a black circle with the acacia tree knocked out in white
+  (Kishan supplied `fnb2.png` for this, used as-is), because flattening its
+  multi-colour badge to solid black would have lost the tree.
+- **`components/portfolio/TrustStrip.tsx`** renders each as an `<img>` (via
+  `withBasePath`), single row on desktop / wrapping on mobile, uniform 38px
+  height, `aria-label="Trusted by"`, `alt` per logo. `.trust-logo` in
+  `globals.css`: full strength by default, muted (55% opacity) on hover, and
+  a 148px `max-width` cap so very wide wordmarks (Barclays) don't dominate
+  the row. No recolour filter (the files are pre-baked; a filter would have
+  blackened FNB's white tree).
+- **Logo height is 25% larger than the first pass** (30px to 38px, Kishan's
+  call); source PNGs are 180px tall so there's headroom.
+- **Content**: `trust.logos` in `lib/content/portfolio.ts` changed from a
+  flat string array to `{ id, label, file }` objects.
+- **Styled-text-wordmark approach was tried first and dropped** in favour of
+  the real logos Kishan supplied. See `docs/DECISIONS.md`.
+- **Joburg is a deliberate exception to the no-Johannesburg rule**, Kishan's
+  explicit call (a brand he worked on). See `docs/DECISIONS.md`.
+- Verified: clean `tsc`, clean static export (15 routes), all 8 logos present
+  in `out/` and rendering at 38px.
+
 ## 2026-08-11 (Contact form replaces mailto CTAs, block 1 of the site upgrade)
 
 - **New shared `components/shared/ContactForm.tsx`.** Inline contact form
