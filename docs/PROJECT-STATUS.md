@@ -111,7 +111,9 @@ a path prefix at build time, so this is not just a copy-paste).
 ## Known-correct facts (verified against source, not guessed)
 
 - **The portfolio hero shows a faint portrait on mobile** (added 2026-08-12,
-  block 5): a `sm:hidden` grayscale copy at 0.17 opacity, masked to the right
+  block 5): a `sm:hidden` copy darkened to a soft silhouette (grayscale,
+  `brightness-[0.4]`, `opacity-[0.6]`, no blend mode, since the portrait is a
+  light-shirted cutout that vanished under multiply), masked to the right
   edge behind the text. Desktop keeps its own portrait. The `/why-verifux` page
   carries a `FAQPage` JSON-LD (4 Q&A) and `/services` a `HowTo` JSON-LD (3
   steps), both per-page, drawn from existing copy, not in `StructuredData.tsx`.

@@ -24,7 +24,7 @@ export function Hero() {
           aria-hidden="true"
           width={900}
           height={1574}
-          className="absolute right-[-18%] top-0 h-full w-auto max-w-none object-cover opacity-[0.17] grayscale [mix-blend-mode:multiply] sm:hidden"
+          className="absolute right-[-18%] top-0 h-full w-auto max-w-none object-cover opacity-[0.6] grayscale brightness-[0.4] sm:hidden"
           style={{
             maskImage:
               "linear-gradient(to left, black 0%, transparent 72%), linear-gradient(to bottom, black 62%, transparent 100%)",
