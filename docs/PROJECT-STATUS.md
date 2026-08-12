@@ -110,6 +110,24 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Known-correct facts (verified against source, not guessed)
 
+- **No "twenty-six years / 26 years" age reference anywhere**, removed
+  2026-08-12 at Kishan's request (age-bias concern). Don't reintroduce a years
+  count. Reach figures ("26-30M users") are fine, they're audience scale. Key
+  replacements: portfolio hero "I design products / millions actually use.";
+  Designerama About heading "One discipline, sharpened."; About stat "30M+ /
+  Users reached across shipped products". See DECISIONS.md.
+- **Verifux is live; product CTAs point to verifux.app**, updated 2026-08-12.
+  Status copy reads "Now live / Live" (not "building / early stage"). The old
+  `designerama.co.za/verifux` link is retired. Don't reintroduce pre-launch
+  framing. Verifux is still not a separate entity in `StructuredData.tsx`.
+- **The Designerama hero has a Framer Motion entrance** (`Hero.tsx`, client
+  component): three staggered clip-up lines, accent line last with a scale
+  pulse, plus a `.hero-ambient` accent blob. Accordions pulse their chevron
+  circle while closed. About paragraphs light grey-to-white on scroll. All gated
+  on reduced motion. Don't convert these to video/Remotion.
+- **The services tier "starting point" text uses the body font** (IBM Plex
+  Sans, sentence case, 14px), not `font-mono`/uppercase; tiers are numbered
+  01-05 with a consistent pricing line (fallback "Scoped in conversation").
 - **The services page shows pricing hints on the first two tiers only**,
   added 2026-08-12. `ServiceTier` in `lib/content/services.ts` has an
   optional `pricingHint`; Systems Diagnosis ("Engagements from R40,000") and

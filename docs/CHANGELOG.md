@@ -4,6 +4,47 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-08-12 (Block 4 hero motion, age-signal removal, Verifux go-live, services rework)
+
+Committed as three logical commits.
+
+**Motion (block 4):**
+- **Designerama hero motion signature** (`components/designerama/Hero.tsx`, now
+  a client component). Headline reveals as three staggered lines, each clipping
+  up from below with a slight rotation; the accent line ("It's badly diagnosed.")
+  arrives last with a longer duration and a one-time scale pulse. One ambient
+  accent blob drifts slowly behind the headline (`.hero-ambient` in
+  `globals.css`). All gated on `useReducedMotion()`; the CSS blob is frozen by
+  the global reduced-motion kill switch.
+- **Accordion chevron pulse** (`Accordion.tsx` + `.accordion-toggle` in
+  `globals.css`): the circle outline pulses toward red while closed
+  (`aria-expanded="false"`), pauses on hover, frozen under reduced motion.
+- **About paragraphs light grey to white on scroll** (`About.tsx`), replacing
+  the old fixed lead-paragraph-white / rest-grey treatment.
+
+**Age-signal removal (Kishan's call):** every "twenty-six years / 26 years"
+reference removed sitewide. Portfolio hero "Twenty-six years shaping products"
+to "I design products"; marquee "26 Years" to "Behavioural Science"; About
+heading "26 years, one discipline." to "One discipline, sharpened."; About stat
+"26+/Years" to "30M+/Users reached across shipped products"; two Designerama
+prose refs reworded; portfolio meta description and four llms.txt lines de-aged.
+Reach figures ("26-30M users") kept (audience scale, not age).
+
+**Verifux go-live:** status copy flipped from pre-launch to live (spotlight
+eyebrow "Currently building" to "Now live", "In active build"/"Early stage" to
+"Live", hero sub "Now building Verifux" to "Now live: Verifux", work tile "Get
+early access" to "Explore Verifux"). Both "Try Verifux" product CTAs repointed
+from the stale `designerama.co.za/verifux` to **verifux.app** (also removes the
+deploy-collision risk noted in DECISIONS).
+
+**Services readability rework** (`ServicesList.tsx` + `services.ts`): the grey
+text under each tier heading changed from cramped `font-mono`/uppercase/11px to
+the readable body font (IBM Plex Sans), sentence case, 14px. Un-squashed the
+tiers (wider left column, larger gaps and vertical padding, bigger bullets and
+list spacing). Added tier numbers 01-05, a scannability intro line, a consistent
+pricing line on every tier ("Scoped in conversation" where no `pricingHint` is
+set), and tightened the two longest `forWho` sentences.
+
 ## 2026-08-12 (Pricing anchor on services, block 3 of the site upgrade)
 
 - **Added an optional `pricingHint` field to `ServiceTier`** in

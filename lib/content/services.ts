@@ -10,6 +10,9 @@ export const hero = {
   lede: "Every engagement starts with evidence, not an opinion about your product. What follows depends on what the audit finds, not on which service was pitched hardest.",
 };
 
+export const listIntro =
+  "Ordered from first diagnosis to ongoing direction. Not sure which fits? Start with a systems diagnosis and we'll scope from there.";
+
 export type ServiceTier = {
   slug: string;
   title: string;
@@ -24,7 +27,7 @@ export const tiers: ServiceTier[] = [
   {
     slug: "systems-diagnosis",
     title: "Systems Diagnosis",
-    forWho: "Teams about to make a high-stakes product decision, a platform rebuild, a plateaued product, a post-raise scale-up, and want evidence before committing budget.",
+    forWho: "Teams facing a high-stakes product decision, a rebuild, or a plateau, who want evidence before committing budget.",
     whatYouGet: [
       "A full Verifux audit across MX, BX and AIX, 54 checkpoints spanning 9 pillars, plus an optional DX craft score",
       "A structured report ranking what's actually broken by cost, not by opinion",
@@ -50,7 +53,7 @@ export const tiers: ServiceTier[] = [
   {
     slug: "ai-product-strategy",
     title: "AI Product Strategy",
-    forWho: "Teams that need their product legible to AI agents and positioned for an AI-native market, not marketing copy that just says we use AI.",
+    forWho: "Teams that need their product legible to AI agents and ready for an AI-native market, not marketing that only claims to use AI.",
     whatYouGet: [
       "An AIX-focused audit: structured data, semantic HTML, llms.txt, agent-actionable interfaces",
       "A read on how AI surfaces and answer engines currently treat your product",

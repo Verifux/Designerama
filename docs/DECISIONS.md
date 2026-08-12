@@ -4,6 +4,45 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Hero motion, age-signal removal, Verifux go-live, services readability (2026-08-12)
+
+**Hero motion uses Framer Motion, not Remotion/OpenMontage.** Kishan suggested
+those to "fix animations"; they are video-rendering tools. Turning the headline
+into an embedded video would be heavier, non-selectable, worse for SEO, and
+couldn't natively respect `prefers-reduced-motion`. Framer Motion is the right
+tool for an accessible web hero (and what block 4 + the project mandate). The
+`impeccable` gate (`design:check`) is the quality check that was run.
+
+**Every "twenty-six years / 26 years" reference removed sitewide.** Kishan
+didn't want his age calculable: "26 years" makes people infer he's 51, a
+possible age-bias deterrent in the hiring/portfolio context. Earlier I flagged
+the consultancy-side refs as a credibility-vs-age tradeoff; Kishan chose
+age-removal everywhere. Replacements keep impact without the number (hero "I
+design products", About "One discipline, sharpened.", stat "30M+/Users
+reached"). **Reach figures like "26-30M users" are kept** because they read as
+audience scale, not age. This does not reopen anything else; it's a deliberate,
+complete de-aging.
+
+**Verifux is live; links point to verifux.app.** Verifux launched (Paddle
+integrated). Pre-launch framing ("Currently building", "Early stage", "In active
+build", "Get early access") actively undersold it, so it was flipped to live.
+The two "Try Verifux" product CTAs now point to **verifux.app** instead of the
+old `designerama.co.za/verifux` path, which also removes the deploy-collision
+risk (that path shares the root this repo's static export overwrites). Verifux
+is still deliberately NOT added as a separate entity in Designerama's structured
+data, its structured data belongs on verifux.app now.
+
+**Services tier "starting point" text switched to the body font.** The grey line
+under each heading was `font-mono` + uppercase + 11px + tight tracking, which
+Kishan found squashed and hard to read. Switched to IBM Plex Sans (body),
+sentence case, 14px, 1.75 leading. ("Reference font" was read as the readable
+body font; open to a specific font if Kishan meant one.) Also added tier numbers
+01-05, a scannability intro line, and a consistent pricing line on all five
+tiers: real hints on the first two (unchanged from block 3), a fallback "Scoped
+in conversation" on the rest so the pattern reads intentional. The block-3
+content decision (pricingHint only on the first two) is unchanged; the fallback
+label lives in the component, not the content.
+
 ## Trust strip: real client logos as uniform black marks, Joburg exception, Barclays cap (2026-08-12)
 
 Block 2 replaced the portfolio trust strip's plain-text client names with
