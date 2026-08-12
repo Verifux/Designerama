@@ -110,6 +110,13 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Known-correct facts (verified against source, not guessed)
 
+- **The portfolio hero shows a faint portrait on mobile** (added 2026-08-12,
+  block 5): a `sm:hidden` grayscale copy at 0.17 opacity, masked to the right
+  edge behind the text. Desktop keeps its own portrait. The `/why-verifux` page
+  carries a `FAQPage` JSON-LD (4 Q&A) and `/services` a `HowTo` JSON-LD (3
+  steps), both per-page, drawn from existing copy, not in `StructuredData.tsx`.
+  `layout.tsx` has a `<noscript>` `cursor: auto` fallback so a failed cursor
+  hydration never hides the pointer. This completes blocks 1-7 of the upgrade.
 - **The live site is static-only, no CMS/PHP** (as of the 2026-08-12 security
   incident). A stale WordPress at `public_html/blog` was hacked and served
   malware; it and the legacy `/verifux` folder were deleted. Do not reintroduce

@@ -16,6 +16,25 @@ export function Hero() {
   return (
     <section className="relative flex min-h-[96vh] flex-col justify-center overflow-hidden border-b border-line pb-16 pt-36">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {/* Mobile-only: portrait as faint right-edge atmosphere behind the text.
+            Heavy left+bottom mask fade keeps the left-aligned headline readable. */}
+        <Image
+          src={withBasePath("/images/kishan-portrait.webp")}
+          alt=""
+          aria-hidden="true"
+          width={900}
+          height={1574}
+          className="absolute right-[-18%] top-0 h-full w-auto max-w-none object-cover opacity-[0.17] grayscale [mix-blend-mode:multiply] sm:hidden"
+          style={{
+            maskImage:
+              "linear-gradient(to left, black 0%, transparent 72%), linear-gradient(to bottom, black 62%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to left, black 0%, transparent 72%), linear-gradient(to bottom, black 62%, transparent 100%)",
+            maskComposite: "intersect",
+            WebkitMaskComposite: "source-in",
+          }}
+          priority
+        />
         <div
           className="absolute bottom-[-4rem] right-[clamp(-6rem,0vw,0rem)] hidden w-[min(42vw,520px)] sm:block"
           aria-hidden="true"

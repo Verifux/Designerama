@@ -52,6 +52,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${displayFont.variable} ${bigShoulders.variable} ${plexSans.variable} ${plexMono.variable}`}
     >
       <body>
+        {/* No-JS safety net: if the cursor provider never hydrates, force the
+            native cursor back so the pointer is never left invisible. */}
+        <noscript>
+          <style>{`html,html *{cursor:auto!important}`}</style>
+        </noscript>
         <StructuredData />
         <GoogleAnalytics />
         <CursorProvider>

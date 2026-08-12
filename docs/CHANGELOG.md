@@ -4,6 +4,30 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-08-12 (Blocks 5-7: mobile portrait, cursor fallback, FAQ/HowTo schema)
+
+- **Block 5 (DX) - portrait on mobile.** The portfolio hero portrait was
+  `hidden sm:block` (invisible on phones). Added a mobile-only (`sm:hidden`)
+  version as faint right-edge atmosphere behind the hero text: same image,
+  grayscale, `opacity 0.17`, `mix-blend-mode: multiply`, with a heavy
+  left+bottom mask fade so the left-aligned headline stays fully readable at
+  375px. Desktop portrait untouched.
+- **Block 6 (MX) - custom cursor CSS fallback.** Added a `<noscript>` style in
+  `app/layout.tsx` forcing `cursor: auto !important`, so if the cursor provider
+  never hydrates the native pointer is never left invisible. The existing
+  `cursor: none` rule is already gated on `data-custom-cursor`, and
+  `CursorProvider` already skips touch/coarse-pointer and reduced-motion, so no
+  other change was needed.
+- **Block 7 (AIX) - FAQ and HowTo schema.** Added a `FAQPage` JSON-LD (4 Q&A) to
+  `/why-verifux` and a `HowTo` JSON-LD (3 steps: Book a diagnosis, Review the
+  findings, Scope the fix) to `/services`, as per-page `<script type="application/
+  ld+json">` blocks (not in the site-wide `StructuredData.tsx`). All answers/steps
+  are drawn from each page's existing copy, no invented facts. Both validate as
+  well-formed JSON.
+- Verified: clean `tsc`, clean static export (15 routes), `design:check` shows
+  only the two pre-existing accepted items, JSON-LD parses, mobile portrait
+  renders at 0.17 opacity with the headline readable at 375px.
+
 ## 2026-08-12 (Security incident: WordPress /blog compromise, cleaned)
 
 - **The live site was compromised** and served a fake-Cloudflare "Human
