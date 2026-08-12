@@ -4,6 +4,31 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Site compromised via stale WordPress /blog; now static-only, no CMS (2026-08-12)
+
+The live site (xneelo host, `public_html`) served a fake-Cloudflare ClickFix
+malware page. Root cause was a **stale WordPress install at `public_html/blog`**
+(2010-era blog, already dropped from nav) that got hacked and used to plant a
+cloaked malware page affecting the whole domain. Kishan did not run the payload.
+
+**Why static-only from now on:** the main site is a Next.js static export (pure
+HTML/CSS/JS, no PHP). The only dynamic, hackable thing in the account was that
+loose WordPress. Removing it eliminated the entire attack surface. Do **not**
+reintroduce WordPress or any PHP/CMS app. If a blog is ever wanted again, it
+must be static (e.g. built into the Next export) or a hosted/managed service on
+a separate domain, never a self-managed WP in this account.
+
+**What shipped as part of the fix:** a hardened static `.htaccess` in the deploy
+bundle (`Options -Indexes`, deny execution of `.php/.pl/.py/.cgi/.sh`, plus
+`X-Content-Type-Options` / `X-Frame-Options` / `Referrer-Policy`). Keep it in
+future deploys. The Verifux product links already point to verifux.app, so the
+legacy `/verifux` folder on this host was deleted too.
+
+**Diagnostic note for future incidents:** Claude Code's Bash runs on Kishan's
+own machine, so `curl` from here reflects his real network. `curl` clean while
+the browser shows malware = server-side (or browser-layer) rather than DNS. Full
+write-up in the persistent memory `security-incident-wordpress-compromise.md`.
+
 ## Hero motion, age-signal removal, Verifux go-live, services readability (2026-08-12)
 
 **Hero motion uses Framer Motion, not Remotion/OpenMontage.** Kishan suggested

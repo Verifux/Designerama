@@ -4,6 +4,23 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-08-12 (Security incident: WordPress /blog compromise, cleaned)
+
+- **The live site was compromised** and served a fake-Cloudflare "Human
+  Verification" ClickFix malware page (paste-and-run Terminal lure). Root
+  cause: a stale **WordPress install at `public_html/blog`** on the xneelo
+  host got hacked (WP core tampered ~Aug 6; cloaker + `blog.zip` + a bloated
+  9 KB `.htaccess` planted Aug 12). It was cloaked, served the scam to real
+  visitors and clean content to bots/curl.
+- **Cleaned:** deleted `/blog`, `blog.zip`, and the legacy `/verifux` folder
+  (Verifux is at verifux.app now); re-uploaded a clean static bundle built
+  fresh from Git, including a **hardened `.htaccess`** (denies PHP execution,
+  `Options -Indexes`, security headers). Site verified clean and serving the
+  latest build. Kishan enabled 2FA.
+- **Standing outcome:** the live site is **static-only, no CMS/PHP** from now
+  on. Do not reintroduce WordPress. See `docs/DECISIONS.md` and the persistent
+  memory `security-incident-wordpress-compromise.md`.
+
 ## 2026-08-12 (Block 4 hero motion, age-signal removal, Verifux go-live, services rework)
 
 Committed as three logical commits.

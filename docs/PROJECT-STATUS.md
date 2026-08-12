@@ -110,6 +110,12 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Known-correct facts (verified against source, not guessed)
 
+- **The live site is static-only, no CMS/PHP** (as of the 2026-08-12 security
+  incident). A stale WordPress at `public_html/blog` was hacked and served
+  malware; it and the legacy `/verifux` folder were deleted. Do not reintroduce
+  WordPress or any PHP app. Deploys include a hardened `.htaccess` (deny PHP,
+  `Options -Indexes`, security headers). Host is xneelo. See DECISIONS.md and
+  the memory `security-incident-wordpress-compromise.md`.
 - **No "twenty-six years / 26 years" age reference anywhere**, removed
   2026-08-12 at Kishan's request (age-bias concern). Don't reintroduce a years
   count. Reach figures ("26-30M users") are fine, they're audience scale. Key
