@@ -4,6 +4,25 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-08-12 (Pricing anchor on services, block 3 of the site upgrade)
+
+- **Added an optional `pricingHint` field to `ServiceTier`** in
+  `lib/content/services.ts`, populated on the first two tiers only:
+  Systems Diagnosis ("Engagements from R40,000") and Diagnosis-Led Redesign
+  ("Scoped to the audit findings, typically R60,000 to R150,000"). The other
+  three tiers stay unpriced (scoped conversationally), `pricingHint`
+  undefined.
+- **`ServicesList.tsx` renders the hint as a small muted line below each
+  tier's `startingPoint`, only when defined** (`text-ink-dim`,
+  `text-[0.82rem]`, `font-mono`). Present but quiet, a self-qualification
+  anchor, not a loud price tag.
+- Numbers reviewed with Kishan and kept as-is (R40,000 read as conservative
+  for the seniority and the global-facing positioning, not overpriced;
+  keeping the R60,000 floor preserves a visible step up from the diagnosis
+  tier, and the R150,000 ceiling preserves upside).
+- Verified: clean `tsc`, clean static export, DOM confirms only the first
+  two tiers render a hint at 0.82rem / IBM Plex Mono / ink-dim.
+
 ## 2026-08-12 (Trust strip real logos, block 2 of the site upgrade)
 
 - **Portfolio trust strip now renders real client logos as uniform black

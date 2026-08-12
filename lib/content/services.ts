@@ -16,6 +16,7 @@ export type ServiceTier = {
   forWho: string;
   whatYouGet: string[];
   startingPoint: string;
+  pricingHint?: string;
   cta: { label: string; href: string };
 };
 
@@ -30,6 +31,7 @@ export const tiers: ServiceTier[] = [
       "A working session to walk through the findings and what they mean for your roadmap",
     ],
     startingPoint: "Starts with a Verifux audit of your live product.",
+    pricingHint: "Engagements from R40,000",
     cta: { label: "Book a systems diagnosis", href: "/#cta" },
   },
   {
@@ -42,6 +44,7 @@ export const tiers: ServiceTier[] = [
       "A smaller fix shipped and instrumented before a bigger bet gets made",
     ],
     startingPoint: "Starts with your diagnosis findings, ours or an existing audit.",
+    pricingHint: "Scoped to the audit findings, typically R60,000 to R150,000",
     cta: { label: "Talk it through", href: "/#cta" },
   },
   {

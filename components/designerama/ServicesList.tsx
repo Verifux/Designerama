@@ -21,6 +21,9 @@ export function ServicesList() {
                   <p className="mt-3 max-w-[26ch] font-mono text-[11px] uppercase tracking-[0.06em] text-ink-dim">
                     {tier.startingPoint}
                   </p>
+                  {tier.pricingHint && (
+                    <p className="mt-2 max-w-[26ch] font-mono text-[0.82rem] text-ink-dim">{tier.pricingHint}</p>
+                  )}
                 </div>
                 <div>
                   <p className="max-w-2xl text-[16.5px] leading-[1.8] tracking-[0.01em] text-ink-dim">{tier.forWho}</p>

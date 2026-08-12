@@ -110,6 +110,15 @@ a path prefix at build time, so this is not just a copy-paste).
 
 ## Known-correct facts (verified against source, not guessed)
 
+- **The services page shows pricing hints on the first two tiers only**,
+  added 2026-08-12. `ServiceTier` in `lib/content/services.ts` has an
+  optional `pricingHint`; Systems Diagnosis ("Engagements from R40,000") and
+  Diagnosis-Led Redesign ("Scoped to the audit findings, typically R60,000
+  to R150,000") set it, the other three leave it undefined (scoped
+  conversationally). `ServicesList.tsx` renders it as a muted line below
+  `startingPoint` only when defined (`text-ink-dim text-[0.82rem] font-mono`).
+  Numbers confirmed by Kishan; don't add hints to the other three tiers
+  without being asked.
 - **The portfolio trust strip renders real client logos as uniform black
   marks, not text**, changed 2026-08-12. Eight transparent PNGs in
   `public/images/logos/` (supersport, dstv, fnb, bobshop, hollard, cocacola,
