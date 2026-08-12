@@ -319,6 +319,47 @@ h3 {
   70% { transform: translate(2rem, -1.5rem) scale(0.94); }
 }
 
+/* Designerama hero ambient blob (block 4): one slow accent glow behind the headline.
+   CSS-animated, so the global prefers-reduced-motion kill switch freezes it. */
+.hero-ambient {
+  position: absolute;
+  left: -3rem;
+  top: -8rem;
+  width: 36rem;
+  height: 36rem;
+  border-radius: 9999px;
+  filter: blur(72px);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 55%, transparent), transparent 70%);
+  will-change: transform;
+  pointer-events: none;
+  animation: hero-drift 30s ease-in-out infinite;
+}
+
+/* Accordion toggle: subtle red attention pulse on the circle outline while closed,
+   to draw the eye to the chevron. Pauses on hover; frozen under reduced motion. */
+.accordion-toggle[aria-expanded="false"] {
+  animation: accordion-attn 2.8s ease-in-out infinite;
+}
+.accordion-toggle:hover {
+  animation: none;
+}
+@keyframes accordion-attn {
+  0%, 100% {
+    border-color: var(--line);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+  50% {
+    border-color: color-mix(in srgb, var(--accent) 65%, var(--line));
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+}
+
+@keyframes hero-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  35% { transform: translate(3rem, 2rem) scale(1.08); }
+  70% { transform: translate(-2rem, 3rem) scale(0.95); }
+}
+
 .scrollbar-hide {
   scrollbar-width: none;
   -ms-overflow-style: none;

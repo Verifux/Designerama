@@ -1,7 +1,17 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { RevealOnScroll, RevealGroup, RevealItem } from "@/components/shared/RevealOnScroll";
 import { about } from "@/lib/content/designerama";
 
+// About renders only in the Designerama (dark) brand context, so the
+// grey-to-white scroll reveal can use concrete token values.
+const DIM = "#b3b1ad"; // --ink-dim (designerama)
+const LIT = "#f2f0ec"; // --ink (designerama)
+
 export function About() {
+  const reduce = useReducedMotion();
+
   return (
     <section id="about" className="border-t border-line">
       <div className="mx-auto max-w-container px-6 py-16 sm:px-8 sm:py-24">
@@ -20,10 +30,20 @@ export function About() {
             ))}
           </RevealGroup>
 
+          {/* Paragraphs light from grey to white as each scrolls into view. */}
           <RevealGroup className="space-y-4" amount={0.12}>
             {about.copy.map((p, i) => (
               <RevealItem key={i} y={16}>
-                <p className={`text-[17px] leading-[1.85] tracking-[0.01em] ${i === 0 ? "text-[18px] text-ink" : "text-ink-dim"}`}>{p}</p>
+                <motion.p
+                  className={`leading-[1.85] tracking-[0.01em] ${i === 0 ? "text-[18px]" : "text-[17px]"}`}
+                  style={reduce ? { color: LIT } : undefined}
+                  initial={reduce ? false : { color: DIM }}
+                  whileInView={reduce ? undefined : { color: LIT }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                >
+                  {p}
+                </motion.p>
               </RevealItem>
             ))}
           </RevealGroup>

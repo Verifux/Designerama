@@ -26,7 +26,7 @@ export function Accordion({
         aria-expanded={open}
         aria-controls={contentId}
         aria-label={label}
-        className="absolute right-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent sm:h-14 sm:w-14"
+        className="accordion-toggle absolute right-0 top-0 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent sm:h-14 sm:w-14"
       >
         <motion.svg
           animate={{ rotate: open ? 180 : 0 }}
