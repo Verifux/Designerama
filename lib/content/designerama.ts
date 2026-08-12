@@ -71,7 +71,7 @@ export const whyItMatters = {
   eyebrow: "03 / Why diagnosis matters",
   heading: "Interfaces got cheap to generate.",
   headingAccent: "Knowing which one to build didn't.",
-  body: "That's the discipline this practice runs on: twenty-six years of product design, UX leadership and behavioural analysis, backed by Verifux's audit engine, pointed at your product before a single screen gets redrawn. The diagnosis comes first. What gets built after it is smaller, faster to ship, and aimed at what's actually broken.",
+  body: "That's the discipline this practice runs on: a career of product design, UX leadership and behavioural analysis, backed by Verifux's audit engine, pointed at your product before a single screen gets redrawn. The diagnosis comes first. What gets built after it is smaller, faster to ship, and aimed at what's actually broken.",
   cta: { label: "Start with a diagnosis", href: "/#cta" },
 };
 
@@ -84,8 +84,8 @@ export const work = {
       tag: "Product / AI SaaS",
       title: "Verifux",
       body: "Finds what's actually broken in a product before it costs you users, revenue or trust, then proves it. Verifux runs a 54-checkpoint audit across 9 pillars (the MX / BX / AIX triad), plus a separate, optional DX craft score, and turns the findings into a structured report in minutes instead of a week of manual review.",
-      goto: "Get early access",
-      href: "#cta",
+      goto: "Explore Verifux",
+      href: "/why-verifux",
     },
     {
       idx: "02",
@@ -99,7 +99,7 @@ export const work = {
       idx: "03",
       tag: "Track record",
       title: "See what's actually shipped",
-      body: "SuperSport, GOtv, bidorbuy, FNB. Twenty-six years of shipping the fix that mattered, not just the redesign that looked good in review.",
+      body: "SuperSport, GOtv, bidorbuy, FNB. A track record of shipping the fix that mattered, not just the redesign that looked good in review.",
       goto: "View Kishan's portfolio",
       href: "/portfolio#work",
     },
@@ -108,9 +108,9 @@ export const work = {
 
 export const about = {
   eyebrow: "05 / About",
-  heading: "26 years, one discipline.",
+  heading: "One discipline, sharpened.",
   credentials: [
-    { stat: "26+", label: "Years across broadcast, motion & product" },
+    { stat: "30M+", label: "Users reached across shipped products" },
     { stat: "CUA", label: "Certified Usability Analyst" },
     { stat: "2", label: "Invited conference talks on behavioural UX, 2025" },
     { stat: "AI", label: "Diagnosis backed by Verifux's audit engine" },

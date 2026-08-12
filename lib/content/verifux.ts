@@ -91,5 +91,5 @@ export const sections = [
 export const cta = {
   eyebrow: "See it on a real product",
   heading: "Try Verifux.",
-  action: { label: "Try Verifux →", href: "https://www.designerama.co.za/verifux" },
+  action: { label: "Try Verifux →", href: "https://verifux.app" },
 };

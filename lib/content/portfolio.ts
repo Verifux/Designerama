@@ -7,9 +7,9 @@ export const hero = {
     "Principal Product Designer & UX Strategist",
     "Behavioural science · Business management",
   ],
-  headline: "Twenty-six years shaping products",
+  headline: "I design products",
   headlineAccent: "millions actually use.",
-  sub: "Principal Product Designer and UX Strategist. I've led UX and product design for platforms at SuperSport, DStv and FNB, blending behavioural science, business management and systems thinking into the work. CUA-certified usability analyst, also designing and building front-end interfaces hands-on, this site included. Invited conference speaker on behavioural UX. Now building Verifux, an AI-powered MX, BX and AIX audit engine with an optional DX craft score. Open to senior in-house roles, contract work, and select consulting.",
+  sub: "Principal Product Designer and UX Strategist. I've led UX and product design for platforms at SuperSport, DStv and FNB, blending behavioural science, business management and systems thinking into the work. CUA-certified usability analyst, also designing and building front-end interfaces hands-on, this site included. Invited conference speaker on behavioural UX. Now live: Verifux, an AI-powered MX, BX and AIX audit engine with an optional DX craft score. Open to senior in-house roles, contract work, and select consulting.",
   actions: [
     { label: "See the work →", href: "#work", variant: "solid" as const },
     { label: "Work with me", href: "#contact", variant: "ghost" as const },
@@ -33,7 +33,7 @@ export const trust = {
   ],
 };
 
-export const marqueeItems = ["UX Strategy", "Product Design", "Verifux", "26 Years", "26-30M Users", "Broadcast to Product"];
+export const marqueeItems = ["UX Strategy", "Product Design", "Verifux", "Behavioural Science", "26-30M Users", "Broadcast to Product"];
 
 export const arc = {
   eyebrow: "The arc",
@@ -109,12 +109,12 @@ export const method = {
 };
 
 export const spotlight = {
-  eyebrow: "Currently building",
+  eyebrow: "Now live",
   heading: "Verifux",
   body: "The same diagnosis I'd otherwise run by hand, encoded once and run in minutes instead of days. Verifux audits a product across the MX / BX / AIX triad, 54 checkpoints spanning 9 pillars, plus a separate, optional DX craft score, catching what Nielsen's heuristics alone miss: dark patterns, and whether the product is even legible to AI agents.",
-  tags: ["AI-powered", "MX · BX · AIX · DX", "Early stage"],
+  tags: ["AI-powered", "MX · BX · AIX · DX", "Live"],
   panel: [
-    { label: "Status", value: "In active build" },
+    { label: "Status", value: "Live" },
     { label: "Framework", value: "MX · BX · AIX + DX" },
     { label: "Scope", value: "54 checkpoints · 9 pillars" },
     { label: "Talk to me →", value: "Available" },
