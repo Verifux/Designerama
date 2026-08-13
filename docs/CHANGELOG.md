@@ -4,6 +4,15 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-08-13 (Block 5 polish: mobile portrait treatment revised)
+
+- **Mobile portrait treatment revised.** The previous `brightness-[0.4]` +
+  `grayscale` + `opacity-[0.6]` approach created an unappealing dark grey cast
+  that made the meta text unreadable. Replaced with a natural-colour treatment:
+  no filters, `opacity-[0.32]`, stronger left mask (`transparent 82%`). The
+  white shirt dissolves into the white background naturally; only the face and
+  hair show as a warm, subtle presence. Text reads cleanly on top.
+
 ## 2026-08-12 (Blocks 5-7: mobile portrait, cursor fallback, FAQ/HowTo schema)
 
 - **Block 5 (DX) - portrait on mobile.** The portfolio hero portrait was

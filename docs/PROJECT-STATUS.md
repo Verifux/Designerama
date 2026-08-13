@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-07-30, SuperSport case-study depth shipped (provisional, SS-only), Phase 4 Insights reverted the day before_
+_Last updated: 2026-08-13, mobile portrait treatment revised to natural colours (Version A)_
 
 ## Strategic repositioning (in progress)
 
@@ -111,10 +111,11 @@ a path prefix at build time, so this is not just a copy-paste).
 ## Known-correct facts (verified against source, not guessed)
 
 - **The portfolio hero shows a faint portrait on mobile** (added 2026-08-12,
-  block 5): a `sm:hidden` copy darkened to a soft silhouette (grayscale,
-  `brightness-[0.4]`, `opacity-[0.6]`, no blend mode, since the portrait is a
-  light-shirted cutout that vanished under multiply), masked to the right
-  edge behind the text. Desktop keeps its own portrait. The `/why-verifux` page
+  revised 2026-08-13, block 5): a `sm:hidden` copy at `opacity-[0.32]` with
+  natural colours (no grayscale, no brightness filter, no blend mode), masked
+  heavily to the right edge (`transparent 82%` left, `transparent 100%`
+  bottom). The white shirt dissolves into the white page naturally; face and
+  hair show as warm subtle presence. Text reads cleanly on top. Desktop keeps its own portrait. The `/why-verifux` page
   carries a `FAQPage` JSON-LD (4 Q&A) and `/services` a `HowTo` JSON-LD (3
   steps), both per-page, drawn from existing copy, not in `StructuredData.tsx`.
   `layout.tsx` has a `<noscript>` `cursor: auto` fallback so a failed cursor

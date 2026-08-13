@@ -6,6 +6,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["next", "dev"],
       "port": 3000
+    },
+    {
+      "name": "static-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "out", "-l", "4000"],
+      "port": 4000
     }
   ]
 }
