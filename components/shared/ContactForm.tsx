@@ -1,12 +1,18 @@
 "use client";
 
-import { useState, useRef, FormEvent } from "react";
+import { useState, useRef, FormEvent, ChangeEvent } from "react";
 
 const ENDPOINT =
   process.env.NEXT_PUBLIC_FORM_ENDPOINT ||
   "https://formsubmit.co/hello@designerama.co.za";
 
 type Status = "idle" | "submitting" | "success" | "error";
+
+type FieldErrors = {
+  name?: string;
+  email?: string;
+  message?: string;
+};
 
 type Props = {
   /** Label above the message textarea. Defaults to the diagnosis framing. */
@@ -17,24 +23,65 @@ type Props = {
   subject?: string;
 };
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function validate(data: FormData): FieldErrors {
+  const errors: FieldErrors = {};
+  const name = (data.get("name") as string | null)?.trim() ?? "";
+  const email = (data.get("email") as string | null)?.trim() ?? "";
+  const message = (data.get("message") as string | null)?.trim() ?? "";
+
+  if (!name) errors.name = "Name is required.";
+  if (!email) errors.email = "Email is required.";
+  else if (!EMAIL_RE.test(email)) errors.email = "Enter a valid email address.";
+  if (!message) errors.message = "Message is required.";
+
+  return errors;
+}
+
 export function ContactForm({
   messageLabel = "What's not working?",
   messagePlaceholder = "Tell me what isn't working...",
   subject = "New enquiry from Designerama",
 }: Props = {}) {
   const [status, setStatus] = useState<Status>("idle");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const formRef = useRef<HTMLFormElement>(null);
+
+  function clearFieldError(field: keyof FieldErrors) {
+    setFieldErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  }
+
+  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const field = e.target.name as keyof FieldErrors;
+    if (fieldErrors[field]) clearFieldError(field);
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("submitting");
-
     const data = new FormData(e.currentTarget);
 
     if (data.get("_honey")) {
       setStatus("success");
       return;
     }
+
+    const errors = validate(data);
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      const firstErrorField = Object.keys(errors)[0];
+      const el = formRef.current?.querySelector<HTMLElement>(`[name="${firstErrorField}"]`);
+      el?.focus();
+      return;
+    }
+
+    setStatus("submitting");
+    setFieldErrors({});
 
     try {
       const res = await fetch(ENDPOINT, {
@@ -99,8 +146,16 @@ export function ContactForm({
             required
             autoComplete="name"
             placeholder="Your name"
-            className="cf-input"
+            aria-invalid={!!fieldErrors.name}
+            aria-describedby={fieldErrors.name ? "cf-name-err" : undefined}
+            className={`cf-input ${fieldErrors.name ? "!border-accent" : ""}`}
+            onChange={handleChange}
           />
+          {fieldErrors.name && (
+            <p id="cf-name-err" role="alert" className="mt-1.5 text-[0.78rem] text-accent">
+              {fieldErrors.name}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="cf-email" className="cf-label">
@@ -113,8 +168,16 @@ export function ContactForm({
             required
             autoComplete="email"
             placeholder="you@company.com"
-            className="cf-input"
+            aria-invalid={!!fieldErrors.email}
+            aria-describedby={fieldErrors.email ? "cf-email-err" : undefined}
+            className={`cf-input ${fieldErrors.email ? "!border-accent" : ""}`}
+            onChange={handleChange}
           />
+          {fieldErrors.email && (
+            <p id="cf-email-err" role="alert" className="mt-1.5 text-[0.78rem] text-accent">
+              {fieldErrors.email}
+            </p>
+          )}
         </div>
       </div>
 
@@ -142,8 +205,16 @@ export function ContactForm({
           required
           rows={4}
           placeholder={messagePlaceholder}
-          className="cf-input resize-y"
+          aria-invalid={!!fieldErrors.message}
+          aria-describedby={fieldErrors.message ? "cf-message-err" : undefined}
+          className={`cf-input resize-y ${fieldErrors.message ? "!border-accent" : ""}`}
+          onChange={handleChange}
         />
+        {fieldErrors.message && (
+          <p id="cf-message-err" role="alert" className="mt-1.5 text-[0.78rem] text-accent">
+            {fieldErrors.message}
+          </p>
+        )}
       </div>
 
       <div aria-live="polite">
