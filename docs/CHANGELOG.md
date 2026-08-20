@@ -4,6 +4,16 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-08-20 (Form validation, deployed)
+
+- **Contact form validation added.** `ContactForm.tsx` had `noValidate` but no
+  JS validation, allowing empty submissions. Added client-side validation: name
+  (required), email (required + format), message (required), with per-field
+  inline error messages, accent border on invalid fields, `aria-invalid` +
+  `aria-describedby`, focus-to-first-error, and errors clearing on input. One
+  shared component used on Designerama CTA, Portfolio CTA, and Services CTA.
+- **Deployed to live site** with portrait fix (Version A) and form validation.
+
 ## 2026-08-13 (Block 5 polish: mobile portrait treatment revised)
 
 - **Mobile portrait treatment revised.** The previous `brightness-[0.4]` +

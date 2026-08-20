@@ -1,6 +1,6 @@
 # Project status
 
-_Last updated: 2026-08-13, mobile portrait treatment revised to natural colours (Version A)_
+_Last updated: 2026-08-20, form validation added and deployed with portrait fix_
 
 ## Strategic repositioning (in progress)
 
@@ -115,7 +115,13 @@ a path prefix at build time, so this is not just a copy-paste).
   natural colours (no grayscale, no brightness filter, no blend mode), masked
   heavily to the right edge (`transparent 82%` left, `transparent 100%`
   bottom). The white shirt dissolves into the white page naturally; face and
-  hair show as warm subtle presence. Text reads cleanly on top. Desktop keeps its own portrait. The `/why-verifux` page
+  hair show as warm subtle presence. Text reads cleanly on top. Desktop keeps
+  its own portrait.
+- **The contact form has client-side validation** (added 2026-08-20): name
+  (required), email (required + format check), message (required). Inline error
+  messages, accent border on invalid fields, `aria-invalid`, focus-to-first-error.
+  One shared `ContactForm.tsx` component used on all three CTA sections.
+- The `/why-verifux` page
   carries a `FAQPage` JSON-LD (4 Q&A) and `/services` a `HowTo` JSON-LD (3
   steps), both per-page, drawn from existing copy, not in `StructuredData.tsx`.
   `layout.tsx` has a `<noscript>` `cursor: auto` fallback so a failed cursor
