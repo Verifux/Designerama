@@ -28,7 +28,7 @@ Load `design-intelligence` and it routes all of this for you. The map below is w
 
 **Anti-skipping rule.** Never invoke stage 2 without 0 and 1. Never call a build done without stage 4. The audit skills diagnose and are not generators; reaching for one in stage 2 is the mistake the rule exists to catch.
 
-The full 37-skill map with copyable triggers lives in the Design Lab (`Designerama/Design-lab`, Stack tab). The shareable version of the stack is [Verifux/Design-Intelligence](https://github.com/Verifux/Design-Intelligence).
+The full 37-skill map with copyable triggers lives in the Design Lab (`Designerama/Design-lab`, Stack tab). The shareable version of the stack is [Verifux/Design-Intelligence-Skill](https://github.com/Verifux/Design-Intelligence-Skill).
 
 ## Standing constraints: never override these
 
