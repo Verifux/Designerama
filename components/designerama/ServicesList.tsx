@@ -19,14 +19,14 @@ export function ServicesList() {
                 }`}
               >
                 <div>
-                  <div className="mb-3 font-mono text-[12px] tracking-[0.1em] text-accent">
+                  <div className="mb-3 font-sans text-[12px] tracking-[0.1em] text-accent">
                     {String(i + 1).padStart(2, "0")}
                   </div>
                   <h2 className="text-[clamp(23px,2.6vw,31px)] font-bold uppercase leading-[1.14] tracking-[-0.005em]">
                     {tier.title}
                   </h2>
                   <p className="mt-4 max-w-[32ch] text-[14px] leading-[1.75] text-ink-dim">{tier.startingPoint}</p>
-                  <p className="mt-3 max-w-[32ch] font-mono text-[0.8rem] leading-[1.6] text-ink-dim">
+                  <p className="mt-3 max-w-[32ch] font-sans text-[0.8rem] leading-[1.6] text-ink-dim">
                     {tier.pricingHint ?? "Scoped in conversation"}
                   </p>
                 </div>

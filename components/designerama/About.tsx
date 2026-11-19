@@ -25,7 +25,7 @@ export function About() {
             {about.credentials.map((c) => (
               <RevealItem key={c.label} y={16}>
                 <div className="font-display text-[34px] font-black text-accent">{c.stat}</div>
-                <div className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.05em] text-ink-dim">{c.label}</div>
+                <div className="mt-1 font-sans text-[10.5px] uppercase tracking-[0.05em] text-ink-dim">{c.label}</div>
               </RevealItem>
             ))}
           </RevealGroup>

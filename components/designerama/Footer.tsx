@@ -11,7 +11,7 @@ export function Footer() {
           <div className="flex flex-wrap gap-8">
             {footer.links.map((l) => {
               const external = l.href.startsWith("http");
-              const linkClasses = "font-mono text-[11px] uppercase tracking-[0.06em] text-ink-dim transition-colors hover:text-accent";
+              const linkClasses = "font-sans text-[11px] uppercase tracking-[0.06em] text-ink-dim transition-colors hover:text-accent";
               return external ? (
                 <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className={linkClasses}>
                   {l.label}
@@ -24,7 +24,7 @@ export function Footer() {
             })}
           </div>
         </div>
-        <div className="mt-8 flex flex-wrap justify-between gap-2 font-mono text-[10.5px] tracking-[0.03em] text-ink-dim">
+        <div className="mt-8 flex flex-wrap justify-between gap-2 font-sans text-[10.5px] tracking-[0.03em] text-ink-dim">
           <span>
             © {new Date().getFullYear()} {footer.copyright}
           </span>

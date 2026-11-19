@@ -8,7 +8,7 @@ export function Philosophy() {
         <blockquote className="text-[clamp(1.7rem,3.6vw,2.6rem)] font-bold leading-tight">
           &ldquo;{philosophy.quote}&rdquo;
         </blockquote>
-        <cite className="mt-5 block font-mono text-[0.82rem] not-italic text-ink-dim">{philosophy.cite}</cite>
+        <cite className="mt-5 block font-sans text-[0.82rem] not-italic text-ink-dim">{philosophy.cite}</cite>
       </RevealOnScroll>
     </section>
   );

@@ -30,7 +30,7 @@ export function LegacyWork() {
                   className="aspect-[16/10] w-full scale-[1.08] object-cover object-center grayscale-[30%] transition-all duration-500 hover:scale-[1.12] hover:grayscale-0"
                 />
               </a>
-              <p className="mt-4 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-ink-dim">{item.tag}</p>
+              <p className="mt-4 font-sans text-[0.7rem] uppercase tracking-[0.08em] text-ink-dim">{item.tag}</p>
               <h3 className="mt-2 font-bold">{item.title}</h3>
               <p className="mt-1 text-[0.9rem] text-ink-muted">{item.summary}</p>
             </RevealItem>

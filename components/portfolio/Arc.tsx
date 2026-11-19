@@ -15,7 +15,7 @@ export function Arc() {
             {arc.items.map((item) => (
               <RevealItem key={item.era} className="relative">
                 <span className="absolute -left-[3.05rem] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-accent bg-bg" />
-                <p className="font-mono text-[0.78rem] text-accent">{item.era}</p>
+                <p className="font-sans text-[0.78rem] text-accent">{item.era}</p>
                 <h3 className="mt-2 text-[1.3rem] font-bold tracking-[-0.02em]">{item.title}</h3>
                 <p className="mt-2 max-w-2xl text-ink-muted">{item.body}</p>
               </RevealItem>

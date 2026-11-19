@@ -221,7 +221,7 @@ export function ImageCarousel({ images, cropRatio }: ImageCarouselProps) {
           </div>
 
           <span
-            className={`whitespace-nowrap font-mono text-[0.72rem] text-ink-dim transition-opacity duration-500 ${
+            className={`whitespace-nowrap font-sans text-[0.72rem] text-ink-dim transition-opacity duration-500 ${
               hasInteracted ? "opacity-0" : "opacity-100"
             }`}
           >

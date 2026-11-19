@@ -18,7 +18,6 @@ const config: Config = {
       fontFamily: {
         display: ["var(--font-display)"],
         sans: ["var(--font-body)"],
-        mono: ["var(--font-mono)"],
       },
       borderRadius: {
         card: "var(--radius-card)",

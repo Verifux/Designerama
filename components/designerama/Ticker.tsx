@@ -4,7 +4,7 @@ function Track() {
   return (
     <span className="inline-flex shrink-0 gap-11 pr-11">
       {ticker.map((item, i) => (
-        <span key={i} className="inline-flex items-center gap-3 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.06em] text-ink-dim">
+        <span key={i} className="inline-flex items-center gap-3 whitespace-nowrap font-sans text-[11px] uppercase tracking-[0.06em] text-ink-dim">
           <span className="h-1 w-1 bg-accent" />
           {item}
         </span>

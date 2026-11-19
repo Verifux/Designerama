@@ -12,7 +12,7 @@ export function CheckpointStrip() {
           <p className="mt-4 text-[17px] leading-[1.8] tracking-[0.01em] text-ink-dim">{diagnose.body}</p>
           <Link
             href={diagnose.link.href}
-            className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-accent transition-colors hover:opacity-80"
+            className="mt-6 inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.08em] text-accent transition-colors hover:opacity-80"
           >
             {diagnose.link.label}
             <span aria-hidden="true">→</span>

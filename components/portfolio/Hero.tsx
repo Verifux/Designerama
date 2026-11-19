@@ -78,7 +78,7 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-container px-5 sm:px-8">
-        <RevealOnScroll className="mb-6 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[0.72rem] uppercase tracking-[0.12em] text-ink-dim">
+        <RevealOnScroll className="mb-6 flex flex-wrap gap-x-6 gap-y-2 font-sans text-[0.72rem] uppercase tracking-[0.12em] text-ink-dim">
           {hero.metaRow.map((m) => (
             <span key={m}>{m}</span>
           ))}

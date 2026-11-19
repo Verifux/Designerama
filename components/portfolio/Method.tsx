@@ -18,7 +18,7 @@ export function Method() {
           <RevealGroup className="grid grid-cols-1 gap-8 border-t border-line pt-10 sm:grid-cols-2 lg:grid-cols-4">
             {method.steps.map((step) => (
               <RevealItem key={step.num}>
-                <p className="font-mono text-[0.85rem] text-accent">{step.num}</p>
+                <p className="font-sans text-[0.85rem] text-accent">{step.num}</p>
                 <h3 className="mt-3 text-[1.2rem] font-bold">{step.title}</h3>
                 <p className="mt-2 text-ink-muted">{step.body}</p>
               </RevealItem>

@@ -15,7 +15,7 @@ export function Speaking() {
             <RevealItem key={item.event} className="rounded-lg2 border border-line p-7 sm:p-9">
               <div className="flex items-baseline justify-between gap-4">
                 <p className="font-semibold">{item.event}</p>
-                <p className="font-mono text-[0.76rem] text-ink-dim">{item.date}</p>
+                <p className="font-sans text-[0.76rem] text-ink-dim">{item.date}</p>
               </div>
               <h3 className="mt-3 text-[1.15rem] font-bold tracking-[-0.01em]">{item.title}</h3>
               <p className="mt-3 text-ink-muted">{item.body}</p>

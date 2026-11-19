@@ -25,11 +25,11 @@ export function WorkGrid() {
                   radius={360}
                   className={`grad-hover-card group block h-full bg-bg p-8 ${!href ? "opacity-60" : ""}`}
                 >
-                  <p className="font-mono text-[0.72rem] uppercase tracking-[0.08em] text-ink-dim">{item.tag}</p>
+                  <p className="font-sans text-[0.72rem] uppercase tracking-[0.08em] text-ink-dim">{item.tag}</p>
                   <h3 className="mt-3 text-[1.2rem] font-bold">{item.title}</h3>
                   <p className="mt-2 text-ink-muted">{item.summary}</p>
                   {goto && (
-                    <span className="mt-5 inline-flex items-center font-mono text-[0.78rem] text-accent transition-transform group-hover:translate-x-1">
+                    <span className="mt-5 inline-flex items-center font-sans text-[0.78rem] text-accent transition-transform group-hover:translate-x-1">
                       {goto}
                     </span>
                   )}

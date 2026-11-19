@@ -43,7 +43,7 @@ export function VerifuxSections() {
                         <p className="col-start-2 mt-3 max-w-[56ch] text-[16.5px] leading-[1.8] tracking-[0.01em] text-ink-dim sm:col-start-2">
                           {p.body}
                         </p>
-                        <div className="col-start-2 mt-1.5 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.06em] text-ink-dim sm:col-start-3 sm:mt-0 sm:self-start">
+                        <div className="col-start-2 mt-1.5 whitespace-nowrap font-sans text-[10px] uppercase tracking-[0.06em] text-ink-dim sm:col-start-3 sm:mt-0 sm:self-start">
                           {p.tag}
                         </div>
                       </GradientHoverCard>

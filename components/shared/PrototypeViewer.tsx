@@ -161,7 +161,7 @@ export function PrototypeViewer({ image, orientation = "vertical" }: PrototypeVi
         </div>
 
         {image.note && (
-          <span className="text-center font-mono text-[0.72rem] text-ink-dim">{image.note}</span>
+          <span className="text-center font-sans text-[0.72rem] text-ink-dim">{image.note}</span>
         )}
       </div>
 

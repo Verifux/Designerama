@@ -20,5 +20,5 @@ export function JoburgClock({ className = "" }: { className?: string }) {
     return () => clearInterval(id);
   }, []);
 
-  return <span className={`font-mono text-[0.8rem] tracking-[0.05em] text-ink-dim ${className}`}>{label}</span>;
+  return <span className={`font-sans text-[0.8rem] tracking-[0.05em] text-ink-dim ${className}`}>{label}</span>;
 }

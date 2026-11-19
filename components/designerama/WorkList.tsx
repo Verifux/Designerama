@@ -28,10 +28,10 @@ export function WorkList() {
                 >
                   <div className="font-display text-[32px] font-black text-line">{item.idx}</div>
                   <div>
-                    <div className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-ink-dim">{item.tag}</div>
+                    <div className="font-sans text-[10.5px] uppercase tracking-[0.1em] text-ink-dim">{item.tag}</div>
                     <h3 className="mt-2 text-[clamp(22px,2.8vw,32px)] font-bold uppercase">{item.title}</h3>
                     <p className="mt-2 max-w-2xl text-[17px] leading-[1.8] tracking-[0.01em] text-ink-dim">{item.body}</p>
-                    <span className="mt-4 inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.06em] text-ink">
+                    <span className="mt-4 inline-flex items-center gap-1 font-sans text-[11px] uppercase tracking-[0.06em] text-ink">
                       {item.goto}
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
                     </span>

@@ -4,6 +4,24 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Dropped the mono face; warmer body font on Designerama only (2026-11-19)
+
+Kishan wanted the mono look gone, as already done on Verifux. There was no
+true monospace on the page apart from IBM Plex Mono labels, but IBM Plex Sans
+in uppercase with wide tracking still read as engineered. Replaced mono labels
+with the body sans and picked Hanken Grotesk for the Designerama brand: the
+standing references (benjamincreative, pzstudio, monks, redcollar,
+craigjamieson) all use premium or custom grotesks and none use Inter or IBM
+Plex, so a warmer grotesk fits the set. Scoped to Designerama only because
+Kishan did not like the change on Portfolio; Portfolio tokens stay as they
+were.
+
+**Gotcha found on the way:** hardcoded `--font-body` / `--font-display` literals
+in `:root` of `globals.css` override the `next/font` variables of the same name,
+so literal names that no `@font-face` defines fall back to system sans. Give
+`next/font` its own variable name (as `--font-hanken` does) and reference it
+from the brand block.
+
 ## Site compromised via stale WordPress /blog; now static-only, no CMS (2026-08-12)
 
 The live site (xneelo host, `public_html`) served a fake-Cloudflare ClickFix

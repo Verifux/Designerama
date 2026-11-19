@@ -14,7 +14,7 @@ function FramePlaceholder({ caption }: { caption: string }) {
         className="flex aspect-video items-center justify-center rounded-card border border-line px-8 text-center"
         style={{ background: "linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, var(--paper)), var(--paper))" }}
       >
-        <span className="font-mono text-[0.78rem] text-ink-dim">Placeholder · {caption}</span>
+        <span className="font-sans text-[0.78rem] text-ink-dim">Placeholder · {caption}</span>
       </div>
     </RevealOnScroll>
   );
@@ -28,7 +28,7 @@ function ImageGallery({ images }: { images: { src: string; alt: string; note?: s
           <div className="overflow-hidden rounded-card border border-line bg-paper">
             <Image src={withBasePath(img.src)} alt={img.alt} width={540} height={1400} className="h-[420px] w-auto object-contain" />
           </div>
-          {img.note && <span className="font-mono text-[0.72rem] text-ink-dim">{img.note}</span>}
+          {img.note && <span className="font-sans text-[0.72rem] text-ink-dim">{img.note}</span>}
         </RevealItem>
       ))}
     </RevealGroup>
@@ -104,7 +104,7 @@ export function CaseStudy({ data, next }: { data: CaseStudyData; next?: { label:
         <RevealGroup className="grid grid-cols-2 gap-x-6 gap-y-6 border-b border-line py-9 sm:grid-cols-4">
           {data.meta.map((m) => (
             <RevealItem key={m.label}>
-              <p className="font-mono text-[0.72rem] uppercase tracking-[0.1em] text-ink-dim">{m.label}</p>
+              <p className="font-sans text-[0.72rem] uppercase tracking-[0.1em] text-ink-dim">{m.label}</p>
               <p className="mt-2 font-semibold">{m.value}</p>
             </RevealItem>
           ))}
@@ -175,7 +175,7 @@ export function CaseStudy({ data, next }: { data: CaseStudyData; next?: { label:
                 {data.alternativesConsidered && <Supplement {...data.alternativesConsidered} />}
                 {data.researchMethod && <Supplement {...data.researchMethod} />}
                 {data.lessonsLearned && (
-                  <p className="max-w-2xl py-10 first:pt-0 font-mono text-[0.9rem] text-ink-muted">{data.lessonsLearned}</p>
+                  <p className="max-w-2xl py-10 first:pt-0 font-sans text-[0.9rem] text-ink-muted">{data.lessonsLearned}</p>
                 )}
               </div>
             </Accordion>

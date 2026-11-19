@@ -19,13 +19,13 @@ export function VerifuxSpotlight() {
               <p className="mt-5 max-w-lg text-ink-muted">{spotlight.body}</p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {spotlight.tags.map((t) => (
-                  <span key={t} className="rounded-pill border border-line px-4 py-1.5 font-mono text-[0.72rem]">
+                  <span key={t} className="rounded-pill border border-line px-4 py-1.5 font-sans text-[0.72rem]">
                     {t}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="rounded-[14px] border border-line bg-bg p-6 font-mono text-[0.86rem]">
+            <div className="rounded-[14px] border border-line bg-bg p-6 font-sans text-[0.86rem]">
               {spotlight.panel.map((row) => (
                 <div key={row.label} className="flex items-center justify-between border-b border-line py-3 last:border-b-0">
                   <span className="text-ink-dim">{row.label}</span>

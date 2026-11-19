@@ -22,7 +22,7 @@ export function Nav({ backLink }: { backLink?: { label: string; href: string } }
               <Logo height={34} priority />
             </Link>
             {backLink && (
-              <Link href={backLink.href} className="font-mono text-[0.78rem] text-ink-dim transition-colors hover:text-accent">
+              <Link href={backLink.href} className="font-sans text-[0.78rem] text-ink-dim transition-colors hover:text-accent">
                 {backLink.label}
               </Link>
             )}
@@ -39,7 +39,7 @@ export function Nav({ backLink }: { backLink?: { label: string; href: string } }
           <div className="hidden items-center gap-5 md:flex">
             <Link
               href={nav.designeramaLink.href}
-              className="font-mono text-[0.78rem] text-ink-dim transition-colors hover:text-accent"
+              className="font-sans text-[0.78rem] text-ink-dim transition-colors hover:text-accent"
             >
               {nav.designeramaLink.label}
             </Link>

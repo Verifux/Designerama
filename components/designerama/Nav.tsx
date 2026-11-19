@@ -9,7 +9,7 @@ import { MobileMenu } from "@/components/shared/MobileMenu";
 import { nav } from "@/lib/content/designerama";
 
 const navLinkClasses =
-  "font-mono text-[11px] uppercase tracking-[0.08em] text-[color-mix(in_srgb,var(--ink)_82%,transparent)] transition-colors hover:text-accent";
+  "font-sans text-[11px] uppercase tracking-[0.08em] text-[color-mix(in_srgb,var(--ink)_82%,transparent)] transition-colors hover:text-accent";
 
 export function Nav() {
   const [open, setOpen] = useState(false);

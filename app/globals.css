@@ -12,7 +12,6 @@
 :root {
   --font-display: "Plus Jakarta Sans", sans-serif;
   --font-body: "IBM Plex Sans", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
 
   --accent: #cc2a3f;
 
@@ -64,6 +63,7 @@
   --radius-pill: 100px;
   --dots-opacity: 0.55;
   --font-display: var(--font-display-alt), sans-serif;
+  --font-body: var(--font-hanken), sans-serif;
 }
 
 /* ==========================================================================
@@ -112,7 +112,7 @@ h3 {
 
 @layer components {
   .eyebrow {
-    @apply font-mono text-[0.72rem] uppercase tracking-[0.16em] text-ink-dim;
+    @apply font-sans text-[0.72rem] uppercase tracking-[0.16em] text-ink-dim;
   }
 
   .btn {
@@ -120,7 +120,7 @@ h3 {
   }
 
   [data-brand="designerama"] .btn {
-    @apply font-mono text-[11px] uppercase tracking-[0.08em] font-normal;
+    @apply font-sans text-[11px] uppercase tracking-[0.08em] font-normal;
   }
 
   .btn--solid {
@@ -167,7 +167,7 @@ h3 {
     }
   }
   .idx-num {
-    @apply font-mono text-[12px] text-accent tracking-[0.05em] pt-7;
+    @apply font-sans text-[12px] text-accent tracking-[0.05em] pt-7;
   }
   .idx-body {
     @apply border-l border-line pl-7 py-7;
@@ -208,7 +208,7 @@ h3 {
 
   /* Contact form inputs */
   .cf-label {
-    @apply block mb-1.5 font-mono text-[0.75rem] uppercase tracking-[0.1em] text-ink-dim font-medium;
+    @apply block mb-1.5 font-sans text-[0.75rem] uppercase tracking-[0.1em] text-ink-dim font-medium;
   }
 
   .cf-input {

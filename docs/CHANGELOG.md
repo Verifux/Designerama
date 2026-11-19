@@ -4,6 +4,21 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-11-19 (Mono fonts removed, Hanken Grotesk on Designerama)
+
+- **IBM Plex Mono removed.** Every `font-mono` class across the Designerama,
+  portfolio and shared components is now `font-sans`; the `mono` entry is gone
+  from `tailwind.config.ts`, and the `--font-mono` token and font import are
+  deleted. Uppercase tracked labels (nav, eyebrow, ticker, buttons) now use the
+  body face.
+- **Designerama body font is Hanken Grotesk** (400/500/600), loaded through
+  `next/font` as `--font-hanken` and applied via
+  `[data-brand="designerama"] { --font-body }`. The Portfolio brand keeps its
+  existing `--font-body` / `--font-display` tokens, unchanged.
+- **Design system updated** (`Design-system/designerama-design-system.html`):
+  type specs now list Hanken Grotesk for Designerama body and labels, IBM Plex
+  Sans for Portfolio body, and no monospace face.
+
 ## 2026-08-20 (Form validation, deployed)
 
 - **Contact form validation added.** `ContactForm.tsx` had `noValidate` but no
