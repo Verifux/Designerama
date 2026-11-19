@@ -108,13 +108,16 @@ so in that specific case, uploading just that one file to overwrite it on
 the host is genuinely enough. Anything that touches code, copy, or adds/
 renames a file needs the full folder.
 
-**If this gets tedious:** if Xeenlo offers FTP/SFTP access (not just a
-web-based zip upload), a sync tool (`rsync`, `lftp mirror`, Cyberduck,
-Transmit) can diff `out/` against the live root and transfer only what
-actually changed, automatically — solving the "which file" question for
-real instead of guessing. Worth asking Xeenlo support whether FTP/SFTP is
-available on the plan if this manual zip-and-replace workflow becomes a
-drag.
+**Automated deploy (since 2026-11-19):** `./scripts/deploy.sh` builds the
+static export and rsyncs `out/` to xneelo `public_html` over SSH key auth on
+port 2222 (port 22 is password-only). It is a dry run by default; `--go`
+uploads, then checks the live CSS for Hanken Grotesk and no IBM Plex Mono.
+Setup per machine: a key at `~/.ssh/xneelo_designerama` (public half in the
+server's `~/.ssh/authorized_keys`) and a git-ignored `.deploy.env` containing
+`XNEELO_USER=<main FTP user>`. The sync uses `--delete` to clear stale hashed
+chunks but protects `.htaccess`, `cgi-bin/`, `.well-known/` and `visual/` (the
+legacy portfolio, still linked from /portfolio). The zip route above remains
+the fallback.
 
 ### Verifying an export before upload
 

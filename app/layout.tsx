@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Big_Shoulders_Display, Hanken_Grotesk } from "next/font/google";
+import { Plus_Jakarta_Sans, Big_Shoulders_Display, Hanken_Grotesk, IBM_Plex_Sans } from "next/font/google";
 import { CursorProvider } from "@/components/shared/CursorProvider";
 import { CustomCursor } from "@/components/shared/CustomCursor";
 import { GoogleAnalytics } from "@/components/shared/GoogleAnalytics";
@@ -28,6 +28,13 @@ const bodySans = Hanken_Grotesk({
   display: "swap",
 });
 
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://designerama.co.za"),
   title: "Kishan Rama & Designerama · Product Design, UX Strategy & Consulting",
@@ -42,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${displayFont.variable} ${bigShoulders.variable} ${bodySans.variable}`}
+      className={`${displayFont.variable} ${bigShoulders.variable} ${bodySans.variable} ${plexSans.variable}`}
     >
       <body>
         {/* No-JS safety net: if the cursor provider never hydrates, force the

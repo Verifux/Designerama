@@ -942,3 +942,8 @@ set), and tightened the two longest `forWho` sentences.
   Photoshop source (preserved in `website_old/designerama logo/`), replacing
   a low-fidelity extracted PNG and a CSS `invert()` hack with proper
   light/dark logo assets.
+
+## 2026-11-19
+
+- **Deploy automated.** `scripts/deploy.sh` rsyncs the static export to xneelo over SSH (port 2222). Dry run by default, `--go` uploads and verifies live CSS. `visual/` is protected from `--delete`.
+- **Agent files.** `public/llms.txt` extended (services, case studies); added `llms-full.txt` and `agents.md`; `robots.txt` names the main AI crawlers. Brought live in the same deploy as the Hanken Grotesk change.

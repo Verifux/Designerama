@@ -11,6 +11,31 @@ Designerama sells product diagnosis, not design hours. Every engagement starts w
 - [Why Verifux](https://designerama.co.za/why-verifux): The full explainer for the audit engine, structured as Problem, Diagnosis, Framework, Method, Evidence, Solution.
 - [Kishan Rama's portfolio](https://designerama.co.za/portfolio): A career of shipped design, six featured case studies from SuperSport, GOtv, bidorbuy, FNB, and DStv.
 
+## Services
+
+- **Systems Diagnosis**: Teams facing a high-stakes product decision, a rebuild, or a plateau, who want evidence before committing budget.
+- **Diagnosis-Led Redesign**: Teams who already know what is broken, from a diagnosis with Designerama or elsewhere, and need it fixed.
+- **AI Product Strategy**: Teams that need their product legible to AI agents and ready for an AI-native market.
+- **Fractional Product Direction**: Teams that need diagnostic judgment applied continuously, not once.
+- **MVP Validation**: Funded founders about to build, who want the idea validated against evidence first.
+
+Details: https://designerama.co.za/services
+
+## Portfolio case studies (Kishan Rama's shipped work)
+
+- [SuperSport](https://designerama.co.za/portfolio/supersport): UX strategy and product design for SuperSport, reaching 26-30 million monthly users across web, mobile and connected TV. Dec 2018 to Sep 2025.
+- [GOtv](https://designerama.co.za/portfolio/gotv): Full self-service redesign for GOtv, MultiChoice's prepaid satellite and streaming TV brand across Africa. Dashboard, discovery, sign-in, payments and package management.
+- [bidorbuy (Bobshop)](https://designerama.co.za/portfolio/bidorbuy): Full UX and UI redesign of bidorbuy (Bobshop.co.za) that nearly doubled revenue in the first month post-launch. Sep 2010 to Jun 2013.
+- [FNB Digital Banking](https://designerama.co.za/portfolio/fnb): Usability-led redesign of FNB's digital banking site, rolled out across Africa and the Channel Islands in three months against an eight-month scope. Won the FNB Innovation Award. 2013 to 2016.
+- [DStv TV Guide](https://designerama.co.za/portfolio/dstv-tv-guide): Lean-back UX and content navigation design for DStv's TV Guide. Channel schedules, Live TV browsing, reminders and voice search, across connected TV and mobile. 2025.
+- [DStv Rewards](https://designerama.co.za/portfolio/dstv-rewards): Two gamified rewards challenges, Upgrade & Earn and Reconnect, designed across app and web to drive package upgrades and reconnections.
+
+## Machine-readable resources
+
+- [Full content for LLMs](https://designerama.co.za/llms-full.txt): Long-form version of this file with every service, framework detail and case study summary.
+- [Guidance for AI agents](https://designerama.co.za/agents.md): How to cite, summarise and route enquiries about Designerama.
+- [Sitemap](https://designerama.co.za/sitemap.xml)
+
 ## Verifux framework, canonical facts
 
 - **MX, human experience**: 7 pillars. Grounded in Nielsen's heuristics and WCAG. Answers "can people use it?"
@@ -21,7 +46,7 @@ Designerama sells product diagnosis, not design hours. Every engagement starts w
 
 ## About Kishan Rama
 
-A career across broadcast, motion design, and product design. Most recently Principal Product Designer and UX Manager at SuperSport (MultiChoice Group), leading UX strategy across web, mobile, and connected TV platforms reaching 26 to 30 million monthly users across 50+ African markets. Earlier roles at DStv, FNB Digital Banking (FNB Innovation Award, 2015), and bidorbuy. Certified Usability Analyst. Invited speaker on behavioural UX (UX Africa Summit 2025, UPTechX Conference 2025).
+A career across broadcast, motion design, and product design. Principal Product Designer and UX Strategist. Most recently, Dec 2018 to Sep 2025, Principal Product Designer and UX Manager at SuperSport (MultiChoice Group), leading UX strategy across web, mobile, and connected TV platforms reaching 26 to 30 million monthly users across 50+ African markets. Earlier roles at DStv, FNB Digital Banking (FNB Innovation Award, 2015), and bidorbuy. Certified Usability Analyst. Invited speaker on behavioural UX (UX Africa Summit 2025, UPTechX Conference 2025).
 
 ## Contact
 
