@@ -33,6 +33,7 @@ export default function PortfolioPage() {
       <AmbientDots />
       <div className="relative z-[1]">
         <Nav />
+        <main>
         <Hero />
         <TrustStrip />
         <Marquee />
@@ -44,6 +45,7 @@ export default function PortfolioPage() {
         <LegacyWork />
         <Philosophy />
         <Cta />
+        </main>
         <Footer />
       </div>
     </ThemeProvider>

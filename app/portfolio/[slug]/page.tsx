@@ -41,7 +41,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       <AmbientDots />
       <div className="relative z-[1]">
         <Nav backLink={{ label: "← Back to work", href: "/portfolio#work" }} />
+        <main>
         <CaseStudy data={item.caseStudy} next={next} />
+        </main>
         <Footer />
       </div>
     </ThemeProvider>

@@ -66,9 +66,11 @@ export default function WhyVerifuxPage() {
       <AmbientDots />
       <div className="relative z-[1]">
         <Nav />
+        <main>
         <VerifuxHero />
         <VerifuxSections />
         <VerifuxCta />
+        </main>
         <Footer />
       </div>
     </ThemeProvider>

@@ -119,20 +119,18 @@ export function ContactForm({
   return (
     <form
       ref={formRef}
+      action={ENDPOINT}
+      method="post"
       onSubmit={handleSubmit}
       className="grid gap-5"
       noValidate
     >
       <input type="hidden" name="_subject" value={subject} />
       <input type="hidden" name="_captcha" value="false" />
-      <input
-        type="text"
-        name="_honey"
-        className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
-        tabIndex={-1}
-        autoComplete="off"
-        aria-hidden="true"
-      />
+      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="cf-honey">Leave this field empty (spam trap)</label>
+        <input id="cf-honey" type="text" name="_honey" tabIndex={-1} autoComplete="off" />
+      </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>

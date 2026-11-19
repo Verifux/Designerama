@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/services`, lastModified: new Date(), priority: 0.9 },
     { url: `${BASE_URL}/why-verifux`, lastModified: new Date(), priority: 0.9 },
     { url: `${BASE_URL}/portfolio`, lastModified: new Date(), priority: 0.9 },
+    { url: `${BASE_URL}/privacy`, lastModified: new Date(), priority: 0.3 },
     ...caseStudyRoutes,
   ];
 }

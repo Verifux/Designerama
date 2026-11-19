@@ -136,6 +136,7 @@ export const footer = {
     { label: "About", href: "/#about" },
     { label: "Verifux", href: "/why-verifux" },
     { label: "Portfolio", href: "/portfolio" },
+    { label: "Privacy", href: "/privacy" },
     { label: "Contact", href: "mailto:hello@designerama.co.za" },
   ],
   copyright: "Designerama. All rights reserved.",

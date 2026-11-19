@@ -94,3 +94,30 @@ export const cta = {
   body: "Tell me what isn't working. I'll tell you honestly whether a diagnosis is the right first step, or whether something else is.",
   action: { label: "Book a systems diagnosis", href: "mailto:hello@designerama.co.za" },
 };
+
+export const faq = {
+  eyebrow: "Common questions",
+  heading: "What buyers usually ask first.",
+  items: [
+    {
+      q: "How much does it cost?",
+      a: "A Systems Diagnosis starts from R40,000. A Diagnosis-Led Redesign is scoped to the audit findings and typically runs R60,000 to R150,000. Prices for AI Product Strategy, Fractional Product Direction and MVP Validation are not published on this site. Ask through the enquiry form.",
+    },
+    {
+      q: "What do I get from a diagnosis?",
+      a: "A full Verifux audit across MX, BX and AIX (54 checkpoints spanning 9 pillars, plus an optional DX craft score), a structured report ranking what is broken by cost, and a working session to walk through the findings and what they mean for your roadmap.",
+    },
+    {
+      q: "How long does an engagement take?",
+      a: "Durations are not published on this site. Ask through the enquiry form.",
+    },
+    {
+      q: "How do I start?",
+      a: "Use the enquiry form on this page or email hello@designerama.co.za. Messages are read personally, with a response aimed within 1 to 2 business days.",
+    },
+    {
+      q: "What if I am not sure a diagnosis is right for me?",
+      a: "Say what is not working. You will get an honest answer on whether a diagnosis is the right first step, or whether something else is.",
+    },
+  ],
+};

@@ -9,6 +9,7 @@ Designerama sells product diagnosis, not design hours. Every engagement starts w
 - [Homepage](https://designerama.co.za/): The core thesis and an overview of the practice. Interfaces are cheap to generate now; knowing which one to build isn't.
 - [Services](https://designerama.co.za/services): Five transformation-framed engagement tiers, Systems Diagnosis, Diagnosis-Led Redesign, AI Product Strategy, Fractional Product Direction, and MVP Validation.
 - [Why Verifux](https://designerama.co.za/why-verifux): The full explainer for the audit engine, structured as Problem, Diagnosis, Framework, Method, Evidence, Solution.
+- [Privacy and AI use](https://designerama.co.za/privacy): What the site measures, where the enquiry form goes, and how AI systems may read the site.
 - [Kishan Rama's portfolio](https://designerama.co.za/portfolio): A career of shipped design, six featured case studies from SuperSport, GOtv, bidorbuy, FNB, and DStv.
 
 ## Services

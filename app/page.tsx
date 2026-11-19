@@ -29,6 +29,7 @@ export default function HomePage() {
       <AmbientDots />
       <div className="relative z-[1]">
         <Nav />
+        <main>
         <Hero />
         <Ticker />
         <CheckpointStrip />
@@ -37,6 +38,7 @@ export default function HomePage() {
         <WorkList />
         <About />
         <Cta />
+        </main>
         <Footer />
       </div>
     </ThemeProvider>

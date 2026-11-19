@@ -5,9 +5,10 @@ import { BgStripe } from "@/components/shared/BgStripe";
 import { Nav } from "@/components/designerama/Nav";
 import { ServicesHero } from "@/components/designerama/ServicesHero";
 import { ServicesList } from "@/components/designerama/ServicesList";
+import { ServicesFaq } from "@/components/designerama/ServicesFaq";
 import { ServicesCta } from "@/components/designerama/ServicesCta";
 import { Footer } from "@/components/designerama/Footer";
-import { meta } from "@/lib/content/services";
+import { meta, tiers, faq } from "@/lib/content/services";
 import { OG_DEFAULTS } from "@/lib/metadata";
 
 export const metadata: Metadata = {
@@ -47,17 +48,53 @@ const howToLd = {
   ],
 };
 
+const SITE_URL = "https://designerama.co.za";
+const provider = { "@type": "Organization", name: "Designerama", url: SITE_URL };
+
+// Only the two tiers that publish a price carry an Offer. The rest stay unpriced on purpose.
+const priceByTier: Record<string, object> = {
+  "systems-diagnosis": { "@type": "PriceSpecification", priceCurrency: "ZAR", minPrice: 40000 },
+  "diagnosis-led-redesign": { "@type": "PriceSpecification", priceCurrency: "ZAR", minPrice: 60000, maxPrice: 150000 },
+};
+
+const servicesLd = {
+  "@context": "https://schema.org",
+  "@graph": tiers.map((t) => ({
+    "@type": "Service",
+    name: t.title,
+    description: `${t.forWho} ${t.startingPoint}`,
+    provider,
+    url: `${SITE_URL}/services`,
+    ...(priceByTier[t.slug] ? { offers: { "@type": "Offer", priceSpecification: priceByTier[t.slug] } } : {}),
+  })),
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.items.map((i) => ({
+    "@type": "Question",
+    name: i.q,
+    acceptedAnswer: { "@type": "Answer", text: i.a },
+  })),
+};
+
 export default function ServicesPage() {
   return (
     <ThemeProvider brand="designerama">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <BgStripe />
       <AmbientDots />
       <div className="relative z-[1]">
         <Nav />
-        <ServicesHero />
-        <ServicesList />
-        <ServicesCta />
+        <main>
+          <ServicesHero />
+          <ServicesList />
+          <ServicesFaq />
+          <ServicesCta />
+        </main>
         <Footer />
       </div>
     </ThemeProvider>
