@@ -119,6 +119,42 @@ chunks but protects `.htaccess`, `cgi-bin/`, `.well-known/` and `visual/` (the
 legacy portfolio, still linked from /portfolio). The zip route above remains
 the fallback.
 
+### xneelo access details (no secrets)
+
+| Item | Value |
+|---|---|
+| Host | `www66.jnb2.host-h.net` |
+| SSH port | `2222` (port 22 is password-only, unused) |
+| User | `designvkh` (the main FTP/SSH user) |
+| Key | `~/.ssh/xneelo_designerama` (ed25519, comment `deo-designerama-deploy`) |
+| Web root | `public_html/` (login lands in `/usr/home/designvkh`) |
+| Config | `.deploy.env` (git-ignored) holds `XNEELO_USER=designvkh` |
+
+Test the login:
+
+```bash
+ssh -p 2222 -i ~/.ssh/xneelo_designerama -o IdentitiesOnly=yes designvkh@www66.jnb2.host-h.net 'ls public_html'
+```
+
+No password is stored in the repo or in memory. On a new machine: generate the
+key (`ssh-keygen -t ed25519 -f ~/.ssh/xneelo_designerama`), add the `.pub` line
+to the server's `~/.ssh/authorized_keys`, and create `.deploy.env` as above.
+
+### Files served that are not pages
+
+`public/` ships `robots.txt`, `llms.txt`, `llms-full.txt` and `agents.md`
+(agent-readiness files, 2026-11-19). They may only repeat what the visible pages
+say, so update them in the same commit as any change to pricing, services or
+contact details. `/privacy` is a real page and is in the sitemap.
+
+### Known host-level issues (not fixable from this repo)
+
+- xneelo returns HTTP 429 to ClaudeBot, GPTBot, PerplexityBot, CCBot and
+  OAI-SearchBot (browser user agents and Claude-User get 200). The fix is an
+  xneelo panel setting or a support ticket, so `robots.txt` allowing these bots
+  does not help until it is lifted.
+- No `.htaccess` and no security headers on the server.
+
 ### Verifying an export before upload
 
 ```bash

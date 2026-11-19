@@ -4,6 +4,38 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Agent-readiness files, scripted xneelo deploy, and what we refused to claim (2026-11-19)
+
+Hosting is xneelo (Apache, static `public_html`), not Cloudflare Pages, so a
+push to git does not publish anything. Deploys now run through
+`scripts/deploy.sh --go`. The server has no `.htaccess` and sends no security
+headers; that is a host setting, not repo code.
+
+Mark and Veo reviewed the work and found, among other things, unsupported
+claims in the new agent files. Rule adopted: an agent-facing file may only
+repeat what the page itself says. Removed "Pricing on request" (the site says
+the price is not published), "South Africa" and "based in" (location copy is
+banned), and a "Last reviewed" date that implied a review nobody did.
+`agents.md` is hand-written and declares no tools, because declaring tools an
+agent cannot call is worse than declaring none.
+
+Left alone on purpose, Kishan's call: the hero overclaims ("Every engagement
+starts with a structured audit", "every checkpoint is scored against something
+checkable"). Not invented: engagement duration and VAT, because neither is on
+the site; the FAQ says duration is not published.
+
+**Open, host-level:** xneelo returns HTTP 429 to ClaudeBot, GPTBot,
+PerplexityBot, CCBot and OAI-SearchBot (browser and Claude-User get 200). It
+cannot be fixed in the repo; it needs the xneelo panel or a support ticket.
+`robots.txt` permitting the bots does nothing while the host refuses them.
+
+**Open, form:** FormSubmit's AJAX path is `/ajax/<email>` and the first
+submission needs an activation email. The current endpoint is unverified, so
+it was not changed; a real test send is needed first.
+
+**Gotcha:** `next/font` hashes family names (`__Hanken_Grotesk_xxxx`), so
+grep live CSS for `Hanken_Grotesk`, not `Hanken Grotesk`.
+
 ## Dropped the mono face; warmer body font on Designerama only (2026-11-19)
 
 Kishan wanted the mono look gone, as already done on Verifux. There was no

@@ -4,6 +4,36 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-11-19 (xneelo deploy script, agent-readiness files, privacy page, services FAQ)
+
+- **Deploys are scripted.** `scripts/deploy.sh` (dry run by default, `--go` to
+  upload) builds `out/`, rsyncs to xneelo `public_html` over SSH key auth on
+  port 2222, protects `.htaccess`, `cgi-bin/`, `.well-known/` and `visual/`, and
+  verifies the live CSS. Pushing to git does not deploy. See DEPLOYMENT.md.
+- **Agent-readiness files:** `public/llms.txt`, `llms-full.txt`, `agents.md`,
+  `robots.txt` (names GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot,
+  Claude-User, Claude-SearchBot, PerplexityBot, Google-Extended,
+  Applebot-Extended, CCBot). Price lines quote the site wording exactly; no
+  location, duration or VAT claims.
+- **Portfolio font regression fixed** (found by Mark). The mono-font removal
+  had also dropped the `IBM_Plex_Sans` `next/font` load, so Portfolio fell back
+  to the browser default. Restored as `--font-plex`; `:root --font-body` now
+  reads `var(--font-plex)`. Designerama stays on Hanken Grotesk.
+- **`<main>` landmark** on home, services, why-verifux, portfolio and case
+  study pages.
+- **Contact form:** the spam-trap field has a real label, and the form carries
+  `action` and `method="post"` so it has a target without JavaScript. The
+  FormSubmit endpoint itself is unchanged and still unverified end to end.
+- **`/privacy` (privacy and AI use)** added, linked from the Designerama
+  footer, `sitemap.xml` and `llms.txt`. Facts only: GA4, FormSubmit, AI-readable
+  pages, no chatbot or tools. Draft for Kishan's review; no retention period or
+  AI-training statement because none is on record.
+- **`/services`:** visible five-question buyer FAQ (`ServicesFaq`, content in
+  `lib/content/services.ts`), FAQPage JSON-LD, and Service JSON-LD for all five
+  tiers with an Offer only on the two priced tiers. Duration is stated as not
+  published.
+- Commits `35199b3` and `34b7414`.
+
 ## 2026-11-19 (Mono fonts removed, Hanken Grotesk on Designerama)
 
 - **IBM Plex Mono removed.** Every `font-mono` class across the Designerama,

@@ -1,6 +1,21 @@
 # Project status
 
-_Last updated: 2026-08-20, form validation added and deployed with portrait fix_
+_Last updated: 2026-11-19, scripted xneelo deploy, agent files, privacy page and services FAQ live_
+
+## Current state (2026-11-19)
+
+- **Live at designerama.co.za on xneelo.** Deploy with `./scripts/deploy.sh --go`
+  (dry run without `--go`); git push alone does not publish. Last deploy
+  followed commit `34b7414`.
+- **Fonts:** Designerama brand uses Hanken Grotesk; Portfolio keeps IBM Plex
+  Sans; no mono face anywhere.
+- **Agent-readiness:** `llms.txt`, `llms-full.txt`, `agents.md`, `robots.txt`,
+  `/privacy`, Service, FAQPage and HowTo JSON-LD on `/services`.
+- **Open items:** xneelo returns 429 to AI crawlers (host ticket needed);
+  rotate the xneelo FTP password; check the xneelo panel for security headers;
+  end-to-end test of the FormSubmit endpoint; Kishan to supply engagement
+  duration and VAT treatment for the FAQ; review `/privacy` copy; decide on a
+  GA4 consent notice. Hero overclaims were left as is on Kishan's instruction.
 
 ## Strategic repositioning (in progress)
 
