@@ -1,13 +1,16 @@
 "use client";
 
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect } from "react";
 
 export type Brand = "portfolio" | "designerama";
+
+// Layout effect so a client-side route change sets the brand before first paint.
+const useBrandEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 const BrandContext = createContext<Brand | null>(null);
 
 export function ThemeProvider({ children, brand }: { children: React.ReactNode; brand: Brand }) {
-  useEffect(() => {
+  useBrandEffect(() => {
     document.documentElement.dataset.brand = brand;
   }, [brand]);
 
