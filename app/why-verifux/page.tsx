@@ -5,6 +5,7 @@ import { BgStripe } from "@/components/shared/BgStripe";
 import { Nav } from "@/components/designerama/Nav";
 import { VerifuxHero } from "@/components/designerama/VerifuxHero";
 import { VerifuxSections } from "@/components/designerama/VerifuxSections";
+import { VerifuxCraftStrip } from "@/components/designerama/VerifuxCraftStrip";
 import { VerifuxCta } from "@/components/designerama/VerifuxCta";
 import { Footer } from "@/components/designerama/Footer";
 import { meta } from "@/lib/content/verifux";
@@ -69,6 +70,7 @@ export default function WhyVerifuxPage() {
         <main>
         <VerifuxHero />
         <VerifuxSections />
+        <VerifuxCraftStrip />
         <VerifuxCta />
         </main>
         <Footer />

@@ -4,6 +4,30 @@ Dated log of substantive changes. For the *why* behind non-obvious calls, see
 [DECISIONS.md](./DECISIONS.md). For current state, see
 [PROJECT-STATUS.md](./PROJECT-STATUS.md).
 
+## 2026-11-20 (Phase 5 of strategic repositioning: MCP/CLI proof, AI Product Strategy productised, Verifux craft strip)
+
+- **Cited real, shipped tooling as evidence.** `/why-verifux`'s method
+  section (`lib/content/verifux.ts`) now names `@verifux/mcp` (free,
+  open-source, listed on the official MCP registry) and the `@verifux/cli-pro`
+  CI gate as proof the audit engine isn't just a score to trust, the code is
+  there to read.
+- **AI Product Strategy tier productised.** `lib/content/services.ts` now
+  lists implementing and calibrating that same CI gate in a client's own
+  build pipeline as an explicit deliverable, not just "a plan for where AI is
+  leverage."
+- **New `VerifuxCraftStrip` section on `/why-verifux`.** Two real stills
+  from the live `02-nine-pillars` carousel (`components/designerama/VerifuxCraftStrip.tsx`,
+  content in `lib/content/verifux.ts`'s new `craftStrip` export), captioned
+  as design process rather than Verifux marketing, kept inside the boundary
+  already established by the Phase 4 Insights revert.
+- **Fixed a render bug in the two new stills.** The first render (headless
+  Chrome `--screenshot` on an isolated single-page extract of the carousel
+  HTML) baked in a 40px band of flat colour at the top of both PNGs, not
+  real page content. Re-rendered with `--print-to-pdf`, the same method the
+  real carousel PDF exports already use cleanly, then converted to PNG.
+  Verified by sampling the top-row pixel colour before and after, and again
+  on the actual served `/_next/image` output, not just the file on disk.
+
 ## 2026-11-19 (xneelo deploy script, agent-readiness files, privacy page, services FAQ)
 
 - **Deploys are scripted.** `scripts/deploy.sh` (dry run by default, `--go` to

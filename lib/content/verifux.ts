@@ -69,7 +69,7 @@ export const sections = [
     id: "method",
     eyebrow: "04 / The method",
     heading: "Graded against evidence, not a guess.",
-    body: "Every checkpoint is scored against something checkable: rendered pages, real accessibility trees, structured data, usage patterns where available, not a screenshot someone eyeballed. AI-assisted evaluation is what makes a full pass take minutes instead of the week a manual heuristics review would need. The audit is thorough because it's fast, not despite it.",
+    body: "Every checkpoint is scored against something checkable: rendered pages, real accessibility trees, structured data, usage patterns where available, not a screenshot someone eyeballed. AI-assisted evaluation is what makes a full pass take minutes instead of the week a manual heuristics review would need. The audit is thorough because it's fast, not despite it. Part of the engine ships as open tooling too: a free MCP server listed on the official MCP registry, and a CI gate that fails a build the moment an AI agent can no longer finish checkout. The code is there to read, not just the score to trust.",
     defaultOpen: false,
   },
   {
@@ -92,4 +92,26 @@ export const cta = {
   eyebrow: "See it on a real product",
   heading: "Try Verifux.",
   action: { label: "Try Verifux →", href: "https://verifux.app" },
+};
+
+// Two stills from the real framework explainer, shown here as process, not
+// promotion. The DX pillar this page describes (hierarchy, type, colour,
+// originality) is self-applied to the audit's own output, so the evidence
+// for it can sit on the same page as the claim.
+export const craftStrip = {
+  eyebrow: "The DX layer, applied to itself",
+  heading: "The audit has its own design system.",
+  body: "Verifux's reports and explainers run through the same DX discipline the audit checks for in a product: a measured palette, one consistent display type at scale, and a single owned structural device instead of a generic template. Two pages from the actual framework explainer, unchanged.",
+  images: [
+    {
+      src: "/images/work/verifux/framework-intro.png",
+      alt: "A Verifux framework panel on a dark ground, reading '9 things get checked. 54 ways,' with a nine-segment progress gauge across the top.",
+      note: "Framework intro",
+    },
+    {
+      src: "/images/work/verifux/pillar-breakdown.png",
+      alt: "A Verifux framework panel on a light ground, breaking the nine pillars into seven human-experience checks, one behavioural check and one AI-readiness check.",
+      note: "Pillar breakdown",
+    },
+  ],
 };

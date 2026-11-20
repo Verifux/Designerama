@@ -57,7 +57,8 @@ export const tiers: ServiceTier[] = [
     whatYouGet: [
       "An AIX-focused audit: structured data, semantic HTML, llms.txt, agent-actionable interfaces",
       "A read on how AI surfaces and answer engines currently treat your product",
-      "A prioritised plan for where AI is real leverage in your build process, not just your product's surface",
+      "The same agent-readiness CI gate built for Verifux, open-source and listed on the official MCP registry, implemented and calibrated in your own pipeline so a regression fails the build, not a customer's agent",
+      "A prioritised plan for where AI gives you real leverage, in how you build the product and not only how it looks",
     ],
     startingPoint: "Starts with an AIX pass of the Verifux audit.",
     cta: { label: "Talk it through", href: "/#cta" },

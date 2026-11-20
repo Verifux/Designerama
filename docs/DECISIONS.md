@@ -4,6 +4,58 @@ Chronological, most recent first. Each entry explains *why*, not just *what*
 — the code diff shows what changed; this shows the reasoning so a future
 session doesn't re-litigate settled calls.
 
+## Phase 5 of the strategic repositioning: MCP/CLI proof, AI Product Strategy productised, a Verifux craft strip (2026-11-20)
+
+Prompted by Kishan asking for a copy and marketing-strategy review of this site, with Sally (Verifux's
+GTM operator, scoped to `VerifuxMarketing/.claude/skills/sally`) "brought up to speed" so her
+positioning craft could cross over. Decided, and logged in global memory
+(`reference_agency_structure.md`): Sally herself stays Verifux-only, her funnel and buyer are
+different from Designerama's; what crosses over is her craft doctrine, not her as an agent. Deo
+(this repo's design-CEO identity) already owns Designerama's own marketing and positioning.
+
+**The MCP/CLI gap.** Grepped every content file on the site for any mention of `@verifux/mcp`
+(free, zero-dependency, listed on the official MCP registry with a real npm downloads badge) or
+`@verifux/cli-pro` (a paid, real-browser CI gate that fails a build the moment an AI agent can no
+longer finish checkout). Neither was mentioned anywhere, despite both being real, shipped, publicly
+inspectable proof exactly where the AI Product Strategy tier needed it: that tier's own description
+was generic enough that any competitor with the same AI tools could write the identical sentence
+(the taste-arbitrage test). Added a sentence citing both tools to `verifux.ts`'s method section, and
+added the CI gate's implementation and calibration as an explicit deliverable to the AI Product
+Strategy tier in `services.ts`, rather than inventing a sixth tier for it. The underlying tool
+already has no self-serve way to buy a key (its own README says so), so selling the hands-on setup
+as a Designerama consulting line is the right sequencing: professional services before the product
+is self-serve, not a distraction from it.
+
+**The carousel/film boundary, applied to a new case.** Kishan also asked about incorporating
+Verifux's marketing carousels and films into this site. The Phase 4 precedent (Insights, reverted
+the same day it shipped, see below) already settled that actual Verifux GTM content doesn't belong
+on the consultancy site. What's different this time, and what Kishan approved: the *design system*
+behind those carousels (the nine-segment pillar gauge, the Geist 800 display type, the structural
+device) is Designerama's own craft, not Verifux marketing, and showing it as process is legitimate
+portfolio content. Picked two stills from the live `02-nine-pillars` carousel source
+(`VerifuxMarketing/carousels/02-nine-pillars.html`) that state only facts already on this site (the
+9-pillar, 7/1/1 MX/BX/AIX split) with no pricing, no CTA, no promotional claim, isolated each
+`.page` div programmatically rather than screenshotting the PDF, and captioned both as "process,"
+explicitly distinguishing this from Phase 4's mistake. Shipped as a new `VerifuxCraftStrip`
+component, content in `verifux.ts`'s `craftStrip` export, wired into `/why-verifux` between the
+sections and the closing CTA.
+
+**A render bug, and the reusable fix.** The first render of those two stills used headless Chrome's
+`--screenshot` flag on the isolated single-page HTML. Both PNGs came back with a 40px band of flat
+colour, RGB(21,18,26), across the top, identical in both files regardless of the page's own
+background, meaning it was a capture artifact and not real content. Confirmed by sampling pixel
+colour at the top row with PIL before concluding anything by eye. The fix: re-render with
+`--headless --print-to-pdf` (the same method this project's own carousel PDF exports already use
+cleanly, background-launch-then-poll-then-kill pattern, see `reference_marketing_assets.md`), then
+convert the single-page PDF to PNG with `sips`. Verified clean at the pixel level again, and a third
+time on the actual served `/_next/image` output after the file swap, not just the file on disk.
+**Lesson for next time:** `--screenshot` on an isolated/cropped fragment of this carousel system is
+not a safe shortcut, even though it looks fine on a quick glance, go straight to `--print-to-pdf`.
+
+Verified with `npx tsc --noEmit` (clean) and `npm run design:check` (2 anti-patterns found, both are
+pre-existing known false positives already documented in this repo's `CLAUDE.md`, nothing new from
+this session's changes).
+
 ## Agent-readiness files, scripted xneelo deploy, and what we refused to claim (2026-11-19)
 
 Hosting is xneelo (Apache, static `public_html`), not Cloudflare Pages, so a

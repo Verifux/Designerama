@@ -1,8 +1,8 @@
 # Project status
 
-_Last updated: 2026-11-19, scripted xneelo deploy, agent files, privacy page and services FAQ live_
+_Last updated: 2026-11-20, Phase 5 of the strategic repositioning: MCP/CLI proof, AI Product Strategy productised, Verifux craft strip_
 
-## Current state (2026-11-19)
+## Current state (2026-11-20)
 
 - **Live at designerama.co.za on xneelo.** Deploy with `./scripts/deploy.sh --go`
   (dry run without `--go`); git push alone does not publish. Last deploy
@@ -67,6 +67,20 @@ strategy, and a phased roadmap) lives at
   Verifux-expansion sub-items from the plan were deliberately not
   built either, all deferred per Risk 2 of the plan or blocked on real
   usage data.
+- **Phase 5 (MCP/CLI proof, AI Product Strategy productised, Verifux craft
+  strip): done**, 2026-11-20. A copy and marketing-strategy review (with
+  Sally's Verifux GTM craft doctrine brought in, not Sally herself, see
+  memory `reference_agency_structure.md`) found that Designerama's own site
+  never mentioned the real, shipped, open-source tooling behind Verifux
+  (`@verifux/mcp`, listed on the official MCP registry, and the
+  `@verifux/cli-pro` agent-actionability CI gate). Added as evidence to
+  `lib/content/verifux.ts`'s method section and productised as an explicit
+  deliverable in the AI Product Strategy tier (`lib/content/services.ts`).
+  Also added a new `VerifuxCraftStrip` section on `/why-verifux`: two real
+  stills from the live `02-nine-pillars` carousel source, reframed as design
+  process rather than Verifux marketing (full reasoning in DECISIONS.md,
+  including the render-pipeline bug the first attempt hit and how it was
+  fixed).
 
 ## What this is
 
